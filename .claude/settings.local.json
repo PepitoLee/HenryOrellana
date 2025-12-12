@@ -7,7 +7,11 @@
       "Bash(npx tsc:*)",
       "Bash(dir:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Henry Orellana Editorial Brand Website\n\n- React 19 + TypeScript + Vite setup\n- Pages: Home, About, Books, Speaking, Blog, Contact, CEO Junior, Metodología\n- Components: Navigation, Footer, Reveal animations\n- GÉNESIS 17™ methodology with 7 intelligences\n- Padres 3.0 program content\n- CEO Junior program for Gen Z entrepreneurs\n- FAQ section with 8 questions\n- Royal Navy color palette (blue/gold theme)\n- Responsive design with Tailwind CSS\n- Spanish language content\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git branch:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)"
     ]
   }
 }

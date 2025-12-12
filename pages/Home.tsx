@@ -132,13 +132,13 @@ export const Home: React.FC = () => {
       <section className="py-24 px-6 bg-charcoal text-white">
         <div className="max-w-4xl mx-auto text-center">
           <Reveal>
-            <span className="font-sans text-forest uppercase tracking-[0.2em] text-xs font-semibold">
+            <span className="font-sans text-burgundy uppercase tracking-[0.2em] text-xs font-semibold">
               La Realidad que Enfrentamos
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display text-4xl md:text-5xl mt-4 mb-8">
-              El Amor <span className="italic text-forest">no Basta</span>: La Crisis Silenciosa de la Familia Moderna
+              El Amor <span className="italic text-burgundy">no Basta</span>: La Crisis Silenciosa de la Familia Moderna
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
@@ -149,7 +149,7 @@ export const Home: React.FC = () => {
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <blockquote className="font-display text-2xl md:text-3xl italic text-forest border-l-4 border-forest pl-6 text-left max-w-2xl mx-auto">
+            <blockquote className="font-display text-2xl md:text-3xl italic text-burgundy border-l-4 border-burgundy pl-6 text-left max-w-2xl mx-auto">
               "Ellos no son el problema. Si tú cambias, todo cambia."
               <footer className="text-white/60 text-base mt-4 not-italic font-sans">— Henry Orellana D.</footer>
             </blockquote>

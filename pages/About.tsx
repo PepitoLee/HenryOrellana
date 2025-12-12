@@ -86,23 +86,23 @@ export const About: React.FC = () => {
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Reveal delay={0.1}>
-              <div className="bg-white/5 p-8 rounded-sm border border-white/10 hover:border-forest/50 transition-colors">
-                <h3 className="font-display text-2xl text-forest mb-4">Padres 3.0</h3>
+              <div className="bg-white/5 p-8 rounded-sm border border-white/10 hover:border-burgundy/50 transition-colors">
+                <h3 className="font-display text-2xl text-burgundy mb-4">Padres 3.0</h3>
                 <p className="font-body text-white/80 mb-4">
                   Empoderar a los padres para que sean los guías que sus hijos necesitan en la era digital.
                 </p>
-                <Link to="/metodologia" className="inline-flex items-center text-forest font-sans text-sm uppercase tracking-wider hover:text-white transition-colors">
+                <Link to="/metodologia" className="inline-flex items-center text-burgundy font-sans text-sm uppercase tracking-wider hover:text-white transition-colors">
                   Conocer más <ArrowRight size={16} className="ml-2" />
                 </Link>
               </div>
             </Reveal>
             <Reveal delay={0.2}>
-              <div className="bg-white/5 p-8 rounded-sm border border-white/10 hover:border-forest/50 transition-colors">
-                <h3 className="font-display text-2xl text-forest mb-4">CEO Junior</h3>
+              <div className="bg-white/5 p-8 rounded-sm border border-white/10 hover:border-burgundy/50 transition-colors">
+                <h3 className="font-display text-2xl text-burgundy mb-4">CEO Junior</h3>
                 <p className="font-body text-white/80 mb-4">
                   Formar a los jóvenes para convertirse en la comunidad más grande de emprendedores del mundo.
                 </p>
-                <Link to="/ceo-junior" className="inline-flex items-center text-forest font-sans text-sm uppercase tracking-wider hover:text-white transition-colors">
+                <Link to="/ceo-junior" className="inline-flex items-center text-burgundy font-sans text-sm uppercase tracking-wider hover:text-white transition-colors">
                   Explorar <ArrowRight size={16} className="ml-2" />
                 </Link>
               </div>
@@ -110,7 +110,7 @@ export const About: React.FC = () => {
           </div>
           <Reveal delay={0.3} className="text-center mt-12">
             <p className="font-body text-white/60">
-              Todo se articula a través de mi metodología patentada: <strong className="text-forest">GÉNESIS 17™</strong>
+              Todo se articula a través de mi metodología patentada: <strong className="text-burgundy">GÉNESIS 17™</strong>
             </p>
           </Reveal>
         </div>

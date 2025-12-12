@@ -122,7 +122,7 @@ export const CEOJunior: React.FC = () => {
       <section className="py-24 bg-charcoal text-white">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <Reveal>
-            <Lightbulb className="mx-auto mb-6 text-forest" size={48} />
+            <Lightbulb className="mx-auto mb-6 text-burgundy" size={48} />
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display text-3xl md:text-4xl mb-8">Nuestro Enfoque</h2>
@@ -140,7 +140,7 @@ export const CEOJunior: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto">
               {competencias.map((comp, idx) => (
                 <div key={idx} className="flex items-center gap-3 bg-white/5 p-4 rounded-sm">
-                  <CheckCircle2 className="text-forest flex-shrink-0" size={20} />
+                  <CheckCircle2 className="text-burgundy flex-shrink-0" size={20} />
                   <span className="font-sans text-sm text-left">{comp}</span>
                 </div>
               ))}

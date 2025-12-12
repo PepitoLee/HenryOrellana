@@ -121,7 +121,7 @@ export const Metodologia: React.FC = () => {
       <section className="py-16 bg-charcoal text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Reveal>
-            <Sparkles className="mx-auto mb-6 text-forest" size={48} />
+            <Sparkles className="mx-auto mb-6 text-burgundy" size={48} />
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display text-3xl md:text-4xl mb-6">El Orden Estructural</h2>
@@ -129,7 +129,7 @@ export const Metodologia: React.FC = () => {
           <Reveal delay={0.2}>
             <p className="font-body text-xl text-white/80 leading-relaxed max-w-2xl mx-auto">
               La inteligencia no tiene principio ni fin, <strong className="text-white">viene de Dios</strong>.
-              El modelo establece que todo comienza con la <strong className="text-forest">Inteligencia Espiritual</strong>.
+              El modelo establece que todo comienza con la <strong className="text-burgundy">Inteligencia Espiritual</strong>.
               Esta es la base funcional de las demás.
             </p>
           </Reveal>

@@ -131,16 +131,16 @@ export const Navigation: React.FC = () => {
 
         {/* Subtle Decorative Line */}
         <div
-          className={`absolute top-24 left-6 right-6 h-px bg-charcoal/10 transition-all duration-700 ${
+          className={`absolute top-28 left-6 right-6 h-px bg-charcoal/10 transition-all duration-700 ${
             isOpen ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
           }`}
           style={{ transformOrigin: 'left' }}
         />
 
         {/* Navigation Content */}
-        <nav className="relative h-full flex flex-col justify-center px-8 py-24">
+        <nav className="relative h-full flex flex-col justify-start px-8 pt-32 pb-24 overflow-y-auto">
           {/* Nav Items - Clean List */}
-          <div className="space-y-1">
+          <div className="space-y-2">
             {navItems.map((item, index) => {
               const isCurrent = location.pathname === item.path;
 

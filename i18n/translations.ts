@@ -512,6 +512,38 @@ export const translations: Record<Language, TranslationKeys> = {
       learnMore: 'Saber más',
       viewAll: 'Ver todo',
       contact: 'Contactar'
+    },
+
+    // SEO
+    seo: {
+      home: {
+        title: 'Transformando Familias en la Era Digital',
+        description: 'Henry Orellana - Autor, conferencista y creador de GÉNESIS i7™. Especializado en crianza consciente y transformación familiar.'
+      },
+      about: {
+        title: 'Sobre Mí',
+        description: 'Conoce a Henry Orellana, autor de Padres 3.0 y creador de la metodología GÉNESIS i7™ para transformar familias.'
+      },
+      books: {
+        title: 'Libros',
+        description: 'Descubre los libros de Henry Orellana: Padres 3.0 y más obras sobre crianza consciente y transformación familiar.'
+      },
+      speaking: {
+        title: 'Conferencias',
+        description: 'Contrata a Henry Orellana para conferencias sobre crianza, liderazgo familiar y la metodología GÉNESIS i7™.'
+      },
+      contact: {
+        title: 'Contacto',
+        description: 'Contacta a Henry Orellana para conferencias, colaboraciones o consultas sobre crianza y transformación familiar.'
+      },
+      ceoJunior: {
+        title: 'CEO Junior',
+        description: 'Programa CEO Junior: Preparando a la Generación Z para el emprendimiento con propósito y liderazgo consciente.'
+      },
+      metodologia: {
+        title: 'Metodología GÉNESIS i7™',
+        description: 'Descubre GÉNESIS i7™: Las 7 inteligencias esenciales para transformar tu familia y empoderar a tus hijos.'
+      }
     }
   },
 
@@ -1022,6 +1054,38 @@ export const translations: Record<Language, TranslationKeys> = {
       learnMore: 'Learn more',
       viewAll: 'View all',
       contact: 'Contact'
+    },
+
+    // SEO
+    seo: {
+      home: {
+        title: 'Transforming Families in the Digital Age',
+        description: 'Henry Orellana - Author, speaker and creator of GENESIS i7™. Specialized in conscious parenting and family transformation.'
+      },
+      about: {
+        title: 'About Me',
+        description: 'Meet Henry Orellana, author of Padres 3.0 and creator of the GENESIS i7™ methodology for family transformation.'
+      },
+      books: {
+        title: 'Books',
+        description: 'Discover Henry Orellana\'s books: Padres 3.0 and more works on conscious parenting and family transformation.'
+      },
+      speaking: {
+        title: 'Speaking',
+        description: 'Book Henry Orellana for keynotes on parenting, family leadership and the GENESIS i7™ methodology.'
+      },
+      contact: {
+        title: 'Contact',
+        description: 'Contact Henry Orellana for speaking engagements, collaborations or inquiries about parenting and family transformation.'
+      },
+      ceoJunior: {
+        title: 'CEO Junior',
+        description: 'CEO Junior Program: Preparing Gen Z for purpose-driven entrepreneurship and conscious leadership.'
+      },
+      metodologia: {
+        title: 'GENESIS i7™ Methodology',
+        description: 'Discover GENESIS i7™: The 7 essential intelligences to transform your family and empower your children.'
+      }
     }
   }
 };

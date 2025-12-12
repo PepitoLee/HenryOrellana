@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Reveal } from '../components/Reveal';
 import { Mail, Mic } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { SEOHead } from '../components/SEO/SEOHead';
 
 type ContactType = 'general' | 'speaking' | 'media';
 
@@ -32,7 +33,13 @@ export const Contact: React.FC = () => {
   const content = getTabContent();
 
   return (
-    <div className="w-full pt-32 pb-20 bg-cream min-h-screen">
+    <>
+      <SEOHead
+        title={t('seo.contact.title')}
+        description={t('seo.contact.description')}
+        url="/contact"
+      />
+      <div className="w-full pt-32 pb-20 bg-cream min-h-screen">
 
       <div className="max-w-4xl mx-auto px-6 mb-16 text-center">
         <Reveal>
@@ -121,5 +128,6 @@ export const Contact: React.FC = () => {
       </div>
 
     </div>
+    </>
   );
 };

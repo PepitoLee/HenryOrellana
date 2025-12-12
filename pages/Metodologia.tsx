@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 import { ShineButton, FillSlideButton } from '../components/AnimatedButtons';
 import { useLanguage } from '../context/LanguageContext';
+import { SEOHead } from '../components/SEO/SEOHead';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const Metodologia: React.FC = () => {
   const { t } = useLanguage();
@@ -95,14 +97,22 @@ export const Metodologia: React.FC = () => {
   ];
 
   return (
-    <div className="w-full pt-32 pb-20">
+    <>
+      <SEOHead
+        title={t('seo.metodologia.title')}
+        description={t('seo.metodologia.description')}
+        url="/metodologia"
+      />
+      <div className="w-full pt-32 pb-20">
       {/* Hero Section */}
       <section className="max-w-5xl mx-auto px-6 text-center mb-24">
         <Reveal>
-          <img
+          <OptimizedImage
             src="/images/genesis-i7-logo.png"
             alt="GÉNESIS i7™ Logo"
-            className="w-48 h-48 mx-auto mb-6 object-contain"
+            className="w-48 h-48 mx-auto mb-6"
+            objectFit="contain"
+            priority
           />
         </Reveal>
         <Reveal delay={0.1}>
@@ -275,5 +285,6 @@ export const Metodologia: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

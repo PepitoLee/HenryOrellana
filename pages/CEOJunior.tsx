@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { RippleButton, MagneticButton, ShineButton } from '../components/AnimatedButtons';
 import { useLanguage } from '../context/LanguageContext';
+import { SEOHead } from '../components/SEO/SEOHead';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const CEOJunior: React.FC = () => {
   const { t } = useLanguage();
@@ -52,7 +54,13 @@ export const CEOJunior: React.FC = () => {
   ];
 
   return (
-    <div className="w-full pt-32 pb-20">
+    <>
+      <SEOHead
+        title={t('seo.ceoJunior.title')}
+        description={t('seo.ceoJunior.description')}
+        url="/ceo-junior"
+      />
+      <div className="w-full pt-32 pb-20">
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-6 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -98,10 +106,11 @@ export const CEOJunior: React.FC = () => {
 
           <Reveal delay={0.3} className="relative">
             <div className="aspect-square rounded-sm overflow-hidden shadow-2xl">
-              <img
+              <OptimizedImage
                 src="/images/ceo-junior-hero.png"
                 alt="CEO Junior"
-                className="w-full h-full object-cover"
+                className="w-full h-full"
+                priority
               />
             </div>
             {/* Decorative elements */}
@@ -231,5 +240,6 @@ export const CEOJunior: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

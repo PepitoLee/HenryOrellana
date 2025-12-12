@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Reveal } from '../components/Reveal';
 import { CheckCircle2, Award, GraduationCap, Heart, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { SEOHead } from '../components/SEO/SEOHead';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const About: React.FC = () => {
   const { t } = useLanguage();
@@ -33,7 +35,13 @@ export const About: React.FC = () => {
   ];
 
   return (
-    <div className="w-full pt-32 pb-20">
+    <>
+      <SEOHead
+        title={t('seo.about.title')}
+        description={t('seo.about.description')}
+        url="/about"
+      />
+      <div className="w-full pt-32 pb-20">
       {/* Header */}
       <div className="max-w-4xl mx-auto px-6 text-center mb-20">
         <Reveal>
@@ -57,10 +65,11 @@ export const About: React.FC = () => {
       <section className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-24">
         <Reveal>
           <div className="relative">
-            <img
+            <OptimizedImage
               src="/images/about-henry.png"
               alt="Henry Orellana D."
-              className="w-full h-auto object-cover shadow-xl"
+              className="w-full h-auto shadow-xl"
+              priority
             />
             <div className="absolute -bottom-4 -right-4 w-32 h-32 border-b-2 border-r-2 border-forest/30"></div>
           </div>
@@ -206,5 +215,6 @@ export const About: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

@@ -2,6 +2,8 @@ import React from 'react';
 import { Reveal } from '../components/Reveal';
 import { Calendar, MapPin } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { SEOHead } from '../components/SEO/SEOHead';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const Speaking: React.FC = () => {
   const { t } = useLanguage();
@@ -31,7 +33,13 @@ export const Speaking: React.FC = () => {
   ];
 
   return (
-    <div className="w-full pt-32 pb-20">
+    <>
+      <SEOHead
+        title={t('seo.speaking.title')}
+        description={t('seo.speaking.description')}
+        url="/speaking"
+      />
+      <div className="w-full pt-32 pb-20">
 
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-6 mb-24">
@@ -48,10 +56,11 @@ export const Speaking: React.FC = () => {
             </button>
           </Reveal>
           <Reveal delay={0.2} className="relative h-[400px] w-full overflow-hidden shadow-xl">
-             <img
+             <OptimizedImage
                src="/images/speaking-hero.png"
                alt="Henry Orellana en Conferencia"
-               className="w-full h-full object-cover"
+               className="w-full h-full"
+               priority
              />
           </Reveal>
         </div>
@@ -108,5 +117,6 @@ export const Speaking: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

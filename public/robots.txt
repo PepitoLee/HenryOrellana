@@ -1,0 +1,12 @@
+# Robots.txt for henryorellana.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://henryorellana.com/sitemap.xml
+
+# Disallow admin/private areas (if any)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/

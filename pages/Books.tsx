@@ -2,12 +2,20 @@ import React from 'react';
 import { Reveal } from '../components/Reveal';
 import { ShoppingBag, BookOpen } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { SEOHead } from '../components/SEO/SEOHead';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export const Books: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="w-full pt-32 pb-20 bg-cream">
+    <>
+      <SEOHead
+        title={t('seo.books.title')}
+        description={t('seo.books.description')}
+        url="/books"
+      />
+      <div className="w-full pt-32 pb-20 bg-cream">
 
       <div className="max-w-7xl mx-auto px-6 mb-20 text-center">
         <Reveal>
@@ -25,10 +33,11 @@ export const Books: React.FC = () => {
         <div className="bg-white p-8 md:p-16 shadow-sm flex flex-col md:flex-row gap-16 items-center">
            <Reveal className="w-full md:w-1/3 flex justify-center">
               <div className="w-full max-w-sm overflow-hidden shadow-2xl">
-                <img
+                <OptimizedImage
                   src="/images/books-autor.png"
                   alt="Henry Orellana - Autor"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto"
+                  priority
                 />
               </div>
            </Reveal>
@@ -85,5 +94,6 @@ export const Books: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

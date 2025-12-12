@@ -4,6 +4,8 @@ import { ArrowRight, Heart, Shield, Brain, Target, Users, Sparkles, CheckCircle2
 import { Reveal } from '../components/Reveal';
 import { ShineButton, RippleButton, FillSlideButton, ScaleShadowButton, BorderDrawButton, MagneticButton } from '../components/AnimatedButtons';
 import { useLanguage } from '../context/LanguageContext';
+import { SEOHead } from '../components/SEO/SEOHead';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 const featuredLogos = ["Forbes", "TEDx", "HBR", "Entrepreneur", "Medium"];
 
@@ -36,7 +38,13 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="w-full overflow-hidden">
+    <>
+      <SEOHead
+        title={t('seo.home.title')}
+        description={t('seo.home.description')}
+        url="/"
+      />
+      <div className="w-full overflow-hidden">
 
       {/* Hero Section - Mobile-First Editorial Design */}
       <section className="relative min-h-screen bg-cream overflow-hidden">
@@ -53,6 +61,7 @@ export const Home: React.FC = () => {
               src="/images/hero-principal.png"
               alt="Henry Orellana D."
               className="w-full h-full object-cover object-top"
+              loading="eager"
             />
             {/* Gradient fade to content */}
             <div className="absolute inset-0 bg-gradient-to-b from-cream/20 via-transparent to-cream" />
@@ -184,6 +193,7 @@ export const Home: React.FC = () => {
                       src="/images/hero-principal.png"
                       alt="Henry Orellana D."
                       className="w-full h-full object-cover"
+                      loading="eager"
                     />
                   </div>
 
@@ -345,10 +355,10 @@ export const Home: React.FC = () => {
             </div>
             <Reveal delay={0.3} className="relative">
               <div className="aspect-square rounded-sm overflow-hidden shadow-2xl">
-                <img
+                <OptimizedImage
                   src="/images/ceo-junior-preview.png"
                   alt="CEO Junior"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full"
                 />
               </div>
             </Reveal>
@@ -379,6 +389,7 @@ export const Home: React.FC = () => {
                       src={article.image}
                       alt={article.title}
                       className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex items-center space-x-2 text-xs font-sans text-forest uppercase tracking-wider">
@@ -466,5 +477,6 @@ export const Home: React.FC = () => {
       </section>
 
     </div>
+    </>
   );
 };

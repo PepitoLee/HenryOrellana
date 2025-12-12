@@ -4,51 +4,53 @@ import { Reveal } from '../components/Reveal';
 import {
   Rocket,
   Lightbulb,
-  Shield,
   Target,
   Users,
   Cpu,
   DollarSign,
   Brain,
-  Sparkles,
   ArrowRight,
   CheckCircle2
 } from 'lucide-react';
-
-const pilares = [
-  {
-    icon: DollarSign,
-    title: "Inteligencia Financiera",
-    subtitle: "Dominar el dinero con propósito",
-    description: "Aprenderá a dominar el dinero con propósito, entendiendo la gestión de riesgos y la mentalidad de abundancia responsable.",
-    color: "from-green-600 to-green-800"
-  },
-  {
-    icon: Cpu,
-    title: "Inteligencia Tecnológica",
-    subtitle: "Crear, no perderse",
-    description: "Dejará de usar la tecnología para perderse y empezará a usarla para crear, creando contenido y seguridad digital.",
-    color: "from-blue-600 to-blue-800"
-  },
-  {
-    icon: Brain,
-    title: "Inteligencia Mental y Espiritual",
-    subtitle: "Disciplina y propósito",
-    description: "Fortalecerá la disciplina, la fijación de metas y el sentido de misión, alineando sus decisiones con su propósito eterno.",
-    color: "from-purple-600 to-purple-800"
-  }
-];
-
-const competencias = [
-  "Competencias digitales avanzadas",
-  "Pensamiento innovador y creativo",
-  "Uso consciente de la Inteligencia Artificial",
-  "Habilidades reales de emprendimiento online",
-  "Liderazgo con valores cristianos",
-  "Visión global y propósito eterno"
-];
+import { RippleButton, MagneticButton, ShineButton } from '../components/AnimatedButtons';
+import { useLanguage } from '../context/LanguageContext';
 
 export const CEOJunior: React.FC = () => {
+  const { t } = useLanguage();
+
+  const pilares = [
+    {
+      icon: DollarSign,
+      title: t('ceoJunior.pillars.financial.title'),
+      subtitle: t('ceoJunior.pillars.financial.subtitle'),
+      description: t('ceoJunior.pillars.financial.description'),
+      color: "from-green-600 to-green-800"
+    },
+    {
+      icon: Cpu,
+      title: t('ceoJunior.pillars.technological.title'),
+      subtitle: t('ceoJunior.pillars.technological.subtitle'),
+      description: t('ceoJunior.pillars.technological.description'),
+      color: "from-blue-600 to-blue-800"
+    },
+    {
+      icon: Brain,
+      title: t('ceoJunior.pillars.mental.title'),
+      subtitle: t('ceoJunior.pillars.mental.subtitle'),
+      description: t('ceoJunior.pillars.mental.description'),
+      color: "from-purple-600 to-purple-800"
+    }
+  ];
+
+  const competencias = [
+    t('ceoJunior.focus.skills.digital'),
+    t('ceoJunior.focus.skills.innovative'),
+    t('ceoJunior.focus.skills.ai'),
+    t('ceoJunior.focus.skills.entrepreneurship'),
+    t('ceoJunior.focus.skills.leadership'),
+    t('ceoJunior.focus.skills.vision')
+  ];
+
   return (
     <div className="w-full pt-32 pb-20">
       {/* Hero Section */}
@@ -57,59 +59,50 @@ export const CEOJunior: React.FC = () => {
           <div className="space-y-8">
             <Reveal>
               <span className="font-sans text-forest uppercase tracking-[0.2em] text-xs font-semibold">
-                Para la Generación Z
+                {t('ceoJunior.hero.subtitle')}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="font-display text-5xl md:text-6xl text-charcoal leading-tight">
-                CEO Junior: <span className="italic text-forest">Forjando a la Próxima Generación</span>
+                {t('ceoJunior.hero.title')} <span className="italic text-forest">{t('ceoJunior.hero.titleHighlight')}</span>
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
               <p className="font-body text-xl text-warm-grey leading-relaxed">
-                de Empresarios Digitales con <strong className="text-charcoal">Propósito Eterno</strong>.
+                {t('ceoJunior.hero.description')}
               </p>
             </Reveal>
             <Reveal delay={0.3}>
               <p className="font-body text-lg text-warm-grey leading-relaxed border-l-4 border-forest pl-6">
-                Esta es la comunidad que prepara a la Generación Z para ir más allá de la escuela tradicional.
-                En CEO Junior, les proporcionamos el mapa, las herramientas y la mentalidad para convertirse
-                en líderes que no solo ganan dinero, sino que también <strong>dejan un legado</strong>.
+                {t('ceoJunior.hero.story')}
               </p>
             </Reveal>
             <Reveal delay={0.4}>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link
+                <RippleButton
                   to="/contact"
-                  className="bg-forest text-white px-8 py-4 font-sans text-sm tracking-widest hover:bg-charcoal transition-colors text-center inline-flex items-center justify-center gap-2"
+                  className="bg-forest text-white px-8 py-4 font-sans text-sm tracking-widest hover:bg-charcoal transition-colors text-center"
                 >
                   <Rocket size={18} />
-                  EXPLORAR PROGRAMAS
-                </Link>
-                <Link
+                  {t('ceoJunior.hero.cta1')}
+                </RippleButton>
+                <MagneticButton
                   to="/metodologia"
                   className="border-2 border-charcoal text-charcoal px-8 py-4 font-sans text-sm tracking-widest hover:bg-charcoal hover:text-white transition-colors text-center"
                 >
-                  CONOCER GÉNESIS 17™
-                </Link>
+                  {t('ceoJunior.hero.cta2')}
+                </MagneticButton>
               </div>
             </Reveal>
           </div>
 
           <Reveal delay={0.3} className="relative">
-            <div className="aspect-square bg-gradient-to-br from-forest to-charcoal rounded-sm overflow-hidden shadow-2xl">
+            <div className="aspect-square rounded-sm overflow-hidden shadow-2xl">
               <img
-                src="https://picsum.photos/seed/ceojuniorhero/600/600"
-                alt="CEO Junior - Jóvenes Emprendedores"
-                className="w-full h-full object-cover mix-blend-overlay opacity-50"
+                src="/images/ceo-junior-hero.png"
+                alt="CEO Junior"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-white p-8">
-                  <Sparkles size={64} className="mx-auto mb-6 opacity-90" />
-                  <h3 className="font-display text-3xl italic mb-2">Empresarios del Futuro</h3>
-                  <p className="font-sans text-sm text-white/80 tracking-wider uppercase">Con Propósito Eterno</p>
-                </div>
-              </div>
             </div>
             {/* Decorative elements */}
             <div className="absolute -bottom-6 -left-6 w-32 h-32 border-b-2 border-l-2 border-forest/30"></div>
@@ -125,14 +118,11 @@ export const CEOJunior: React.FC = () => {
             <Lightbulb className="mx-auto mb-6 text-burgundy" size={48} />
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-display text-3xl md:text-4xl mb-8">Nuestro Enfoque</h2>
+            <h2 className="font-display text-3xl md:text-4xl mb-8">{t('ceoJunior.focus.title')}</h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="font-body text-xl text-white/80 leading-relaxed max-w-3xl mx-auto">
-              Desarrollamos <strong className="text-white">competencias digitales</strong>,
-              <strong className="text-white"> pensamiento innovador</strong>,
-              <strong className="text-white"> uso consciente de la IA</strong> y
-              <strong className="text-white"> habilidades reales de emprendimiento online</strong>.
+              {t('ceoJunior.focus.description')}
             </p>
           </Reveal>
 
@@ -149,18 +139,18 @@ export const CEOJunior: React.FC = () => {
         </div>
       </section>
 
-      {/* Pilares de GÉNESIS 17™ Aplicados */}
+      {/* Pilares de GÉNESIS i7™ Aplicados */}
       <section className="py-24 bg-cream-dark">
         <div className="max-w-6xl mx-auto px-6">
           <Reveal className="text-center mb-16">
             <span className="font-sans text-forest uppercase tracking-[0.2em] text-xs font-semibold">
-              Metodología Aplicada
+              {t('ceoJunior.pillars.subtitle')}
             </span>
             <h2 className="font-display text-4xl md:text-5xl text-charcoal mt-4 mb-4">
-              Pilares de <span className="text-forest">GÉNESIS 17™</span> en CEO Junior
+              {t('ceoJunior.pillars.title')}
             </h2>
             <p className="font-sans text-warm-grey max-w-2xl mx-auto">
-              Las inteligencias clave que transformarán a tu hijo en un líder con propósito
+              {t('ceoJunior.pillars.description')}
             </p>
           </Reveal>
 
@@ -189,21 +179,17 @@ export const CEOJunior: React.FC = () => {
               <div className="space-y-6">
                 <Target className="text-forest" size={48} />
                 <h2 className="font-display text-3xl md:text-4xl text-charcoal">
-                  Nuestra Visión
+                  {t('ceoJunior.vision.title')}
                 </h2>
                 <p className="font-body text-lg text-warm-grey leading-relaxed">
-                  CEO Junior aspira a ser la <strong className="text-charcoal">comunidad más grande de jóvenes
-                  emprendedores</strong> de todo el mundo, formando empresarios digitales con
-                  <strong className="text-charcoal"> valores cristianos</strong>,
-                  <strong className="text-charcoal"> propósito eterno</strong> y
-                  <strong className="text-charcoal"> habilidades del siglo XXI</strong>.
+                  {t('ceoJunior.vision.description')}
                 </p>
               </div>
             </Reveal>
             <Reveal delay={0.2}>
               <div className="bg-cream p-8 rounded-sm">
                 <blockquote className="font-display text-2xl italic text-charcoal leading-relaxed">
-                  "Preparamos líderes que no solo ganan dinero, sino que también dejan un legado."
+                  {t('ceoJunior.vision.quote')}
                   <footer className="text-forest text-base mt-4 not-italic font-sans">— Henry Orellana D.</footer>
                 </blockquote>
               </div>
@@ -219,29 +205,27 @@ export const CEOJunior: React.FC = () => {
             <Users className="mx-auto mb-6 opacity-80" size={48} />
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-display text-3xl md:text-4xl mb-6">La Solución Integral</h2>
+            <h2 className="font-display text-3xl md:text-4xl mb-6">{t('ceoJunior.solution.title')}</h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="font-body text-xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-8">
-              <strong className="text-white">Padres 3.0</strong> es el programa de padres conscientes, y
-              <strong className="text-white"> CEO Junior</strong> es el programa para adolescentes con visión
-              emprendedora digital. Juntos, forman el ecosistema completo para transformar familias.
+              {t('ceoJunior.solution.description')}
             </p>
           </Reveal>
           <Reveal delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Link
+              <ShineButton
                 to="/metodologia"
-                className="bg-white text-charcoal px-8 py-4 font-sans text-sm tracking-widest hover:bg-cream transition-colors inline-flex items-center justify-center gap-2"
+                className="bg-white text-charcoal px-8 py-4 font-sans text-sm tracking-widest hover:bg-cream transition-colors"
               >
-                CONOCER PADRES 3.0 <ArrowRight size={16} />
-              </Link>
-              <Link
+                {t('ceoJunior.solution.cta1')} <ArrowRight size={16} />
+              </ShineButton>
+              <RippleButton
                 to="/contact"
                 className="border-2 border-white text-white px-8 py-4 font-sans text-sm tracking-widest hover:bg-white hover:text-charcoal transition-colors"
               >
-                QUIERO QUE MI HIJO SEA UN CEO JUNIOR
-              </Link>
+                {t('ceoJunior.solution.cta2')}
+              </RippleButton>
             </div>
           </Reveal>
         </div>

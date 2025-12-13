@@ -7,15 +7,14 @@ import { BlogSearch } from '../components/Blog/BlogSearch';
 import { CategoryFilter } from '../components/Blog/CategoryFilter';
 import { BlogCard } from '../components/Blog/BlogCard';
 import { SEOHead } from '../components/SEO/SEOHead';
-import { getFeaturedPost } from '../data/blogPosts';
 import { categories } from '../data/categories';
 import { formatDate } from '../utils/blogUtils';
+import { Loader2 } from 'lucide-react';
 
 export const Blog: React.FC = () => {
   const { t, language } = useLanguage();
-  const { filteredPosts, searchQuery, selectedCategory } = useBlog();
+  const { filteredPosts, featuredPost, searchQuery, selectedCategory, loading, error } = useBlog();
 
-  const featuredPost = getFeaturedPost();
   const featuredTranslation = featuredPost?.translations[language];
   const featuredCategory = featuredPost
     ? categories.find(c => c.id === featuredPost.categories[0])
@@ -55,89 +54,120 @@ export const Blog: React.FC = () => {
           </Reveal>
         </div>
 
-        {/* Featured Article (only show when no filters active) */}
-        {!hasActiveFilters && featuredPost && featuredTranslation && (
-          <section className="max-w-7xl mx-auto px-6 mb-24">
-            <Reveal width="100%">
-              <Link to={`/blog/${featuredPost.slug}`} className="block group">
-                <div className="relative aspect-[21/9] w-full overflow-hidden mb-8">
-                  <img
-                    src={featuredPost.image}
-                    alt={featuredTranslation.title}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                  {/* Featured Badge */}
-                  <div className="absolute top-4 left-4 bg-burgundy text-white px-3 py-1 text-xs font-sans uppercase tracking-wider">
-                    {language === 'es' ? 'Destacado' : 'Featured'}
-                  </div>
-                </div>
-                <div className="max-w-3xl">
-                  <div className="flex gap-4 text-xs font-sans uppercase tracking-widest text-forest mb-3">
-                    <span>{featuredCategory?.translations[language]}</span>
-                    <span>•</span>
-                    <span>{formatDate(featuredPost.publishedAt, language)}</span>
-                  </div>
-                  <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4 group-hover:text-forest transition-colors">
-                    {featuredTranslation.title}
-                  </h2>
-                  <p className="font-body text-lg text-warm-grey mb-6">
-                    {featuredTranslation.excerpt}
-                  </p>
-                  <span className="font-sans text-sm font-bold uppercase tracking-wide border-b border-charcoal pb-1 group-hover:text-forest group-hover:border-forest transition-colors">
-                    {t('blog.readMore')}
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          </section>
-        )}
-
-        {/* Results Count (when filtering) */}
-        {hasActiveFilters && (
-          <div className="max-w-7xl mx-auto px-6 mb-8">
-            <Reveal>
-              <p className="font-sans text-sm text-warm-grey">
-                {filteredPosts.length}{' '}
-                {language === 'es'
-                  ? filteredPosts.length === 1
-                    ? 'articulo encontrado'
-                    : 'articulos encontrados'
-                  : filteredPosts.length === 1
-                  ? 'article found'
-                  : 'articles found'}
+        {/* Loading State */}
+        {loading && (
+          <div className="max-w-7xl mx-auto px-6 py-24 flex justify-center">
+            <div className="flex flex-col items-center gap-4">
+              <Loader2 className="w-8 h-8 animate-spin text-forest" />
+              <p className="font-sans text-warm-grey">
+                {language === 'es' ? 'Cargando articulos...' : 'Loading articles...'}
               </p>
-            </Reveal>
+            </div>
           </div>
         )}
 
-        {/* No Results Message */}
-        {noResults && (
+        {/* Error State */}
+        {error && !loading && (
           <div className="max-w-7xl mx-auto px-6 py-16 text-center">
             <Reveal>
               <p className="font-display text-2xl text-charcoal mb-4">
-                {language === 'es'
-                  ? 'No se encontraron articulos'
-                  : 'No articles found'}
+                {language === 'es' ? 'Error al cargar' : 'Error loading'}
               </p>
-              <p className="font-body text-warm-grey">
-                {language === 'es'
-                  ? 'Intenta con otros terminos de busqueda o categorias'
-                  : 'Try different search terms or categories'}
+              <p className="font-body text-warm-grey mb-6">
+                {error}
               </p>
             </Reveal>
           </div>
         )}
 
-        {/* Article Grid */}
-        {filteredPosts.length > 0 && (
-          <section className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, idx) => (
-                <BlogCard key={post.id} post={post} index={idx} />
-              ))}
-            </div>
-          </section>
+        {/* Content (only show when not loading and no error, or when we have fallback data) */}
+        {!loading && (
+          <>
+            {/* Featured Article (only show when no filters active) */}
+            {!hasActiveFilters && featuredPost && featuredTranslation && (
+              <section className="max-w-7xl mx-auto px-6 mb-24">
+                <Reveal width="100%">
+                  <Link to={`/blog/${featuredPost.slug}`} className="block group">
+                    <div className="relative aspect-[21/9] w-full overflow-hidden mb-8">
+                      <img
+                        src={featuredPost.image}
+                        alt={featuredTranslation.title}
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                      {/* Featured Badge */}
+                      <div className="absolute top-4 left-4 bg-burgundy text-white px-3 py-1 text-xs font-sans uppercase tracking-wider">
+                        {language === 'es' ? 'Destacado' : 'Featured'}
+                      </div>
+                    </div>
+                    <div className="max-w-3xl">
+                      <div className="flex gap-4 text-xs font-sans uppercase tracking-widest text-forest mb-3">
+                        <span>{featuredCategory?.translations[language]}</span>
+                        <span>•</span>
+                        <span>{formatDate(featuredPost.publishedAt, language)}</span>
+                      </div>
+                      <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4 group-hover:text-forest transition-colors">
+                        {featuredTranslation.title}
+                      </h2>
+                      <p className="font-body text-lg text-warm-grey mb-6">
+                        {featuredTranslation.excerpt}
+                      </p>
+                      <span className="font-sans text-sm font-bold uppercase tracking-wide border-b border-charcoal pb-1 group-hover:text-forest group-hover:border-forest transition-colors">
+                        {t('blog.readMore')}
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              </section>
+            )}
+
+            {/* Results Count (when filtering) */}
+            {hasActiveFilters && (
+              <div className="max-w-7xl mx-auto px-6 mb-8">
+                <Reveal>
+                  <p className="font-sans text-sm text-warm-grey">
+                    {filteredPosts.length}{' '}
+                    {language === 'es'
+                      ? filteredPosts.length === 1
+                        ? 'articulo encontrado'
+                        : 'articulos encontrados'
+                      : filteredPosts.length === 1
+                      ? 'article found'
+                      : 'articles found'}
+                  </p>
+                </Reveal>
+              </div>
+            )}
+
+            {/* No Results Message */}
+            {noResults && (
+              <div className="max-w-7xl mx-auto px-6 py-16 text-center">
+                <Reveal>
+                  <p className="font-display text-2xl text-charcoal mb-4">
+                    {language === 'es'
+                      ? 'No se encontraron articulos'
+                      : 'No articles found'}
+                  </p>
+                  <p className="font-body text-warm-grey">
+                    {language === 'es'
+                      ? 'Intenta con otros terminos de busqueda o categorias'
+                      : 'Try different search terms or categories'}
+                  </p>
+                </Reveal>
+              </div>
+            )}
+
+            {/* Article Grid */}
+            {filteredPosts.length > 0 && (
+              <section className="max-w-7xl mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredPosts.map((post, idx) => (
+                    <BlogCard key={post.id} post={post} index={idx} />
+                  ))}
+                </div>
+              </section>
+            )}
+          </>
         )}
       </div>
     </>

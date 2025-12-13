@@ -15,6 +15,15 @@ import { Contact } from './pages/Contact';
 import { CEOJunior } from './pages/CEOJunior';
 import { Metodologia } from './pages/Metodologia';
 
+// Admin imports
+import { AdminAuthProvider } from './admin/context/AdminAuthContext';
+import { AdminLayout } from './admin/components/AdminLayout';
+import { AdminLogin } from './admin/pages/AdminLogin';
+import { AdminDashboard } from './admin/pages/AdminDashboard';
+import { AdminPostList } from './admin/pages/AdminPostList';
+import { AdminPostNew } from './admin/pages/AdminPostNew';
+import { AdminPostEdit } from './admin/pages/AdminPostEdit';
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -23,31 +32,48 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Public layout wrapper
+const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="min-h-screen bg-cream font-sans text-charcoal selection:bg-forest selection:text-white flex flex-col">
+    <Navigation />
+    <main className="flex-grow">
+      {children}
+    </main>
+    <Footer />
+  </div>
+);
+
 const App: React.FC = () => {
   return (
     <SEOProvider>
       <LanguageProvider>
         <BlogProvider>
-          <Router>
-            <ScrollToTop />
-            <div className="min-h-screen bg-cream font-sans text-charcoal selection:bg-forest selection:text-white flex flex-col">
-              <Navigation />
-              <main className="flex-grow">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/books" element={<Books />} />
-                  <Route path="/speaking" element={<Speaking />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/:slug" element={<BlogPost />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/ceo-junior" element={<CEOJunior />} />
-                  <Route path="/metodologia" element={<Metodologia />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          </Router>
+          <AdminAuthProvider>
+            <Router>
+              <ScrollToTop />
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+                <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+                <Route path="/books" element={<PublicLayout><Books /></PublicLayout>} />
+                <Route path="/speaking" element={<PublicLayout><Speaking /></PublicLayout>} />
+                <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
+                <Route path="/blog/:slug" element={<PublicLayout><BlogPost /></PublicLayout>} />
+                <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+                <Route path="/ceo-junior" element={<PublicLayout><CEOJunior /></PublicLayout>} />
+                <Route path="/metodologia" element={<PublicLayout><Metodologia /></PublicLayout>} />
+
+                {/* Admin Routes */}
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="posts" element={<AdminPostList />} />
+                  <Route path="posts/new" element={<AdminPostNew />} />
+                  <Route path="posts/:id/edit" element={<AdminPostEdit />} />
+                </Route>
+              </Routes>
+            </Router>
+          </AdminAuthProvider>
         </BlogProvider>
       </LanguageProvider>
     </SEOProvider>

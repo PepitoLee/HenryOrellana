@@ -1,4 +1,4 @@
-// Supabase Edge Function for generating blog content with Google Gemini AI
+// Supabase Edge Function for generating SEO-optimized blog content with Google Gemini AI
 // Deploy: supabase functions deploy generate-blog-content --no-verify-jwt
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
@@ -36,9 +36,9 @@ interface GeneratedContent {
 const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
 
 const lengthGuide = {
-  short: { words: '800-1200', readTime: '4-5 min' },
-  medium: { words: '1500-2000', readTime: '7-8 min' },
-  long: { words: '2500-3500', readTime: '12-15 min' },
+  short: { words: '1200-1500', readTime: '5-6 min' },
+  medium: { words: '1800-2200', readTime: '8-10 min' },
+  long: { words: '2800-3500', readTime: '12-15 min' },
 };
 
 const toneDescriptions = {
@@ -54,64 +54,133 @@ function buildPrompt(request: GenerateRequest): string {
 
   return `Eres Henry Orellana D., autor del libro "CEO Junior", speaker internacional, experto en emprendimiento familiar y crianza con propósito. Tu misión es transformar familias en equipos emprendedores.
 
-IMPORTANTE: Genera un artículo de blog COMPLETO Y PROFESIONAL sobre el siguiente tema.
+GENERA UN ARTÍCULO DE BLOG 100% OPTIMIZADO PARA SEO sobre el siguiente tema.
 
 TEMA: ${topic}
 CATEGORÍA: ${category}
 TONO: ${toneDesc}
-LONGITUD: ${length.words} palabras aproximadamente
+LONGITUD: ${length.words} palabras (mínimo 1500 palabras para SEO)
 
-INSTRUCCIONES ESTRICTAS:
+═══════════════════════════════════════════════════════════════
+                    OPTIMIZACIÓN SEO OBLIGATORIA
+═══════════════════════════════════════════════════════════════
 
-1. CONTENIDO HTML:
-- Usa etiquetas HTML semánticas: <p>, <h2>, <h3>, <ul>, <li>, <strong>, <em>, <blockquote>
-- NO uses <h1> (el título va separado)
-- Incluye al menos 3-4 secciones con subtítulos <h2>
-- Usa listas para puntos clave
-- Incluye una cita inspiracional en <blockquote>
-- Termina con una llamada a la acción
+1. TÍTULO SEO (MUY IMPORTANTE):
+   - Incluye la PALABRA CLAVE PRINCIPAL al inicio
+   - Usa números cuando sea posible ("7 Estrategias...", "5 Claves...")
+   - Incluye palabras de poder: "Guía", "Definitiva", "Probado", "Secretos", "Cómo"
+   - Máximo 60 caracteres para que no se corte en Google
+   - Debe generar curiosidad y clicks
 
-2. ESTRUCTURA DEL CONTENIDO:
-- Introducción enganchadora (conecta con el lector)
-- Desarrollo con subtítulos claros
-- Ejemplos prácticos o historias
-- Consejos accionables
-- Conclusión con reflexión y CTA
+2. META DESCRIPCIÓN SEO:
+   - Exactamente 150-160 caracteres
+   - Incluye la palabra clave principal
+   - Incluye un CALL TO ACTION ("Descubre", "Aprende", "Conoce")
+   - Debe convencer al usuario de hacer click
 
-3. ESTILO DE ESCRITURA:
-- Primera persona cuando compartas experiencias
-- Segunda persona para hablar al lector
-- Mezcla de datos con historias personales
-- Referencias a tu libro "CEO Junior" cuando sea relevante
-- Conecta con valores familiares y emprendimiento
+3. ESTRUCTURA DE CONTENIDO PARA POSICIONAMIENTO:
 
-4. SEO:
-- Meta descripción de exactamente 150-160 caracteres
-- Slug corto y descriptivo (máx 5 palabras, sin acentos, guiones)
+   A) INTRODUCCIÓN (150-200 palabras):
+      - Primer párrafo con la PALABRA CLAVE en las primeras 100 palabras
+      - Plantea el problema/necesidad del lector
+      - Promete la solución
+      - Usa pregunta retórica para enganchar
 
-FORMATO DE RESPUESTA (JSON ESTRICTO):
+   B) TABLA DE CONTENIDOS implícita con H2 claros
+
+   C) DESARROLLO con jerarquía H2 > H3:
+      <h2>Subtítulo con Palabra Clave</h2>
+      <p>Contenido relevante...</p>
+      <h3>Subtema específico</h3>
+      <p>Desarrollo del subtema...</p>
+
+   D) LISTAS para Featured Snippets:
+      <h2>X Beneficios/Pasos/Consejos de [Tema]</h2>
+      <ul>
+        <li><strong>Beneficio 1:</strong> Explicación</li>
+        <li><strong>Beneficio 2:</strong> Explicación</li>
+      </ul>
+
+   E) SECCIÓN FAQ para Position Zero:
+      <h2>Preguntas Frecuentes sobre [Tema]</h2>
+      <h3>¿Pregunta con palabra clave?</h3>
+      <p>Respuesta directa y concisa...</p>
+
+   F) CONCLUSIÓN con CTA:
+      - Resume puntos clave
+      - Llamada a la acción clara
+      - Invita a comentar/compartir
+
+4. DENSIDAD DE PALABRAS CLAVE:
+   - Palabra clave principal: 1-2% del contenido
+   - Variaciones semánticas (LSI): distribuidas naturalmente
+   - En H2 y H3: al menos 2-3 veces
+   - En primer y último párrafo: obligatorio
+
+5. ELEMENTOS HTML SEMÁNTICOS:
+   <p> - Párrafos cortos (máx 3-4 líneas)
+   <h2> - Subtítulos principales (4-6 en el artículo)
+   <h3> - Subtítulos secundarios
+   <ul>/<ol> - Listas para escaneabilidad
+   <strong> - Palabras clave y conceptos importantes
+   <em> - Énfasis en frases clave
+   <blockquote> - Citas inspiracionales
+
+6. LEGIBILIDAD Y UX:
+   - Párrafos cortos (máximo 150 palabras)
+   - Oraciones variadas (cortas y medianas)
+   - Transiciones fluidas entre secciones
+   - Bullet points para información importante
+   - Negritas en conceptos clave
+
+7. SLUG SEO:
+   - 3-5 palabras máximo
+   - Palabra clave principal incluida
+   - Sin acentos, sin caracteres especiales
+   - Separado por guiones
+   - Ejemplo: "crianza-hijos-emprendedores"
+
+═══════════════════════════════════════════════════════════════
+                    ESTRUCTURA OBLIGATORIA
+═══════════════════════════════════════════════════════════════
+
+El contenido DEBE incluir:
+1. Introducción con gancho + palabra clave
+2. Mínimo 4-5 secciones H2
+3. Al menos 2 listas (ul o ol)
+4. Una sección de FAQ con 3-4 preguntas
+5. Blockquote con cita inspiracional
+6. Conclusión con CTA
+7. Referencias a "CEO Junior" cuando sea natural
+
+═══════════════════════════════════════════════════════════════
+                    FORMATO DE RESPUESTA JSON
+═══════════════════════════════════════════════════════════════
+
 {
   "es": {
-    "title": "Título atractivo y SEO-friendly en español",
-    "excerpt": "Resumen de 2-3 oraciones que enganche al lector",
-    "content": "<p>Contenido HTML completo...</p>",
-    "metaDescription": "Meta descripción de 150-160 caracteres para SEO",
+    "title": "Título SEO optimizado (máx 60 chars, con palabra clave)",
+    "excerpt": "2-3 oraciones que resuman el valor del artículo con palabra clave",
+    "content": "<p>Contenido HTML completo optimizado para SEO...</p>",
+    "metaDescription": "Meta descripción 150-160 chars con palabra clave y CTA",
     "readTime": "${length.readTime}"
   },
   "en": {
-    "title": "Attractive SEO-friendly title in English",
-    "excerpt": "2-3 sentence summary that hooks the reader",
-    "content": "<p>Full HTML content...</p>",
-    "metaDescription": "Meta description 150-160 characters for SEO",
+    "title": "SEO optimized title in English (max 60 chars)",
+    "excerpt": "2-3 sentences summarizing the article value",
+    "content": "<p>Full SEO-optimized HTML content in English...</p>",
+    "metaDescription": "Meta description 150-160 chars with keyword and CTA",
     "readTime": "${length.readTime}"
   },
-  "suggestedSlug": "url-slug-sin-acentos"
+  "suggestedSlug": "keyword-based-slug"
 }
 
-IMPORTANTE:
-- Responde SOLO con el JSON válido, sin explicaciones adicionales
-- El contenido en inglés debe ser una traducción profesional, no literal
-- Asegúrate de que el JSON sea válido y parseable`;
+REGLAS FINALES:
+- Responde SOLO con JSON válido, sin texto adicional
+- El contenido en inglés es traducción profesional adaptada al mercado angloparlante
+- NO uses <h1> (el título va separado)
+- Mínimo 1500 palabras en el contenido
+- El JSON debe ser válido y parseable`;
 }
 
 async function generateWithGemini(prompt: string): Promise<GeneratedContent> {
@@ -120,7 +189,7 @@ async function generateWithGemini(prompt: string): Promise<GeneratedContent> {
   }
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent?key=${GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
     {
       method: 'POST',
       headers: {
@@ -133,10 +202,10 @@ async function generateWithGemini(prompt: string): Promise<GeneratedContent> {
           },
         ],
         generationConfig: {
-          temperature: 0.8,
+          temperature: 0.7,
           topK: 40,
           topP: 0.95,
-          maxOutputTokens: 8192,
+          maxOutputTokens: 16384,
         },
         safetySettings: [
           {

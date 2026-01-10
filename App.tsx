@@ -14,6 +14,7 @@ import { BlogPost } from './pages/BlogPost';
 import { Contact } from './pages/Contact';
 import { CEOJunior } from './pages/CEOJunior';
 import { Metodologia } from './pages/Metodologia';
+import LandingPage from './src/landing/LandingPage';
 
 // Admin imports
 import { AdminAuthProvider } from './admin/context/AdminAuthContext';
@@ -62,6 +63,9 @@ const App: React.FC = () => {
                 <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
                 <Route path="/ceo-junior" element={<PublicLayout><CEOJunior /></PublicLayout>} />
                 <Route path="/metodologia" element={<PublicLayout><Metodologia /></PublicLayout>} />
+
+                {/* Landing Page - Independent (no PublicLayout) */}
+                <Route path="/landingpage" element={<LandingPage />} />
 
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

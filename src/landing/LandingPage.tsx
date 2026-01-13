@@ -38,8 +38,7 @@ export default function LandingPage() {
   }, []);
 
   const handleCheckout = () => {
-    const offerCode = 'TU_CODIGO_DE_OFERTA';
-    window.open(`https://pay.hotmart.com/${offerCode}`, '_blank');
+    window.open('https://pay.hotmart.com/G103838321V', '_blank');
   };
 
   return (

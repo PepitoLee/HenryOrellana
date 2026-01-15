@@ -390,6 +390,23 @@
 }
 
 /* TESTIMONIAL */
+.landing-page-wrapper .scroll-card.testimonial {
+  min-width: 280px;
+  max-width: 320px;
+}
+
+.landing-page-wrapper .scroll-card.testimonial .card-img {
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  object-position: center;
+  background: #0a0a15;
+}
+
+.landing-page-wrapper .scroll-card.testimonial .card-img.full {
+  max-height: none;
+}
+
 .landing-page-wrapper .testimonial p {
   padding: 15px;
   font-style: italic;

@@ -244,7 +244,7 @@ export default function LandingPage() {
       {/* 8. AUTORIDAD */}
       <section className="author-section">
         <div className="container">
-          <img src="/landing/images/author_consulting_vertical_1768454280839.png" className="author-hero" alt="Henry" />
+          <img src="/landing/images/henry_orellana_author.jpeg" className="author-hero" alt="Henry Orellana" />
           <div className="author-content">
             <h3>Henry Orellana</h3>
             <p>Experto en comportamiento adolescente. He ayudado a +500 familias a recuperar la paz.</p>

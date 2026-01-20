@@ -71,7 +71,7 @@ export default function LandingPage() {
       {/* 1. HERO */}
       <section className="hero-section">
         <div className="container">
-          <div className="pre-headline badge-glow">ATENCION PADRES (13-19 ANOS)</div>
+          <div className="pre-headline badge-glow">ATENCIÓN PADRES DE ( 10 - 18 AÑOS )</div>
           <h1 className="headline">"Siento que estoy perdiendo a mi hijo..."</h1>
           <p className="subheadline">
             Revierte la "zombificacion" digital en 21 dias sin gritos, sin peleas y sin quitarle el telefono a la fuerza.

@@ -1,8 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './landing-styles.css';
 
 export default function LandingPage() {
   const carouselsRef = useRef<HTMLDivElement[]>([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   useEffect(() => {
     // Auto-scroll carousels
@@ -69,16 +78,35 @@ export default function LandingPage() {
           </p>
 
           <div className="vsl-wrapper">
-            <div className="video-container">
+            <div className={`video-container ${isPlaying ? 'playing' : ''}`}>
               <video
-                controls
+                ref={videoRef}
+                controls={isPlaying}
                 playsInline
-                poster="/landing/images/mobile_vsl_thumbnail_vertical_1768452316161.png"
                 className="vsl-video"
+                onEnded={() => setIsPlaying(false)}
               >
                 <source src="/landing/video_landing.mp4" type="video/mp4" />
                 Tu navegador no soporta el video.
               </video>
+
+              {!isPlaying && (
+                <div className="video-poster-overlay" onClick={handlePlayVideo}>
+                  <img
+                    src="/landing/images/video_poster.jpeg"
+                    alt="Video Protocolo Desconexión"
+                    className="video-poster-img"
+                  />
+                  <div className="custom-play-button">
+                    <div className="play-button-ring"></div>
+                    <div className="play-button-inner">
+                      <span className="play-icon-triangle">▶</span>
+                    </div>
+                    <span className="play-text">VER VIDEO</span>
+                  </div>
+                  <div className="video-glow"></div>
+                </div>
+              )}
             </div>
           </div>
 

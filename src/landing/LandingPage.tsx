@@ -70,10 +70,15 @@ export default function LandingPage() {
 
           <div className="vsl-wrapper">
             <div className="video-container">
-              <img src="/landing/images/mobile_vsl_thumbnail_vertical_1768452316161.png" alt="Video Historia" className="vsl-thumb" />
-              <div className="play-button-overlay">
-                <div className="play-icon">▶</div>
-              </div>
+              <video
+                controls
+                playsInline
+                poster="/landing/images/mobile_vsl_thumbnail_vertical_1768452316161.png"
+                className="vsl-video"
+              >
+                <source src="/landing/video_landing.mp4" type="video/mp4" />
+                Tu navegador no soporta el video.
+              </video>
             </div>
           </div>
 

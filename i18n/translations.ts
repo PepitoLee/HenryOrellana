@@ -9,7 +9,7 @@ export const translations: Record<Language, TranslationKeys> = {
     // Navigation
     nav: {
       metodologia: 'Metodología',
-      ceoJunior: 'CEO Junior',
+      starbizAcademy: 'StarbizAcademy',
       about: 'Sobre Mí',
       books: 'Libros',
       speaking: 'Conferencias',
@@ -604,7 +604,7 @@ export const translations: Record<Language, TranslationKeys> = {
     // Navigation
     nav: {
       metodologia: 'Methodology',
-      ceoJunior: 'CEO Junior',
+      starbizAcademy: 'StarbizAcademy',
       about: 'About',
       books: 'Books',
       speaking: 'Speaking',

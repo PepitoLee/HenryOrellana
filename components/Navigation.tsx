@@ -6,7 +6,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 
 const getNavItems = (t: (key: string) => string) => [
   { name: t('nav.metodologia'), path: '/metodologia', subtitle: 'GÉNESIS i7™' },
-  { name: t('nav.ceoJunior'), path: '/ceo-junior', subtitle: 'Programa' },
+  { name: t('nav.starbizAcademy'), path: '/ceo-junior', subtitle: 'Academy' },
   { name: t('nav.about'), path: '/about', subtitle: t('nav.about') },
   { name: t('nav.books'), path: '/books', subtitle: t('nav.books') },
   { name: t('nav.speaking'), path: '/speaking', subtitle: t('nav.speaking') },

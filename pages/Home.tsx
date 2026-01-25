@@ -110,13 +110,13 @@ export const Home: React.FC = () => {
                   </div>
                 </Link>
 
-                {/* CEO Junior Card */}
+                {/* StarbizAcademy Card */}
                 <Link to="/ceo-junior" className="block group">
                   <div className="bg-[#1e40af] p-5 shadow-lg hover:shadow-xl transition-all">
                     <div className="flex items-center gap-4">
                       <span className="text-3xl">🚀</span>
                       <div className="flex-1">
-                        <h3 className="font-display text-lg text-white font-semibold">CEO JUNIOR</h3>
+                        <h3 className="font-display text-lg text-white font-semibold">STARBIZACADEMY</h3>
                         <p className="text-white/80 text-sm">{t('home.group.ceoJunior.tagline')}</p>
                       </div>
                       <ArrowRight size={20} className="text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
@@ -202,11 +202,11 @@ export const Home: React.FC = () => {
                     </div>
                   </Link>
 
-                  {/* CEO Junior */}
+                  {/* StarbizAcademy */}
                   <Link to="/ceo-junior" className="group">
                     <div className="bg-[#1e40af] p-5 h-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
                       <span className="text-3xl block mb-3">🚀</span>
-                      <h3 className="font-display text-base text-white font-bold mb-1">CEO JUNIOR</h3>
+                      <h3 className="font-display text-base text-white font-bold mb-1">STARBIZACADEMY</h3>
                       <p className="text-white/70 text-xs mb-3">{t('home.group.ceoJunior.tagline')}</p>
                       <p className="text-white/50 text-[10px] uppercase tracking-wider">{t('home.group.ceoJunior.for')}</p>
                     </div>
@@ -354,7 +354,7 @@ export const Home: React.FC = () => {
                     <span className="text-[10px] text-white/40 uppercase tracking-wider block mb-2">{t('home.whyGroup.solution')}</span>
                     <Link to="/ceo-junior" className="inline-flex items-center gap-2 text-blue-400 font-semibold group-hover:text-blue-300 transition-colors">
                       <span className="text-lg">🚀</span>
-                      CEO JUNIOR
+                      STARBIZACADEMY
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>

@@ -9,7 +9,6 @@ const getNavItems = (t: (key: string) => string) => [
   { name: 'USALATINO PRIME', path: '/usalatino-prime', subtitle: 'Migración VIP', isPrime: true },
   { name: 'STARBIZACADEMY', path: '/ceo-junior', subtitle: 'GÉNESIS i7™', isStarbiz: true },
   { name: t('nav.books'), path: '/books', subtitle: t('nav.books') },
-  { name: t('nav.speaking'), path: '/speaking', subtitle: t('nav.speaking') },
   { name: t('nav.blog'), path: '/blog', subtitle: t('nav.blog') },
   { name: t('nav.contact'), path: '/contact', subtitle: t('nav.contact') },
 ];

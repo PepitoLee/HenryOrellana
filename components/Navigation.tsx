@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Star } from 'lucide-react';
+import { ArrowUpRight, Star, Rocket } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 const getNavItems = (t: (key: string) => string) => [
-  { name: t('nav.metodologia'), path: '/metodologia', subtitle: 'GÉNESIS i7™' },
-  { name: 'USALATINO PRIME', path: '/usalatino-prime', subtitle: 'Migración VIP', isPrime: true },
-  { name: t('nav.starbizAcademy'), path: '/ceo-junior', subtitle: 'Academy' },
   { name: t('nav.about'), path: '/about', subtitle: t('nav.about') },
+  { name: 'USALATINO PRIME', path: '/usalatino-prime', subtitle: 'Migración VIP', isPrime: true },
+  { name: 'STARBIZACADEMY', path: '/ceo-junior', subtitle: 'Academy', isStarbiz: true },
+  { name: t('nav.metodologia'), path: '/metodologia', subtitle: 'GÉNESIS i7™' },
   { name: t('nav.books'), path: '/books', subtitle: t('nav.books') },
   { name: t('nav.speaking'), path: '/speaking', subtitle: t('nav.speaking') },
   { name: t('nav.blog'), path: '/blog', subtitle: t('nav.blog') },
@@ -68,17 +68,32 @@ export const Navigation: React.FC = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center space-x-6">
-            {navItems.map((item: any) => (
-              item.isPrime ? (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] px-4 py-2 rounded-sm font-sans text-xs tracking-wide font-bold hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all"
-                >
-                  <Star size={14} />
-                  PRIME
-                </Link>
-              ) : (
+            {navItems.map((item: any) => {
+              if (item.isPrime) {
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] px-4 py-2 rounded-sm font-sans text-xs tracking-wide font-bold hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all"
+                  >
+                    <Star size={14} />
+                    PRIME
+                  </Link>
+                );
+              }
+              if (item.isStarbiz) {
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#06b6d4] to-[#0891b2] text-white px-4 py-2 rounded-sm font-sans text-xs tracking-wide font-bold hover:shadow-lg hover:shadow-[#06b6d4]/30 transition-all"
+                  >
+                    <Rocket size={14} />
+                    STARBIZ
+                  </Link>
+                );
+              }
+              return (
                 <Link
                   key={item.path}
                   to={item.path}
@@ -91,8 +106,8 @@ export const Navigation: React.FC = () => {
                      location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}></span>
                 </Link>
-              )
-            ))}
+              );
+            })}
             <LanguageSwitcher variant="pill" />
             <Link
               to="/metodologia"
@@ -186,6 +201,36 @@ export const Navigation: React.FC = () => {
                         {item.subtitle}
                       </span>
                       <ArrowUpRight size={16} className="text-[#ffd700]" />
+                    </div>
+                  </Link>
+                );
+              }
+
+              // Special STARBIZ item styling
+              if (item.isStarbiz) {
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`group flex items-center justify-between py-4 border-b border-[#06b6d4]/20 transition-all duration-500 bg-gradient-to-r from-[#06b6d4]/10 to-transparent -mx-4 px-4 rounded-lg ${
+                      isOpen
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 -translate-x-8'
+                    }`}
+                    style={{ transitionDelay: isOpen ? `${index * 60 + 100}ms` : '0ms' }}
+                  >
+                    <div className="flex items-center gap-4">
+                      <Rocket size={24} className="text-[#06b6d4]" />
+                      <span className="font-display text-3xl md:text-4xl tracking-tight text-[#0e7490] font-bold">
+                        STARBIZ
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="font-sans text-xs text-[#0e7490]/70 uppercase tracking-wider">
+                        {item.subtitle}
+                      </span>
+                      <ArrowUpRight size={16} className="text-[#06b6d4]" />
                     </div>
                   </Link>
                 );

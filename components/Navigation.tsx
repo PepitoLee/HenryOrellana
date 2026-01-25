@@ -6,6 +6,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 
 const getNavItems = (t: (key: string) => string) => [
   { name: t('nav.metodologia'), path: '/metodologia', subtitle: 'GÉNESIS i7™' },
+  { name: 'USALATINO PRIME', path: '/usalatino-prime', subtitle: 'Migración VIP', isPrime: true },
   { name: t('nav.starbizAcademy'), path: '/ceo-junior', subtitle: 'Academy' },
   { name: t('nav.about'), path: '/about', subtitle: t('nav.about') },
   { name: t('nav.books'), path: '/books', subtitle: t('nav.books') },
@@ -67,28 +68,32 @@ export const Navigation: React.FC = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center space-x-6">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`text-xs font-sans tracking-wide uppercase transition-colors relative group ${
-                  location.pathname === item.path ? 'text-forest' : 'text-charcoal hover:text-forest'
-                }`}
-              >
-                {item.name}
-                <span className={`absolute -bottom-1 left-0 h-px bg-forest transition-all duration-300 ${
-                   location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}></span>
-              </Link>
+            {navItems.map((item: any) => (
+              item.isPrime ? (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] px-4 py-2 rounded-sm font-sans text-xs tracking-wide font-bold hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all"
+                >
+                  <Star size={14} />
+                  PRIME
+                </Link>
+              ) : (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`text-xs font-sans tracking-wide uppercase transition-colors relative group ${
+                    location.pathname === item.path ? 'text-forest' : 'text-charcoal hover:text-forest'
+                  }`}
+                >
+                  {item.name}
+                  <span className={`absolute -bottom-1 left-0 h-px bg-forest transition-all duration-300 ${
+                     location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </Link>
+              )
             ))}
             <LanguageSwitcher variant="pill" />
-            <Link
-              to="/usalatino-prime"
-              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] px-4 py-2 rounded-sm font-sans text-xs tracking-wide font-bold hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all"
-            >
-              <Star size={14} />
-              PRIME
-            </Link>
             <Link
               to="/metodologia"
               className="bg-forest text-white px-5 py-2 rounded-sm font-sans text-xs tracking-wide hover:bg-charcoal transition-all"
@@ -153,8 +158,38 @@ export const Navigation: React.FC = () => {
         <nav className="relative h-full flex flex-col justify-start px-8 pt-32 pb-24 overflow-y-auto">
           {/* Nav Items - Clean List */}
           <div className="space-y-2">
-            {navItems.map((item, index) => {
+            {navItems.map((item: any, index) => {
               const isCurrent = location.pathname === item.path;
+
+              // Special PRIME item styling
+              if (item.isPrime) {
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`group flex items-center justify-between py-4 border-b border-[#ffd700]/20 transition-all duration-500 bg-gradient-to-r from-[#ffd700]/10 to-transparent -mx-4 px-4 rounded-lg ${
+                      isOpen
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 -translate-x-8'
+                    }`}
+                    style={{ transitionDelay: isOpen ? `${index * 60 + 100}ms` : '0ms' }}
+                  >
+                    <div className="flex items-center gap-4">
+                      <Star size={24} className="text-[#ffd700]" />
+                      <span className="font-display text-3xl md:text-4xl tracking-tight text-[#1a3a6e] font-bold">
+                        PRIME
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="font-sans text-xs text-[#1a3a6e]/70 uppercase tracking-wider">
+                        {item.subtitle}
+                      </span>
+                      <ArrowUpRight size={16} className="text-[#ffd700]" />
+                    </div>
+                  </Link>
+                );
+              }
 
               return (
                 <Link
@@ -211,16 +246,6 @@ export const Navigation: React.FC = () => {
             }`}
             style={{ transitionDelay: isOpen ? '550ms' : '0ms' }}
           >
-            {/* USALATINO PRIME Button - Destacado */}
-            <Link
-              to="/usalatino-prime"
-              onClick={() => setIsOpen(false)}
-              className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] px-8 py-4 font-sans text-sm tracking-widest uppercase font-bold hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all duration-300"
-            >
-              <Star size={18} />
-              <span>USALATINO PRIME</span>
-            </Link>
-
             <Link
               to="/metodologia"
               onClick={() => setIsOpen(false)}

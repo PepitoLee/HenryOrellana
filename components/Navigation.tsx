@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Star } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
@@ -54,10 +54,15 @@ export const Navigation: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <Link
             to="/"
-            className="font-display font-semibold text-xl md:text-2xl tracking-tight text-charcoal"
+            className="flex flex-col"
             onClick={() => setIsOpen(false)}
           >
-            Henry Orellana D.
+            <span className="font-display font-bold text-lg md:text-xl tracking-tight text-charcoal uppercase">
+              ORELLANA GROUP
+            </span>
+            <span className="font-sans text-[9px] md:text-[10px] text-warm-grey tracking-[0.15em] uppercase -mt-0.5">
+              by Henry Orellana
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -77,6 +82,13 @@ export const Navigation: React.FC = () => {
               </Link>
             ))}
             <LanguageSwitcher variant="pill" />
+            <Link
+              to="/usalatino-prime"
+              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] px-4 py-2 rounded-sm font-sans text-xs tracking-wide font-bold hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all"
+            >
+              <Star size={14} />
+              PRIME
+            </Link>
             <Link
               to="/metodologia"
               className="bg-forest text-white px-5 py-2 rounded-sm font-sans text-xs tracking-wide hover:bg-charcoal transition-all"
@@ -192,17 +204,27 @@ export const Navigation: React.FC = () => {
             })}
           </div>
 
-          {/* CTA Button + Language Switcher */}
+          {/* CTA Buttons + Language Switcher */}
           <div
-            className={`mt-12 flex flex-col gap-6 transition-all duration-500 ${
+            className={`mt-12 flex flex-col gap-4 transition-all duration-500 ${
               isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
             style={{ transitionDelay: isOpen ? '550ms' : '0ms' }}
           >
+            {/* USALATINO PRIME Button - Destacado */}
+            <Link
+              to="/usalatino-prime"
+              onClick={() => setIsOpen(false)}
+              className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] px-8 py-4 font-sans text-sm tracking-widest uppercase font-bold hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all duration-300"
+            >
+              <Star size={18} />
+              <span>USALATINO PRIME</span>
+            </Link>
+
             <Link
               to="/metodologia"
               onClick={() => setIsOpen(false)}
-              className="inline-flex items-center gap-3 bg-charcoal text-cream px-8 py-4 font-sans text-sm tracking-widest uppercase hover:bg-forest transition-colors duration-300"
+              className="inline-flex items-center justify-center gap-3 bg-charcoal text-cream px-8 py-4 font-sans text-sm tracking-widest uppercase hover:bg-forest transition-colors duration-300"
             >
               <span>{t('nav.cta')}</span>
               <ArrowUpRight size={16} />
@@ -221,11 +243,16 @@ export const Navigation: React.FC = () => {
             }`}
             style={{ transitionDelay: isOpen ? '600ms' : '0ms' }}
           >
-            <div className="font-sans text-xs text-warm-grey/60 tracking-wider">
-              GÉNESIS i7™
+            <div className="flex flex-col">
+              <span className="font-display font-bold text-sm text-charcoal/80 tracking-tight uppercase">
+                ORELLANA GROUP
+              </span>
+              <span className="font-sans text-[9px] text-warm-grey/60 tracking-wider">
+                GÉNESIS i7™
+              </span>
             </div>
             <div className="font-mono text-xs text-warm-grey/40">
-              © 2024
+              © 2025
             </div>
           </div>
         </nav>

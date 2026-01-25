@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Heart, Shield, Brain, Target, Users, Sparkles, CheckCircle2, HelpCircle, ChevronDown } from 'lucide-react';
+import { ArrowRight, Heart, Shield, Brain, Target, Users, Sparkles, CheckCircle2, HelpCircle, ChevronDown, Star } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { ShineButton, RippleButton, FillSlideButton, ScaleShadowButton, BorderDrawButton, MagneticButton } from '../components/AnimatedButtons';
 import { useLanguage } from '../context/LanguageContext';
@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
       />
       <div className="w-full overflow-hidden">
 
-      {/* Hero Section - Mobile-First Editorial Design */}
+      {/* Hero Section - ORELLANA GROUP Ecosystem */}
       <section className="relative min-h-screen bg-cream overflow-hidden">
         {/* Background Texture */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -54,134 +54,194 @@ export const Home: React.FC = () => {
         }} />
 
         {/* Mobile Layout (default) */}
-        <div className="lg:hidden relative min-h-screen flex flex-col">
-          {/* Mobile Image - Top Half with Gradient Overlay */}
-          <div className="relative h-[55vh] w-full overflow-hidden">
+        <div className="lg:hidden relative min-h-screen flex flex-col pt-24">
+          {/* Mobile Image */}
+          <div className="relative h-[40vh] w-full overflow-hidden">
             <img
               src="/images/hero-principal.png"
-              alt="Henry Orellana D."
+              alt="Henry Orellana - Fundador ORELLANA GROUP"
               className="w-full h-full object-cover object-top"
               loading="eager"
             />
-            {/* Gradient fade to content */}
-            <div className="absolute inset-0 bg-gradient-to-b from-cream/20 via-transparent to-cream" />
+            <div className="absolute inset-0 bg-gradient-to-b from-cream/30 via-transparent to-cream" />
 
-            {/* Floating Badge on Image */}
-            <div className="absolute bottom-8 left-6 right-6">
-              <Reveal delay={0.2}>
-                <div className="bg-white/95 backdrop-blur-sm px-5 py-3 shadow-lg border-l-4 border-burgundy">
-                  <span className="font-sans text-[10px] text-warm-grey uppercase tracking-[0.2em] block mb-1">
-                    {t('home.hero.creatorOf')}
-                  </span>
-                  <span className="font-display text-xl text-charcoal">GÉNESIS i7™</span>
-                </div>
-              </Reveal>
+            {/* Floating Badge */}
+            <div className="absolute bottom-4 right-4">
+              <div className="bg-charcoal/90 backdrop-blur-sm px-4 py-2 shadow-lg">
+                <span className="font-sans text-[10px] text-cream/80 uppercase tracking-[0.15em] block">Fundador & CEO</span>
+              </div>
             </div>
           </div>
 
-          {/* Mobile Content - Bottom */}
-          <div className="relative flex-1 px-6 py-8 -mt-4 z-10">
+          {/* Mobile Content */}
+          <div className="relative flex-1 px-6 py-8 -mt-8 z-10">
             <Reveal delay={0.1}>
-              <span className="font-sans text-forest uppercase tracking-[0.15em] text-[10px] font-semibold">
-                {t('home.hero.subtitle')}
-              </span>
-            </Reveal>
-
-            <Reveal delay={0.2}>
-              <h1 className="font-display text-[2rem] leading-[1.1] text-charcoal mt-3 mb-4">
-                {t('home.hero.title1')}<br/>
-                {t('home.hero.title2')} <span className="text-forest italic">{t('home.hero.title3')}</span>
-              </h1>
-            </Reveal>
-
-            <Reveal delay={0.3}>
-              <p className="font-body text-base text-warm-grey leading-relaxed mb-6">
-                {t('home.hero.description')}
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.4}>
-              <div className="flex flex-col gap-3">
-                <ShineButton
-                  to="/metodologia"
-                  className="bg-charcoal text-cream px-6 py-4 font-sans text-xs tracking-[0.15em] uppercase text-center"
-                >
-                  <Sparkles size={16} />
-                  {t('home.hero.cta1')}
-                </ShineButton>
-                <BorderDrawButton
-                  to="/ceo-junior"
-                  className="border border-charcoal/20 text-charcoal px-6 py-4 font-sans text-xs tracking-[0.15em] uppercase text-center"
-                >
-                  {t('home.hero.cta2')}
-                </BorderDrawButton>
+              <div className="text-center mb-6">
+                <h1 className="font-display text-3xl font-bold tracking-tight text-charcoal uppercase">
+                  ORELLANA GROUP
+                </h1>
+                <div className="w-20 h-0.5 bg-forest mx-auto my-3" />
+                <p className="font-display text-lg text-forest italic">
+                  {t('home.group.tagline')}
+                </p>
               </div>
             </Reveal>
 
-            <Reveal delay={0.5}>
-              <p className="text-[10px] text-warm-grey/70 mt-4 font-sans text-center tracking-wider">
-                {t('home.hero.transform')}
+            <Reveal delay={0.2}>
+              <p className="font-body text-base text-warm-grey leading-relaxed text-center mb-8">
+                {t('home.group.description')}
               </p>
+            </Reveal>
+
+            {/* Brand Cards - Mobile */}
+            <Reveal delay={0.3}>
+              <div className="space-y-4 mb-8">
+                {/* Padres 3.0 Card */}
+                <Link to="/metodologia" className="block group">
+                  <div className="bg-[#2d5a3d] p-5 shadow-lg hover:shadow-xl transition-all">
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl">👨‍👩‍👧‍👦</span>
+                      <div className="flex-1">
+                        <h3 className="font-display text-lg text-white font-semibold">PADRES 3.0</h3>
+                        <p className="text-white/80 text-sm">{t('home.group.padres.tagline')}</p>
+                      </div>
+                      <ArrowRight size={20} className="text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </Link>
+
+                {/* CEO Junior Card */}
+                <Link to="/ceo-junior" className="block group">
+                  <div className="bg-[#1e40af] p-5 shadow-lg hover:shadow-xl transition-all">
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl">🚀</span>
+                      <div className="flex-1">
+                        <h3 className="font-display text-lg text-white font-semibold">CEO JUNIOR</h3>
+                        <p className="text-white/80 text-sm">{t('home.group.ceoJunior.tagline')}</p>
+                      </div>
+                      <ArrowRight size={20} className="text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </Link>
+
+                {/* USALATINO PRIME Card */}
+                <Link to="/usalatino-prime" className="block group">
+                  <div className="bg-gradient-to-r from-[#1a3a6e] to-[#0d1b2a] p-5 shadow-lg hover:shadow-xl transition-all border border-[#ffd700]/30">
+                    <div className="flex items-center gap-4">
+                      <Star size={28} className="text-[#ffd700]" />
+                      <div className="flex-1">
+                        <h3 className="font-display text-lg text-white font-semibold">USALATINO PRIME</h3>
+                        <p className="text-white/80 text-sm">{t('home.group.usalatino.tagline')}</p>
+                      </div>
+                      <ArrowRight size={20} className="text-[#ffd700]/60 group-hover:text-[#ffd700] group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </Reveal>
+
+            {/* Metodología Base */}
+            <Reveal delay={0.4}>
+              <div className="text-center border-t border-charcoal/10 pt-6">
+                <p className="text-[10px] text-warm-grey uppercase tracking-[0.2em] mb-2">
+                  {t('home.group.methodologyBase')}
+                </p>
+                <Link to="/metodologia" className="inline-flex items-center gap-2 text-forest font-display text-lg hover:text-charcoal transition-colors">
+                  <Sparkles size={18} />
+                  GÉNESIS i7™
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
             </Reveal>
           </div>
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden lg:flex relative min-h-screen items-center pt-20 px-6">
-          <div className="max-w-7xl mx-auto grid grid-cols-12 gap-16 items-center w-full">
+        <div className="hidden lg:flex relative min-h-screen items-center pt-24 px-6">
+          <div className="max-w-7xl mx-auto grid grid-cols-12 gap-12 items-center w-full">
             {/* Text Content */}
-            <div className="col-span-7 space-y-8 z-10">
+            <div className="col-span-7 space-y-6 z-10">
               <Reveal delay={0.1}>
-                <span className="font-sans text-forest uppercase tracking-[0.2em] text-xs font-semibold">
-                  {t('home.hero.subtitle')} • {t('home.hero.creatorOf')} GÉNESIS i7™
-                </span>
+                <div className="inline-flex items-center gap-2 bg-forest/10 px-4 py-1.5 rounded-full">
+                  <span className="w-2 h-2 rounded-full bg-forest animate-pulse" />
+                  <span className="font-sans text-xs text-forest uppercase tracking-[0.2em] font-semibold">
+                    {t('home.group.subtitle')}
+                  </span>
+                </div>
               </Reveal>
 
               <Reveal delay={0.2}>
-                <h1 className="font-display text-5xl xl:text-6xl leading-[1.1] text-charcoal">
-                  {t('home.hero.title1')} {t('home.hero.title2')} <span className="text-forest italic">{t('home.hero.title3')}</span>
+                <h1 className="font-display text-5xl xl:text-6xl font-bold tracking-tight text-charcoal uppercase">
+                  ORELLANA GROUP
                 </h1>
+                <div className="w-24 h-1 bg-forest mt-4" />
               </Reveal>
 
               <Reveal delay={0.3}>
-                <p className="font-body text-xl xl:text-2xl text-warm-grey max-w-2xl leading-relaxed">
-                  {t('home.hero.description')}
+                <p className="font-display text-2xl xl:text-3xl text-forest italic">
+                  {t('home.group.tagline')}
                 </p>
               </Reveal>
 
               <Reveal delay={0.4}>
-                <p className="font-sans text-sm text-charcoal max-w-lg border-l-4 border-forest pl-4 py-2 bg-white/50">
-                  {t('home.hero.genesisDescription')}
+                <p className="font-body text-lg text-warm-grey max-w-xl leading-relaxed">
+                  {t('home.group.description')}
                 </p>
               </Reveal>
 
-              <Reveal delay={0.5} className="pt-4">
-                <div className="flex gap-4">
-                  <RippleButton
-                    to="/metodologia"
-                    className="bg-forest text-white px-8 py-4 font-sans text-sm tracking-widest hover:bg-charcoal transition-colors"
-                  >
-                    <Sparkles size={18} />
-                    {t('nav.cta')}
-                  </RippleButton>
-                  <FillSlideButton
-                    to="/ceo-junior"
-                    direction="left"
-                    className="border-2 border-forest text-forest px-8 py-4 font-sans text-sm tracking-widest hover:text-white transition-colors"
-                  >
-                    {t('home.hero.cta2')}
-                  </FillSlideButton>
+              {/* Brand Cards - Desktop Grid */}
+              <Reveal delay={0.5}>
+                <div className="grid grid-cols-3 gap-4 pt-4">
+                  {/* Padres 3.0 */}
+                  <Link to="/metodologia" className="group">
+                    <div className="bg-[#2d5a3d] p-5 h-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                      <span className="text-3xl block mb-3">👨‍👩‍👧‍👦</span>
+                      <h3 className="font-display text-base text-white font-bold mb-1">PADRES 3.0</h3>
+                      <p className="text-white/70 text-xs mb-3">{t('home.group.padres.tagline')}</p>
+                      <p className="text-white/50 text-[10px] uppercase tracking-wider">{t('home.group.padres.for')}</p>
+                    </div>
+                  </Link>
+
+                  {/* CEO Junior */}
+                  <Link to="/ceo-junior" className="group">
+                    <div className="bg-[#1e40af] p-5 h-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                      <span className="text-3xl block mb-3">🚀</span>
+                      <h3 className="font-display text-base text-white font-bold mb-1">CEO JUNIOR</h3>
+                      <p className="text-white/70 text-xs mb-3">{t('home.group.ceoJunior.tagline')}</p>
+                      <p className="text-white/50 text-[10px] uppercase tracking-wider">{t('home.group.ceoJunior.for')}</p>
+                    </div>
+                  </Link>
+
+                  {/* USALATINO PRIME */}
+                  <Link to="/usalatino-prime" className="group">
+                    <div className="bg-gradient-to-br from-[#1a3a6e] to-[#0d1b2a] p-5 h-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all border border-[#ffd700]/30">
+                      <Star size={28} className="text-[#ffd700] mb-3" />
+                      <h3 className="font-display text-base text-white font-bold mb-1">USALATINO PRIME</h3>
+                      <p className="text-white/70 text-xs mb-3">{t('home.group.usalatino.tagline')}</p>
+                      <p className="text-[#ffd700]/60 text-[10px] uppercase tracking-wider">{t('home.group.usalatino.for')}</p>
+                    </div>
+                  </Link>
                 </div>
-                <p className="text-xs text-warm-grey mt-3 font-sans">
-                  {t('home.hero.transform')}
-                </p>
+              </Reveal>
+
+              {/* Metodología Base */}
+              <Reveal delay={0.6}>
+                <div className="flex items-center gap-4 pt-4 border-t border-charcoal/10">
+                  <p className="font-sans text-sm text-warm-grey">
+                    {t('home.group.methodologyBase')}:
+                  </p>
+                  <Link to="/metodologia" className="inline-flex items-center gap-2 text-charcoal font-display text-lg hover:text-forest transition-colors group">
+                    <Sparkles size={18} className="text-forest" />
+                    GÉNESIS i7™
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </Reveal>
             </div>
 
             {/* Image */}
             <div className="col-span-5 relative">
               <Reveal delay={0.3} className="relative">
-                {/* Main Image Container */}
                 <div className="relative aspect-[3/4] w-full max-w-md ml-auto">
                   {/* Decorative elements */}
                   <div className="absolute -top-4 -right-4 w-full h-full border-2 border-forest/20" />
@@ -191,7 +251,7 @@ export const Home: React.FC = () => {
                   <div className="relative w-full h-full overflow-hidden shadow-2xl">
                     <img
                       src="/images/hero-principal.png"
-                      alt="Henry Orellana D."
+                      alt="Henry Orellana - Fundador ORELLANA GROUP"
                       className="w-full h-full object-cover"
                       loading="eager"
                     />
@@ -200,7 +260,7 @@ export const Home: React.FC = () => {
                   {/* Name Badge */}
                   <div className="absolute -bottom-6 -left-6 bg-charcoal text-cream px-6 py-4 shadow-xl">
                     <span className="font-display text-lg">Henry Orellana D.</span>
-                    <span className="block font-sans text-[10px] text-cream/60 tracking-wider mt-1">{t('home.hero.badge')}</span>
+                    <span className="block font-sans text-[10px] text-cream/60 tracking-wider mt-1">FUNDADOR & CEO</span>
                   </div>
                 </div>
               </Reveal>
@@ -233,30 +293,107 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* La Crisis y el Quiebre */}
+      {/* ¿Por qué Orellana Group? - Los 3 desafíos */}
       <section className="py-24 px-6 bg-charcoal text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <Reveal>
-            <span className="font-sans text-burgundy uppercase tracking-[0.2em] text-xs font-semibold">
-              {t('home.crisis.subtitle')}
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="font-display text-4xl md:text-5xl mt-4 mb-8">
-              {t('home.crisis.title')} <span className="italic text-burgundy">{t('home.crisis.titleHighlight')}</span>{t('home.crisis.titleEnd')}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="font-body text-xl text-white/80 leading-relaxed mb-8">
-              {t('home.crisis.description')}
-              <strong className="text-white"> {t('home.crisis.descriptionBold')}</strong>{t('home.crisis.descriptionEnd')}
-            </p>
-          </Reveal>
-          <Reveal delay={0.3}>
-            <blockquote className="font-display text-2xl md:text-3xl italic text-burgundy border-l-4 border-burgundy pl-6 text-left max-w-2xl mx-auto">
-              {t('home.crisis.quote')}
-              <footer className="text-white/60 text-base mt-4 not-italic font-sans">— Henry Orellana D.</footer>
-            </blockquote>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <Reveal>
+              <span className="font-sans text-burgundy uppercase tracking-[0.2em] text-xs font-semibold">
+                {t('home.whyGroup.subtitle')}
+              </span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-4xl md:text-5xl mt-4 mb-4">
+                {t('home.whyGroup.title')} <span className="italic text-emerald-400">{t('home.whyGroup.titleHighlight')}</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="font-body text-xl text-white/70 max-w-2xl mx-auto">
+                {t('home.whyGroup.description')}
+              </p>
+            </Reveal>
+          </div>
+
+          {/* Los 3 Desafíos → Soluciones */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Desafío 1: Desconexión Familiar */}
+            <Reveal delay={0.3}>
+              <div className="group">
+                <div className="bg-white/5 border border-white/10 p-8 h-full hover:bg-white/10 hover:border-emerald-400/50 transition-all">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">🔴</span>
+                    <h3 className="font-display text-xl text-white">{t('home.whyGroup.challenge1.title')}</h3>
+                  </div>
+                  <p className="text-white/60 text-sm mb-6 leading-relaxed">
+                    {t('home.whyGroup.challenge1.description')}
+                  </p>
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="text-[10px] text-white/40 uppercase tracking-wider block mb-2">{t('home.whyGroup.solution')}</span>
+                    <Link to="/metodologia" className="inline-flex items-center gap-2 text-emerald-400 font-semibold group-hover:text-emerald-300 transition-colors">
+                      <span className="text-lg">👨‍👩‍👧‍👦</span>
+                      PADRES 3.0
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Desafío 2: Jóvenes sin propósito */}
+            <Reveal delay={0.4}>
+              <div className="group">
+                <div className="bg-white/5 border border-white/10 p-8 h-full hover:bg-white/10 hover:border-blue-400/50 transition-all">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">🔴</span>
+                    <h3 className="font-display text-xl text-white">{t('home.whyGroup.challenge2.title')}</h3>
+                  </div>
+                  <p className="text-white/60 text-sm mb-6 leading-relaxed">
+                    {t('home.whyGroup.challenge2.description')}
+                  </p>
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="text-[10px] text-white/40 uppercase tracking-wider block mb-2">{t('home.whyGroup.solution')}</span>
+                    <Link to="/ceo-junior" className="inline-flex items-center gap-2 text-blue-400 font-semibold group-hover:text-blue-300 transition-colors">
+                      <span className="text-lg">🚀</span>
+                      CEO JUNIOR
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Desafío 3: Sueño migratorio incierto */}
+            <Reveal delay={0.5}>
+              <div className="group">
+                <div className="bg-white/5 border border-white/10 p-8 h-full hover:bg-white/10 hover:border-[#ffd700]/50 transition-all">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">🔴</span>
+                    <h3 className="font-display text-xl text-white">{t('home.whyGroup.challenge3.title')}</h3>
+                  </div>
+                  <p className="text-white/60 text-sm mb-6 leading-relaxed">
+                    {t('home.whyGroup.challenge3.description')}
+                  </p>
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="text-[10px] text-white/40 uppercase tracking-wider block mb-2">{t('home.whyGroup.solution')}</span>
+                    <Link to="/usalatino-prime" className="inline-flex items-center gap-2 text-[#ffd700] font-semibold group-hover:text-[#ffe066] transition-colors">
+                      <Star size={16} />
+                      USALATINO PRIME
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Quote */}
+          <Reveal delay={0.6}>
+            <div className="mt-16 text-center">
+              <blockquote className="font-display text-2xl md:text-3xl italic text-cream max-w-2xl mx-auto">
+                {t('home.whyGroup.quote')}
+              </blockquote>
+              <p className="text-white/60 text-sm mt-4 font-sans">— Henry Orellana D.</p>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -265,15 +402,18 @@ export const Home: React.FC = () => {
       <section className="py-24 bg-cream-dark overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <Reveal className="order-2 md:order-1">
-            <div className="relative group perspective-1000">
-              <div className="relative w-64 h-96 mx-auto bg-forest shadow-2xl transform transition-transform duration-500 group-hover:rotate-y-12">
-                <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-center border border-white/20">
-                  <h3 className="font-display text-3xl text-white italic mb-2">{t('home.padres.bookTitle')}</h3>
-                  <p className="font-sans text-white/80 text-xs tracking-widest uppercase mb-8">{t('home.padres.bookSubtitle')}</p>
-                  <div className="w-12 h-1 bg-white/50 mb-8"></div>
-                  <span className="font-display text-white text-lg">Henry Orellana D.</span>
-                </div>
-                <div className="absolute left-0 top-0 bottom-0 w-4 bg-black/20"></div>
+            <div className="relative group">
+              {/* Book Image with hover effect */}
+              <div className="relative w-72 md:w-80 mx-auto transform transition-all duration-500 group-hover:scale-105 group-hover:-rotate-2">
+                {/* Shadow */}
+                <div className="absolute -bottom-4 left-4 right-4 h-8 bg-black/20 blur-xl rounded-full" />
+                {/* Book */}
+                <img
+                  src="/images/padres-30-book.jpg"
+                  alt="Libro Padres 3.0 - Henry Orellana"
+                  className="relative w-full h-auto shadow-2xl rounded-sm"
+                  loading="lazy"
+                />
               </div>
             </div>
           </Reveal>
@@ -363,6 +503,319 @@ export const Home: React.FC = () => {
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* USALATINO PRIME Section - Premium Redesign */}
+      <section className="relative overflow-hidden">
+        {/* Estilos personalizados */}
+        <style>{`
+          @keyframes float-prime {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+          }
+          @keyframes shimmer-gold {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+          }
+          @keyframes pulse-border {
+            0%, 100% { border-color: rgba(255, 215, 0, 0.3); }
+            50% { border-color: rgba(255, 215, 0, 0.8); }
+          }
+          .float-prime { animation: float-prime 6s ease-in-out infinite; }
+          .shimmer-gold {
+            background: linear-gradient(90deg, #ffd700 0%, #fff 50%, #ffd700 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer-gold 3s linear infinite;
+          }
+          .pulse-border { animation: pulse-border 2s ease-in-out infinite; }
+        `}</style>
+
+        {/* MOBILE LAYOUT */}
+        <div className="lg:hidden">
+          {/* Imagen Hero Mobile - Full Width */}
+          <div className="relative h-[70vh] w-full overflow-hidden">
+            <img
+              src="/images/usalatino/usalatino-hero.png"
+              alt="USALATINO PRIME - Henry Orellana"
+              className="w-full h-full object-cover object-top"
+            />
+            {/* Overlay degradado */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1a3a6e] via-[#1a3a6e]/60 to-transparent" />
+
+            {/* Badge flotante sobre imagen */}
+            <div className="absolute top-6 left-1/2 -translate-x-1/2">
+              <div className="bg-gradient-to-r from-[#ffd700] to-[#ffaa00] px-6 py-2 shadow-lg">
+                <div className="flex items-center gap-2">
+                  <Star size={16} className="text-[#1a3a6e]" />
+                  <span className="font-sans text-[10px] font-bold tracking-[0.2em] text-[#1a3a6e] uppercase">
+                    USALATINO PRIME
+                  </span>
+                  <Star size={16} className="text-[#1a3a6e]" />
+                </div>
+              </div>
+            </div>
+
+            {/* Contenido sobre imagen */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+              <Reveal>
+                <p className="text-[#ffd700] uppercase tracking-[0.3em] text-[10px] font-semibold mb-2">
+                  Tu Camino Seguro hacia el
+                </p>
+                <h2 className="font-display text-4xl text-white mb-3 leading-tight">
+                  Sueño <span className="italic shimmer-gold text-transparent">Americano</span>
+                </h2>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* Contenido Mobile */}
+          <div className="bg-gradient-to-b from-[#1a3a6e] to-[#0d1b2a] px-6 py-10">
+            <Reveal delay={0.1}>
+              <p className="text-white/80 text-base text-center leading-relaxed mb-8 font-body">
+                Acompañamiento VIP personalizado para tu proceso migratorio.
+                Estrategia experta y seguimiento constante.
+              </p>
+            </Reveal>
+
+            {/* Servicios - Cards horizontales móvil */}
+            <Reveal delay={0.2}>
+              <div className="space-y-3 mb-8">
+                {[
+                  { icon: '🛡️', title: 'Asilo Político', desc: 'Defensivo y afirmativo' },
+                  { icon: '📋', title: 'Visa Juvenil SIJS', desc: 'Protección especializada' },
+                  { icon: '✅', title: 'Ajuste de Status', desc: 'Green Card' },
+                  { icon: '👔', title: 'Asesoría VIP', desc: 'Casos complejos' },
+                ].map((service, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-4 bg-white/5 backdrop-blur-sm border border-[#ffd700]/20 p-4 hover:border-[#ffd700]/50 transition-all"
+                  >
+                    <span className="text-2xl flex-shrink-0">{service.icon}</span>
+                    <div className="flex-1">
+                      <h3 className="text-white font-semibold text-sm font-sans">{service.title}</h3>
+                      <p className="text-white/60 text-xs">{service.desc}</p>
+                    </div>
+                    <ArrowRight size={16} className="text-[#ffd700]/50" />
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* CTAs Mobile */}
+            <Reveal delay={0.3}>
+              <div className="flex flex-col gap-3">
+                <a
+                  href="https://green-caterpillar-757909.hostingersite.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] font-bold px-6 py-4 text-sm hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all font-sans uppercase tracking-wider"
+                >
+                  <Star size={18} />
+                  ¡Agenda tu Consulta!
+                </a>
+                <Link
+                  to="/usalatino-prime"
+                  className="flex items-center justify-center gap-2 border-2 border-[#ffd700]/30 text-white px-6 py-4 font-sans text-sm uppercase tracking-wider hover:bg-white/5 transition-colors pulse-border"
+                >
+                  Conoce Más
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            </Reveal>
+
+            {/* Tagline */}
+            <p className="text-center text-[#ffd700]/40 text-[10px] mt-6 font-sans tracking-[0.2em]">
+              YOUR PATH TO SUCCESS IN THE USA
+            </p>
+          </div>
+        </div>
+
+        {/* DESKTOP LAYOUT */}
+        <div className="hidden lg:block bg-gradient-to-br from-[#1a3a6e] via-[#0f2847] to-[#0d1b2a] py-24 relative">
+          {/* Decoraciones de fondo */}
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#ffd700]/5 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#ffd700]/5 rounded-full blur-3xl" />
+
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-12 gap-12 items-center">
+              {/* Contenido Izquierda */}
+              <div className="col-span-7 space-y-8 relative z-10">
+                <Reveal>
+                  <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] px-6 py-2">
+                    <Star size={18} className="text-[#1a3a6e]" />
+                    <span className="font-sans text-xs font-bold tracking-[0.2em] text-[#1a3a6e] uppercase">
+                      USALATINO PRIME
+                    </span>
+                    <Star size={18} className="text-[#1a3a6e]" />
+                  </div>
+                </Reveal>
+
+                <Reveal delay={0.1}>
+                  <p className="text-[#ffd700] uppercase tracking-[0.3em] text-sm font-semibold">
+                    Tu Camino Seguro hacia el
+                  </p>
+                  <h2 className="font-display text-5xl xl:text-6xl text-white mt-2 leading-tight">
+                    Sueño <span className="italic shimmer-gold text-transparent">Americano</span>
+                  </h2>
+                </Reveal>
+
+                <Reveal delay={0.2}>
+                  <p className="text-white/80 text-xl leading-relaxed max-w-xl font-body">
+                    Acompañamiento VIP personalizado para tu proceso migratorio.
+                    Estrategia experta, seguimiento constante y resultados reales.
+                  </p>
+                </Reveal>
+
+                {/* Servicios Grid Desktop */}
+                <Reveal delay={0.3}>
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { icon: '🛡️', title: 'Asilo Político', desc: 'Defensivo y afirmativo' },
+                      { icon: '📋', title: 'Visa Juvenil SIJS', desc: 'Protección especializada' },
+                      { icon: '✅', title: 'Ajuste de Status', desc: 'Residencia permanente' },
+                      { icon: '👔', title: 'Asesoría VIP', desc: 'Casos complejos' },
+                    ].map((service, i) => (
+                      <div
+                        key={i}
+                        className="group flex items-center gap-4 bg-white/5 backdrop-blur-sm border border-white/10 p-4 hover:border-[#ffd700]/50 hover:bg-white/10 transition-all duration-300"
+                      >
+                        <span className="text-3xl group-hover:scale-110 transition-transform">{service.icon}</span>
+                        <div>
+                          <h3 className="text-white font-semibold text-sm font-sans">{service.title}</h3>
+                          <p className="text-white/60 text-xs">{service.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Reveal>
+
+                {/* CTAs Desktop */}
+                <Reveal delay={0.4}>
+                  <div className="flex flex-wrap gap-4 pt-4">
+                    <a
+                      href="https://green-caterpillar-757909.hostingersite.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] font-bold px-8 py-4 text-sm hover:scale-105 hover:shadow-lg hover:shadow-[#ffd700]/30 transition-all font-sans uppercase tracking-wider"
+                    >
+                      <Star size={18} />
+                      ¡Agenda tu Consulta!
+                    </a>
+                    <Link
+                      to="/usalatino-prime"
+                      className="inline-flex items-center gap-2 border-2 border-[#ffd700]/40 text-white px-8 py-4 font-sans text-sm uppercase tracking-wider hover:bg-[#ffd700]/10 hover:border-[#ffd700] transition-all"
+                    >
+                      Conoce Más
+                      <ArrowRight size={18} />
+                    </Link>
+                  </div>
+                  <p className="text-[#ffd700]/40 text-xs mt-4 font-sans tracking-[0.15em]">
+                    YOUR PATH TO SUCCESS IN THE USA
+                  </p>
+                </Reveal>
+              </div>
+
+              {/* Imagen Derecha */}
+              <div className="col-span-5 relative">
+                <Reveal delay={0.3}>
+                  <div className="relative float-prime">
+                    {/* Marco decorativo */}
+                    <div className="absolute -inset-4 border-2 border-[#ffd700]/20 -rotate-3" />
+                    <div className="absolute -inset-4 border-2 border-[#ffd700]/10 rotate-2" />
+
+                    {/* Imagen principal */}
+                    <div className="relative aspect-[3/4] overflow-hidden shadow-2xl shadow-black/50">
+                      <img
+                        src="/images/usalatino/usalatino-hero.png"
+                        alt="USALATINO PRIME - Henry Orellana"
+                        className="w-full h-full object-cover object-top"
+                      />
+                      {/* Overlay sutil */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a3a6e]/50 via-transparent to-transparent" />
+                    </div>
+
+                    {/* Badge sobre imagen */}
+                    <div className="absolute -bottom-6 -left-6 bg-[#1a3a6e] border-2 border-[#ffd700] px-6 py-4 shadow-xl">
+                      <p className="font-display text-lg text-white">Henry Orellana D.</p>
+                      <p className="font-sans text-[10px] text-[#ffd700] tracking-wider uppercase">
+                        Fundador USALATINO PRIME
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GÉNESIS i7™ - Metodología Base */}
+      <section className="py-24 px-6 bg-gradient-to-br from-cream to-cream-dark relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-forest/5 -skew-x-12 transform origin-top-right" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <Reveal>
+              <span className="font-sans text-forest uppercase tracking-[0.2em] text-xs font-semibold">
+                {t('home.genesis.subtitle')}
+              </span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-4xl md:text-5xl text-charcoal mt-4 mb-4">
+                GÉNESIS <span className="italic text-forest">i7™</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="font-body text-lg text-warm-grey max-w-2xl mx-auto">
+                {t('home.genesis.description')}
+              </p>
+            </Reveal>
+          </div>
+
+          {/* Las 7 Inteligencias */}
+          <Reveal delay={0.3}>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-12">
+              {[
+                { icon: '✨', name: t('home.genesis.intelligences.spiritual'), color: 'bg-purple-100 text-purple-700 border-purple-200' },
+                { icon: '🧠', name: t('home.genesis.intelligences.mental'), color: 'bg-blue-100 text-blue-700 border-blue-200' },
+                { icon: '💪', name: t('home.genesis.intelligences.physical'), color: 'bg-orange-100 text-orange-700 border-orange-200' },
+                { icon: '❤️', name: t('home.genesis.intelligences.emotional'), color: 'bg-red-100 text-red-700 border-red-200' },
+                { icon: '🤝', name: t('home.genesis.intelligences.social'), color: 'bg-green-100 text-green-700 border-green-200' },
+                { icon: '💰', name: t('home.genesis.intelligences.financial'), color: 'bg-yellow-100 text-yellow-700 border-yellow-200' },
+                { icon: '🚀', name: t('home.genesis.intelligences.technological'), color: 'bg-cyan-100 text-cyan-700 border-cyan-200' },
+              ].map((intel, i) => (
+                <div
+                  key={i}
+                  className={`${intel.color} border p-4 text-center hover:shadow-lg hover:-translate-y-1 transition-all`}
+                >
+                  <span className="text-2xl block mb-2">{intel.icon}</span>
+                  <span className="font-sans text-xs font-semibold uppercase tracking-wider">{intel.name}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Quote y CTA */}
+          <Reveal delay={0.4}>
+            <div className="bg-white p-8 md:p-12 shadow-xl max-w-3xl mx-auto">
+              <blockquote className="font-display text-xl md:text-2xl text-charcoal italic text-center mb-6">
+                {t('home.genesis.quote')}
+              </blockquote>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  to="/metodologia"
+                  className="inline-flex items-center justify-center gap-2 bg-forest text-white px-8 py-4 font-sans text-sm uppercase tracking-wider hover:bg-charcoal transition-colors"
+                >
+                  <Sparkles size={18} />
+                  {t('home.genesis.cta')}
+                </Link>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

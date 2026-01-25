@@ -34,6 +34,59 @@ export const translations: Record<Language, TranslationKeys> = {
         scroll: 'Scroll',
         genesisDescription: 'Descubre GÉNESIS i7™, el único mapa creado por Henry Orellana D. que integra Espiritualidad, Ciencia y Tecnología para transformar a los padres y empoderar a sus hijos.'
       },
+      group: {
+        subtitle: 'Ecosistema de Transformación Familiar',
+        tagline: 'Un ecosistema para prosperar',
+        description: 'Tres programas. Una misión: Empoderar a tu familia para el éxito personal, profesional y migratorio.',
+        methodologyBase: 'Metodología base',
+        padres: {
+          tagline: 'Reconecta con tu adolescente',
+          for: 'Para padres'
+        },
+        ceoJunior: {
+          tagline: 'Forma al futuro líder',
+          for: 'Para jóvenes'
+        },
+        usalatino: {
+          tagline: 'Tu camino al sueño americano',
+          for: 'Para migrantes'
+        }
+      },
+      whyGroup: {
+        subtitle: 'Los Desafíos de Hoy',
+        title: '¿Por qué',
+        titleHighlight: 'Orellana Group?',
+        description: 'Entendemos los desafíos reales que enfrentan las familias modernas y ofrecemos soluciones integrales.',
+        solution: 'Nuestra solución',
+        challenge1: {
+          title: 'Desconexión Familiar',
+          description: 'Padres e hijos viviendo bajo el mismo techo pero en mundos diferentes. Comunicación rota, conflictos constantes y pérdida de confianza.'
+        },
+        challenge2: {
+          title: 'Jóvenes sin Propósito',
+          description: 'Una generación con acceso a todo pero sin dirección clara. Sin habilidades para el mundo real ni visión emprendedora.'
+        },
+        challenge3: {
+          title: 'Sueño Migratorio Incierto',
+          description: 'Familias que arriesgaron todo por un mejor futuro pero navegan solas un sistema migratorio complejo y confuso.'
+        },
+        quote: '"Ellos no son el problema. Si tú cambias, todo cambia."'
+      },
+      genesis: {
+        subtitle: 'La Metodología que Une Todo',
+        description: 'Las 7 inteligencias integradas que fundamentan todos nuestros programas. Una ruta clara, profunda y moderna para la transformación.',
+        quote: '"La inteligencia no tiene principio ni fin, viene de Dios. Todo comienza con la Inteligencia Espiritual."',
+        cta: 'Explorar GÉNESIS i7™',
+        intelligences: {
+          spiritual: 'Espiritual',
+          mental: 'Mental',
+          physical: 'Física',
+          emotional: 'Emocional',
+          social: 'Social',
+          financial: 'Financiera',
+          technological: 'Tecnológica'
+        }
+      },
       featured: {
         title: 'Como visto en'
       },
@@ -575,6 +628,59 @@ export const translations: Record<Language, TranslationKeys> = {
         badge: 'COACH & AUTHOR',
         scroll: 'Scroll',
         genesisDescription: 'Discover GÉNESIS i7™, the only map created by Henry Orellana D. that integrates Spirituality, Science and Technology to transform parents and empower their children.'
+      },
+      group: {
+        subtitle: 'Family Transformation Ecosystem',
+        tagline: 'An ecosystem to thrive',
+        description: 'Three programs. One mission: Empower your family for personal, professional and migratory success.',
+        methodologyBase: 'Base methodology',
+        padres: {
+          tagline: 'Reconnect with your teenager',
+          for: 'For parents'
+        },
+        ceoJunior: {
+          tagline: 'Shape the future leader',
+          for: 'For youth'
+        },
+        usalatino: {
+          tagline: 'Your path to the American dream',
+          for: 'For migrants'
+        }
+      },
+      whyGroup: {
+        subtitle: "Today's Challenges",
+        title: 'Why',
+        titleHighlight: 'Orellana Group?',
+        description: 'We understand the real challenges modern families face and offer comprehensive solutions.',
+        solution: 'Our solution',
+        challenge1: {
+          title: 'Family Disconnection',
+          description: 'Parents and children living under the same roof but in different worlds. Broken communication, constant conflicts and loss of trust.'
+        },
+        challenge2: {
+          title: 'Youth Without Purpose',
+          description: 'A generation with access to everything but no clear direction. Without real-world skills or entrepreneurial vision.'
+        },
+        challenge3: {
+          title: 'Uncertain Immigration Dream',
+          description: 'Families who risked everything for a better future but navigate a complex and confusing immigration system alone.'
+        },
+        quote: '"They are not the problem. If you change, everything changes."'
+      },
+      genesis: {
+        subtitle: 'The Methodology That Unites Everything',
+        description: 'The 7 integrated intelligences that underpin all our programs. A clear, deep and modern path to transformation.',
+        quote: '"Intelligence has no beginning or end, it comes from God. Everything begins with Spiritual Intelligence."',
+        cta: 'Explore GÉNESIS i7™',
+        intelligences: {
+          spiritual: 'Spiritual',
+          mental: 'Mental',
+          physical: 'Physical',
+          emotional: 'Emotional',
+          social: 'Social',
+          financial: 'Financial',
+          technological: 'Technological'
+        }
       },
       featured: {
         title: 'As seen in'

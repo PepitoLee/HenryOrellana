@@ -7,8 +7,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 const getNavItems = (t: (key: string) => string) => [
   { name: t('nav.about'), path: '/about', subtitle: t('nav.about') },
   { name: 'USALATINO PRIME', path: '/usalatino-prime', subtitle: 'Migración VIP', isPrime: true },
-  { name: 'STARBIZACADEMY', path: '/ceo-junior', subtitle: 'Academy', isStarbiz: true },
-  { name: t('nav.metodologia'), path: '/metodologia', subtitle: 'GÉNESIS i7™' },
+  { name: 'STARBIZACADEMY', path: '/ceo-junior', subtitle: 'GÉNESIS i7™', isStarbiz: true },
   { name: t('nav.books'), path: '/books', subtitle: t('nav.books') },
   { name: t('nav.speaking'), path: '/speaking', subtitle: t('nav.speaking') },
   { name: t('nav.blog'), path: '/blog', subtitle: t('nav.blog') },
@@ -110,7 +109,7 @@ export const Navigation: React.FC = () => {
             })}
             <LanguageSwitcher variant="pill" />
             <Link
-              to="/metodologia"
+              to="/ceo-junior"
               className="bg-forest text-white px-5 py-2 rounded-sm font-sans text-xs tracking-wide hover:bg-charcoal transition-all"
             >
               {t('nav.cta')}
@@ -292,7 +291,7 @@ export const Navigation: React.FC = () => {
             style={{ transitionDelay: isOpen ? '550ms' : '0ms' }}
           >
             <Link
-              to="/metodologia"
+              to="/ceo-junior"
               onClick={() => setIsOpen(false)}
               className="inline-flex items-center justify-center gap-3 bg-charcoal text-cream px-8 py-4 font-sans text-sm tracking-widest uppercase hover:bg-forest transition-colors duration-300"
             >

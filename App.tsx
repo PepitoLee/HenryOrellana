@@ -14,6 +14,7 @@ import { BlogPost } from './pages/BlogPost';
 import { Contact } from './pages/Contact';
 import { CEOJunior } from './pages/CEOJunior';
 import { Metodologia } from './pages/Metodologia';
+import { UsalatinoPrime } from './pages/UsalatinoPrime';
 import LandingPage from './src/landing/LandingPage';
 
 // Admin imports
@@ -63,6 +64,7 @@ const App: React.FC = () => {
                 <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
                 <Route path="/ceo-junior" element={<PublicLayout><CEOJunior /></PublicLayout>} />
                 <Route path="/metodologia" element={<PublicLayout><Metodologia /></PublicLayout>} />
+                <Route path="/usalatino-prime" element={<PublicLayout><UsalatinoPrime /></PublicLayout>} />
 
                 {/* Landing Page - Independent (no PublicLayout) */}
                 <Route path="/landingpage" element={<LandingPage />} />

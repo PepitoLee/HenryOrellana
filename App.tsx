@@ -16,6 +16,7 @@ import { CEOJunior } from './pages/CEOJunior';
 import { Metodologia } from './pages/Metodologia';
 import { UsalatinoPrime } from './pages/UsalatinoPrime';
 import LandingPage from './src/landing/LandingPage';
+import MentoriaUtah from './pages/MentoriaUtah';
 
 // Admin imports
 import { AdminAuthProvider } from './admin/context/AdminAuthContext';
@@ -66,8 +67,9 @@ const App: React.FC = () => {
                 <Route path="/metodologia" element={<PublicLayout><Metodologia /></PublicLayout>} />
                 <Route path="/usalatino-prime" element={<PublicLayout><UsalatinoPrime /></PublicLayout>} />
 
-                {/* Landing Page - Independent (no PublicLayout) */}
+                {/* Landing Pages - Independent (no PublicLayout) */}
                 <Route path="/landingpage" element={<LandingPage />} />
+                <Route path="/mentoria-utah" element={<MentoriaUtah />} />
 
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

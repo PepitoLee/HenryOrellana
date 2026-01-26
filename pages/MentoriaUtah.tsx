@@ -141,20 +141,20 @@ const MentoriaUtah: React.FC = () => {
   const styles = {
     // Base colors
     colors: {
-      onyx: '#0a0a0a',
-      onyxLight: '#141414',
-      champagne: '#d4af37',
-      champagneLight: '#f4e4bc',
-      champagneDark: '#b8960c',
-      forest: '#1a472a',
-      forestLight: '#2d5a3f',
-      sage: '#87a96b',
+      onyx: '#071D49',
+      onyxLight: '#0a2a5c',
+      champagne: '#FFB81D',
+      champagneLight: '#FFD966',
+      champagneDark: '#E5A000',
+      forest: '#AA0200',
+      forestLight: '#CC2A2A',
+      sage: '#FFFFFF',
       cream: '#faf8f5',
     },
     // Base container
     container: {
       minHeight: '100vh',
-      backgroundColor: '#0a0a0a',
+      backgroundColor: '#071D49',
       color: '#ffffff',
       fontFamily: "'Outfit', system-ui, sans-serif",
       overflowX: 'hidden' as const,
@@ -184,10 +184,10 @@ const MentoriaUtah: React.FC = () => {
       border: '1px solid rgba(255, 255, 255, 0.05)',
     },
     glassGold: {
-      background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.02) 100%)',
+      background: 'linear-gradient(135deg, rgba(255, 184, 29, 0.1) 0%, rgba(255, 184, 29, 0.02) 100%)',
       backdropFilter: 'blur(40px)',
       WebkitBackdropFilter: 'blur(40px)',
-      border: '1px solid rgba(212, 175, 55, 0.2)',
+      border: '1px solid rgba(255, 184, 29, 0.2)',
     },
     // CTA Button
     ctaButton: {
@@ -195,8 +195,8 @@ const MentoriaUtah: React.FC = () => {
       display: 'inline-flex',
       alignItems: 'center',
       gap: '12px',
-      background: 'linear-gradient(135deg, #d4af37 0%, #b8960c 100%)',
-      color: '#0a0a0a',
+      background: 'linear-gradient(135deg, #FFB81D 0%, #E5A000 100%)',
+      color: '#071D49',
       fontWeight: 600,
       fontSize: '16px',
       letterSpacing: '0.05em',
@@ -205,11 +205,11 @@ const MentoriaUtah: React.FC = () => {
       border: 'none',
       cursor: 'pointer',
       transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-      boxShadow: '0 20px 60px -15px rgba(212, 175, 55, 0.4)',
+      boxShadow: '0 20px 60px -15px rgba(255, 184, 29, 0.4)',
     },
     ctaButtonHover: {
       transform: 'translateY(-3px)',
-      boxShadow: '0 30px 80px -15px rgba(212, 175, 55, 0.5)',
+      boxShadow: '0 30px 80px -15px rgba(255, 184, 29, 0.5)',
     },
     // Card
     card: {
@@ -325,10 +325,10 @@ const MentoriaUtah: React.FC = () => {
         /* Sun pulse for logo */
         @keyframes sunPulse {
           0%, 100% {
-            filter: brightness(1) drop-shadow(0 0 10px rgba(212,175,55,0.3));
+            filter: brightness(1) drop-shadow(0 0 10px rgba(255,184,29,0.3));
           }
           50% {
-            filter: brightness(1.15) drop-shadow(0 0 25px rgba(212,175,55,0.5));
+            filter: brightness(1.15) drop-shadow(0 0 25px rgba(255,184,29,0.5));
           }
         }
 
@@ -368,7 +368,7 @@ const MentoriaUtah: React.FC = () => {
         .animate-fade-6 { animation: fadeUp 0.8s ease-out 1.2s both; }
 
         .shimmer-text {
-          background: linear-gradient(90deg, #d4af37 0%, #f4e4bc 50%, #d4af37 100%);
+          background: linear-gradient(90deg, #FFB81D 0%, #FFD966 50%, #FFB81D 100%);
           background-size: 200% auto;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -377,7 +377,7 @@ const MentoriaUtah: React.FC = () => {
         }
 
         .text-gold {
-          background: linear-gradient(135deg, #f4e4bc 0%, #d4af37 50%, #b8960c 100%);
+          background: linear-gradient(135deg, #FFD966 0%, #FFB81D 50%, #E5A000 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -385,7 +385,7 @@ const MentoriaUtah: React.FC = () => {
 
         .cta-btn:hover {
           transform: translateY(-3px) !important;
-          box-shadow: 0 30px 80px -15px rgba(212, 175, 55, 0.5) !important;
+          box-shadow: 0 30px 80px -15px rgba(255, 184, 29, 0.5) !important;
         }
 
         .card-hover:hover {
@@ -402,8 +402,8 @@ const MentoriaUtah: React.FC = () => {
         .faq-content.open { max-height: 200px; }
 
         ::selection {
-          background: #d4af37;
-          color: #0a0a0a;
+          background: #FFB81D;
+          color: #071D49;
         }
 
         @media (max-width: 768px) {
@@ -449,7 +449,7 @@ const MentoriaUtah: React.FC = () => {
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.5) 40%, rgba(10,10,10,0.8) 100%)',
+              background: 'linear-gradient(to bottom, rgba(7,29,73,0.7) 0%, rgba(7,29,73,0.5) 40%, rgba(7,29,73,0.8) 100%)',
             }} />
             {/* Gold accent glow */}
             <div style={{
@@ -459,7 +459,7 @@ const MentoriaUtah: React.FC = () => {
               transform: 'translate(-50%, -50%)',
               width: '150vw',
               height: '150vh',
-              background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 50%)',
+              background: 'radial-gradient(ellipse at center, rgba(255, 184, 29, 0.08) 0%, transparent 50%)',
               pointerEvents: 'none',
             }} />
           </div>
@@ -485,13 +485,13 @@ const MentoriaUtah: React.FC = () => {
                 fontSize: '11px',
                 letterSpacing: '0.25em',
                 textTransform: 'uppercase',
-                color: '#f4e4bc',
+                color: '#FFD966',
               }}>
                 <span style={{
                   width: '8px',
                   height: '8px',
                   borderRadius: '50%',
-                  background: '#87a96b',
+                  background: '#FFFFFF',
                   animation: 'pulse 2s ease-in-out infinite',
                 }} />
                 Mentoría en Vivo
@@ -526,7 +526,7 @@ const MentoriaUtah: React.FC = () => {
             <div className="animate-fade-4" style={{
               height: '1px',
               width: '120px',
-              background: 'linear-gradient(90deg, #d4af37, transparent)',
+              background: 'linear-gradient(90deg, #FFB81D, transparent)',
               marginBottom: '32px',
             }} />
 
@@ -560,7 +560,7 @@ const MentoriaUtah: React.FC = () => {
                   padding: '12px 20px',
                   borderRadius: '50px',
                   fontSize: '14px',
-                  color: item.accent ? '#f4e4bc' : 'rgba(255, 255, 255, 0.7)',
+                  color: item.accent ? '#FFD966' : 'rgba(255, 255, 255, 0.7)',
                   fontWeight: item.accent ? 500 : 400,
                 }}>
                   {item.label}
@@ -589,7 +589,7 @@ const MentoriaUtah: React.FC = () => {
                 alignItems: 'center',
                 gap: '8px',
               }}>
-                <svg style={{ width: '16px', height: '16px', color: '#87a96b' }} fill="currentColor" viewBox="0 0 20 20">
+                <svg style={{ width: '16px', height: '16px', color: '#FFFFFF' }} fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 Empresa constituida en Estados Unidos
@@ -618,7 +618,7 @@ const MentoriaUtah: React.FC = () => {
             <div style={{
               width: '1px',
               height: '40px',
-              background: 'linear-gradient(to bottom, #d4af37, transparent)',
+              background: 'linear-gradient(to bottom, #FFB81D, transparent)',
             }} />
           </div>
         </section>
@@ -630,7 +630,7 @@ const MentoriaUtah: React.FC = () => {
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          background: 'linear-gradient(90deg, #1a472a 0%, #2d5a3f 50%, #1a472a 100%)',
+          background: 'linear-gradient(90deg, #AA0200 0%, #CC2A2A 50%, #AA0200 100%)',
           padding: '12px 16px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
         }}>
@@ -679,7 +679,7 @@ const MentoriaUtah: React.FC = () => {
         ══════════════════════════════════════════════════════════════ */}
         <section style={{
           ...styles.sectionLg,
-          background: '#141414',
+          background: '#0a2a5c',
         }}>
           <div style={styles.maxWidth}>
             <Reveal>
@@ -687,7 +687,7 @@ const MentoriaUtah: React.FC = () => {
                 <span style={{
                   ...styles.glass,
                   ...styles.badge,
-                  color: '#d4af37',
+                  color: '#FFB81D',
                   marginBottom: '24px',
                 }}>El Problema</span>
                 <h2 className="section-title" style={{
@@ -735,7 +735,7 @@ const MentoriaUtah: React.FC = () => {
                   <span style={{ fontSize: '24px' }}>✨</span>
                   <p style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.8)' }}>
                     La buena noticia:{' '}
-                    <span style={{ color: '#d4af37', fontWeight: 500 }}>hay un camino más simple.</span>
+                    <span style={{ color: '#FFB81D', fontWeight: 500 }}>hay un camino más simple.</span>
                   </p>
                 </div>
               </div>
@@ -776,7 +776,7 @@ const MentoriaUtah: React.FC = () => {
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to bottom, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.75) 50%, rgba(10,10,10,0.9) 100%)',
+              background: 'linear-gradient(to bottom, rgba(7,29,73,0.85) 0%, rgba(7,29,73,0.75) 50%, rgba(7,29,73,0.9) 100%)',
             }} />
           </div>
 
@@ -785,9 +785,9 @@ const MentoriaUtah: React.FC = () => {
               <div style={{ ...styles.textCenter, marginBottom: '64px' }}>
                 <span style={{
                   ...styles.badge,
-                  background: 'rgba(135, 169, 107, 0.1)',
-                  border: '1px solid rgba(135, 169, 107, 0.2)',
-                  color: '#87a96b',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#FFFFFF',
                   marginBottom: '24px',
                 }}>El Secreto Mejor Guardado</span>
                 <h2 className="section-title" style={{
@@ -802,10 +802,10 @@ const MentoriaUtah: React.FC = () => {
 
             <div style={styles.grid2}>
               {[
-                { icon: '💰', stat: '40%', label: 'más baratas', title: 'Universidades accesibles', desc: 'Opciones reales para familias latinas. Sin endeudarte de por vida.', accent: '#d4af37' },
-                { icon: '🏠', stat: '#1', label: 'en seguridad', title: 'Ambiente familiar', desc: 'Comunidad acogedora y segura. Ideal para jóvenes lejos de casa.', accent: '#87a96b' },
-                { icon: '📈', stat: '#1', label: 'en crecimiento', title: 'Oportunidades laborales', desc: 'El estado con mayor crecimiento económico de USA.', accent: '#d4af37' },
-                { icon: '🏔️', stat: '25%', label: 'más accesible', title: 'Calidad de vida', desc: 'Naturaleza, seguridad y costo de vida razonable.', accent: '#87a96b' },
+                { icon: '💰', stat: '40%', label: 'más baratas', title: 'Universidades accesibles', desc: 'Opciones reales para familias latinas. Sin endeudarte de por vida.', accent: '#FFB81D' },
+                { icon: '🏠', stat: '#1', label: 'en seguridad', title: 'Ambiente familiar', desc: 'Comunidad acogedora y segura. Ideal para jóvenes lejos de casa.', accent: '#FFFFFF' },
+                { icon: '📈', stat: '#1', label: 'en crecimiento', title: 'Oportunidades laborales', desc: 'El estado con mayor crecimiento económico de USA.', accent: '#FFB81D' },
+                { icon: '🏔️', stat: '25%', label: 'más accesible', title: 'Calidad de vida', desc: 'Naturaleza, seguridad y costo de vida razonable.', accent: '#FFFFFF' },
               ].map((item, i) => (
                 <Reveal key={i} delay={i * 100}>
                   <div className="card-hover" style={{
@@ -845,7 +845,7 @@ const MentoriaUtah: React.FC = () => {
         ══════════════════════════════════════════════════════════════ */}
         <section style={{
           padding: '64px 24px',
-          background: 'linear-gradient(180deg, #0a0a0a 0%, #141414 50%, #0a0a0a 100%)',
+          background: 'linear-gradient(180deg, #071D49 0%, #0a2a5c 50%, #071D49 100%)',
         }}>
           <div style={styles.maxWidth}>
             <div style={{
@@ -869,7 +869,7 @@ const MentoriaUtah: React.FC = () => {
                       ...styles.fontEditorial,
                       fontSize: 'clamp(2.5rem, 6vw, 4rem)',
                       fontWeight: 300,
-                      color: '#d4af37',
+                      color: '#FFB81D',
                       marginBottom: '8px',
                     }}>
                       <AnimatedNumber value={item.value} suffix={item.suffix} />
@@ -916,7 +916,7 @@ const MentoriaUtah: React.FC = () => {
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.85) 50%, rgba(10,10,10,0.92) 100%)',
+              background: 'linear-gradient(135deg, rgba(7,29,73,0.92) 0%, rgba(7,29,73,0.85) 50%, rgba(7,29,73,0.92) 100%)',
             }} />
           </div>
 
@@ -926,7 +926,7 @@ const MentoriaUtah: React.FC = () => {
                 <span style={{
                   ...styles.glass,
                   ...styles.badge,
-                  color: '#d4af37',
+                  color: '#FFB81D',
                   marginBottom: '24px',
                 }}>¿Es Para Ti?</span>
                 <h2 className="section-title" style={{
@@ -971,16 +971,16 @@ const MentoriaUtah: React.FC = () => {
         ══════════════════════════════════════════════════════════════ */}
         <section style={{
           ...styles.sectionLg,
-          background: '#141414',
+          background: '#0a2a5c',
         }}>
           <div style={styles.maxWidth}>
             <Reveal>
               <div style={{ ...styles.textCenter, marginBottom: '64px' }}>
                 <span style={{
                   ...styles.badge,
-                  background: 'rgba(135, 169, 107, 0.1)',
-                  border: '1px solid rgba(135, 169, 107, 0.2)',
-                  color: '#87a96b',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#FFFFFF',
                   marginBottom: '24px',
                 }}>El Contenido</span>
                 <h2 className="section-title" style={{
@@ -1012,21 +1012,21 @@ const MentoriaUtah: React.FC = () => {
                     alignItems: 'center',
                     gap: '16px',
                     padding: '20px 24px',
-                    background: 'rgba(212, 175, 55, 0.03)',
+                    background: 'rgba(255, 184, 29, 0.03)',
                     borderRadius: '12px',
-                    border: '1px solid rgba(212, 175, 55, 0.1)',
+                    border: '1px solid rgba(255, 184, 29, 0.1)',
                   }}>
                     <div style={{
                       width: '32px',
                       height: '32px',
                       borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #d4af37 0%, #b8960c 100%)',
+                      background: 'linear-gradient(135deg, #FFB81D 0%, #E5A000 100%)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
                     }}>
-                      <svg style={{ width: '16px', height: '16px', color: '#0a0a0a' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg style={{ width: '16px', height: '16px', color: '#071D49' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
@@ -1069,7 +1069,7 @@ const MentoriaUtah: React.FC = () => {
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.1) 50%, transparent 100%)',
+              background: 'linear-gradient(90deg, transparent 0%, rgba(255,184,29,0.1) 50%, transparent 100%)',
               backgroundSize: '200% 100%',
               animation: 'shimmerBg 4s ease-in-out infinite',
             }} />
@@ -1077,7 +1077,7 @@ const MentoriaUtah: React.FC = () => {
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'radial-gradient(ellipse at center, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.9) 70%, rgba(10,10,10,0.95) 100%)',
+              background: 'radial-gradient(ellipse at center, rgba(7,29,73,0.7) 0%, rgba(7,29,73,0.9) 70%, rgba(7,29,73,0.95) 100%)',
             }} />
           </div>
 
@@ -1100,8 +1100,8 @@ const MentoriaUtah: React.FC = () => {
                     position: 'absolute',
                     top: '20px',
                     right: '20px',
-                    background: '#87a96b',
-                    color: '#0a0a0a',
+                    background: '#FFFFFF',
+                    color: '#071D49',
                     padding: '6px 12px',
                     borderRadius: '50px',
                     fontSize: '12px',
@@ -1133,7 +1133,7 @@ const MentoriaUtah: React.FC = () => {
                         ...styles.fontEditorial,
                         fontSize: '64px',
                         fontWeight: 300,
-                        color: '#d4af37',
+                        color: '#FFB81D',
                       }}>$30</span>
                     </div>
                     <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)' }}>USD · Pago único</p>
@@ -1161,7 +1161,7 @@ const MentoriaUtah: React.FC = () => {
                         padding: '8px 0',
                         borderBottom: i < 4 ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
                       }}>
-                        <svg style={{ width: '18px', height: '18px', color: '#87a96b', flexShrink: 0 }} fill="currentColor" viewBox="0 0 20 20">
+                        <svg style={{ width: '18px', height: '18px', color: '#FFFFFF', flexShrink: 0 }} fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.8)' }}>{item}</span>
@@ -1203,7 +1203,7 @@ const MentoriaUtah: React.FC = () => {
         ══════════════════════════════════════════════════════════════ */}
         <section style={{
           ...styles.sectionLg,
-          background: '#141414',
+          background: '#0a2a5c',
         }}>
           <div style={styles.maxWidth}>
             <Reveal>
@@ -1217,7 +1217,7 @@ const MentoriaUtah: React.FC = () => {
                   <span style={{
                     ...styles.badge,
                     ...styles.glassGold,
-                    color: '#f4e4bc',
+                    color: '#FFD966',
                     marginBottom: '24px',
                   }}>Sobre StarbizAcademy</span>
 
@@ -1281,7 +1281,7 @@ const MentoriaUtah: React.FC = () => {
                     borderRadius: '50%',
                     margin: '0 auto 24px',
                     overflow: 'hidden',
-                    border: '3px solid rgba(212, 175, 55, 0.4)',
+                    border: '3px solid rgba(255, 184, 29, 0.4)',
                     boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
                   }}>
                     <ResponsiveImage
@@ -1304,7 +1304,7 @@ const MentoriaUtah: React.FC = () => {
                   }}>Henry Orellana</h3>
                   <p style={{
                     fontSize: '14px',
-                    color: '#d4af37',
+                    color: '#FFB81D',
                     marginBottom: '16px',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
@@ -1369,7 +1369,7 @@ const MentoriaUtah: React.FC = () => {
                         style={{
                           width: '20px',
                           height: '20px',
-                          color: '#d4af37',
+                          color: '#FFB81D',
                           transform: openFaq === i ? 'rotate(180deg)' : 'rotate(0)',
                           transition: 'transform 0.3s ease',
                           flexShrink: 0,
@@ -1429,7 +1429,7 @@ const MentoriaUtah: React.FC = () => {
             <div style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(26,71,42,0.7) 50%, rgba(10,10,10,0.9) 100%)',
+              background: 'linear-gradient(180deg, rgba(7,29,73,0.85) 0%, rgba(170,2,0,0.7) 50%, rgba(7,29,73,0.9) 100%)',
             }} />
           </div>
 
@@ -1489,7 +1489,7 @@ const MentoriaUtah: React.FC = () => {
           padding: '48px 24px',
           borderTop: '1px solid rgba(255, 255, 255, 0.05)',
           textAlign: 'center',
-          background: 'linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%)',
+          background: 'linear-gradient(180deg, #071D49 0%, #0d0d0d 100%)',
         }}>
           <div style={styles.maxWidth}>
             {/* Utah Logo with Pulse Animation */}
@@ -1512,7 +1512,7 @@ const MentoriaUtah: React.FC = () => {
             <p style={{
               ...styles.fontEditorial,
               fontSize: '20px',
-              color: '#d4af37',
+              color: '#FFB81D',
               marginBottom: '8px',
             }}>StarbizAcademy</p>
             <p style={{
@@ -1534,8 +1534,8 @@ const MentoriaUtah: React.FC = () => {
           right: 0,
           zIndex: 100,
           padding: '16px 24px',
-          background: 'linear-gradient(to top, #0a0a0a 0%, rgba(10, 10, 10, 0.95) 100%)',
-          borderTop: '1px solid rgba(212, 175, 55, 0.2)',
+          background: 'linear-gradient(to top, #071D49 0%, rgba(7, 29, 73, 0.95) 100%)',
+          borderTop: '1px solid rgba(255, 184, 29, 0.2)',
           transform: isStickyCTAVisible ? 'translateY(0)' : 'translateY(100%)',
           transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}>
@@ -1549,13 +1549,13 @@ const MentoriaUtah: React.FC = () => {
           }}>
             <div>
               <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.6)' }}>Mentoría Utah</p>
-              <p style={{ fontSize: '24px', fontWeight: 600, color: '#d4af37' }}>$30 USD</p>
+              <p style={{ fontSize: '24px', fontWeight: 600, color: '#FFB81D' }}>$30 USD</p>
             </div>
             <button
               onClick={handleCTA}
               style={{
-                background: 'linear-gradient(135deg, #d4af37 0%, #b8960c 100%)',
-                color: '#0a0a0a',
+                background: 'linear-gradient(135deg, #FFB81D 0%, #E5A000 100%)',
+                color: '#071D49',
                 fontWeight: 600,
                 fontSize: '14px',
                 padding: '14px 28px',

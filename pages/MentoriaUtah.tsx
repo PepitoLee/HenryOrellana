@@ -281,6 +281,86 @@ const MentoriaUtah: React.FC = () => {
           50% { opacity: 0.5; }
         }
 
+        /* ===== URGENCY BAR ANIMATIONS ===== */
+        @keyframes urgencyGlow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(255, 184, 29, 0.3), 0 0 40px rgba(170, 2, 0, 0.2);
+          }
+          50% {
+            box-shadow: 0 0 40px rgba(255, 184, 29, 0.6), 0 0 80px rgba(170, 2, 0, 0.4);
+          }
+        }
+
+        @keyframes numberPulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+
+        @keyframes urgencyShake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+          20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+
+        @keyframes fireFlicker {
+          0%, 100% { opacity: 1; transform: scale(1) rotate(-2deg); }
+          25% { opacity: 0.9; transform: scale(1.1) rotate(2deg); }
+          50% { opacity: 1; transform: scale(0.95) rotate(-1deg); }
+          75% { opacity: 0.95; transform: scale(1.05) rotate(1deg); }
+        }
+
+        @keyframes slideInDown {
+          from { transform: translateY(-100%); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes countdownTick {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); color: #FFB81D; }
+          100% { transform: scale(1); }
+        }
+
+        @keyframes borderPulse {
+          0%, 100% { border-color: rgba(255, 184, 29, 0.3); }
+          50% { border-color: rgba(255, 184, 29, 0.8); }
+        }
+
+        @keyframes textGlow {
+          0%, 100% { text-shadow: 0 0 10px rgba(255, 184, 29, 0.5); }
+          50% { text-shadow: 0 0 20px rgba(255, 184, 29, 0.8), 0 0 40px rgba(255, 184, 29, 0.4); }
+        }
+
+        .urgency-bar {
+          animation: slideInDown 0.6s ease-out, urgencyGlow 2s ease-in-out infinite;
+        }
+
+        .urgency-number {
+          animation: numberPulse 1s ease-in-out infinite;
+        }
+
+        .urgency-fire {
+          animation: fireFlicker 0.5s ease-in-out infinite;
+          display: inline-block;
+        }
+
+        .urgency-text-glow {
+          animation: textGlow 2s ease-in-out infinite;
+        }
+
+        .countdown-box {
+          animation: borderPulse 2s ease-in-out infinite;
+          transition: all 0.3s ease;
+        }
+
+        .countdown-box:hover {
+          transform: scale(1.1);
+          background: rgba(255, 184, 29, 0.2) !important;
+        }
+
+        .countdown-seconds {
+          animation: countdownTick 1s ease-in-out infinite;
+        }
+
         @keyframes shimmer {
           0% { background-position: -200% center; }
           100% { background-position: 200% center; }
@@ -624,16 +704,38 @@ const MentoriaUtah: React.FC = () => {
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
-            URGENCY BAR
+            URGENCY BAR - EPIC VERSION
         ══════════════════════════════════════════════════════════════ */}
-        <div style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 50,
-          background: 'linear-gradient(90deg, #AA0200 0%, #CC2A2A 50%, #AA0200 100%)',
-          padding: '12px 16px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-        }}>
+        <div
+          className="urgency-bar"
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 50,
+            background: 'linear-gradient(135deg, #AA0200 0%, #8B0000 25%, #AA0200 50%, #CC2A2A 75%, #AA0200 100%)',
+            backgroundSize: '400% 400%',
+            padding: '16px 16px 20px',
+            borderBottom: '3px solid #FFB81D',
+            overflow: 'hidden',
+          }}>
+          {/* Animated background particles */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(circle at 20% 50%, rgba(255, 184, 29, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(255, 184, 29, 0.15) 0%, transparent 50%)',
+            pointerEvents: 'none',
+          }} />
+
+          {/* Shimmer overlay */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%)',
+            backgroundSize: '200% 100%',
+            animation: 'shimmer 3s linear infinite',
+            pointerEvents: 'none',
+          }} />
+
           <div style={{
             ...styles.maxWidth,
             display: 'flex',
@@ -642,34 +744,122 @@ const MentoriaUtah: React.FC = () => {
             justifyContent: 'center',
             gap: '12px',
             textAlign: 'center',
+            position: 'relative',
+            zIndex: 1,
           }}>
-            <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.8)', fontWeight: 300 }}>
-              ⚡ Precio especial termina en:
-            </span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'monospace' }}>
-              {[
-                { value: timeLeft.hours, label: 'h' },
-                { value: timeLeft.minutes, label: 'm' },
-                { value: timeLeft.seconds, label: 's' },
-              ].map((unit, i) => (
-                <React.Fragment key={i}>
-                  <div style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    backdropFilter: 'blur(10px)',
-                    padding: '8px 12px',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    gap: '4px',
-                  }}>
-                    <span style={{ fontSize: '18px', fontWeight: 600, color: '#ffffff' }}>
-                      {String(unit.value).padStart(2, '0')}
-                    </span>
-                    <span style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.5)' }}>{unit.label}</span>
-                  </div>
-                  {i < 2 && <span style={{ color: 'rgba(255, 255, 255, 0.3)' }}>:</span>}
-                </React.Fragment>
-              ))}
+            {/* Top badge */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: 'rgba(0, 0, 0, 0.3)',
+              padding: '6px 16px',
+              borderRadius: '50px',
+              border: '1px solid rgba(255, 184, 29, 0.3)',
+            }}>
+              <span className="urgency-fire" style={{ fontSize: '18px' }}>🔥</span>
+              <span style={{
+                fontSize: '13px',
+                color: '#FFB81D',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+              }}>
+                ¡OFERTA POR TIEMPO LIMITADO!
+              </span>
+              <span className="urgency-fire" style={{ fontSize: '18px' }}>🔥</span>
+            </div>
+
+            {/* Main countdown section */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '8px',
+            }}>
+              <span className="urgency-text-glow" style={{
+                fontSize: 'clamp(16px, 4vw, 22px)',
+                color: '#ffffff',
+                fontWeight: 600,
+                letterSpacing: '0.05em',
+              }}>
+                ⚡ El precio especial termina en:
+              </span>
+
+              {/* Giant countdown numbers */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'clamp(8px, 2vw, 16px)',
+              }}>
+                {[
+                  { value: timeLeft.hours, label: 'HORAS' },
+                  { value: timeLeft.minutes, label: 'MIN' },
+                  { value: timeLeft.seconds, label: 'SEG' },
+                ].map((unit, i) => (
+                  <React.Fragment key={i}>
+                    <div
+                      className={`countdown-box ${i === 2 ? 'countdown-seconds' : 'urgency-number'}`}
+                      style={{
+                        background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)',
+                        backdropFilter: 'blur(10px)',
+                        padding: 'clamp(12px, 3vw, 20px) clamp(16px, 4vw, 28px)',
+                        borderRadius: '12px',
+                        border: '2px solid rgba(255, 184, 29, 0.4)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '4px',
+                        minWidth: 'clamp(60px, 15vw, 90px)',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                      }}>
+                      <span style={{
+                        fontSize: 'clamp(32px, 8vw, 52px)',
+                        fontWeight: 800,
+                        color: '#FFB81D',
+                        fontFamily: "'Outfit', system-ui, sans-serif",
+                        lineHeight: 1,
+                        textShadow: '0 0 20px rgba(255, 184, 29, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3)',
+                      }}>
+                        {String(unit.value).padStart(2, '0')}
+                      </span>
+                      <span style={{
+                        fontSize: 'clamp(9px, 2vw, 11px)',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        letterSpacing: '0.15em',
+                        fontWeight: 600,
+                      }}>
+                        {unit.label}
+                      </span>
+                    </div>
+                    {i < 2 && (
+                      <span style={{
+                        color: '#FFB81D',
+                        fontSize: 'clamp(28px, 6vw, 40px)',
+                        fontWeight: 700,
+                        textShadow: '0 0 10px rgba(255, 184, 29, 0.5)',
+                        animation: 'pulse 1s ease-in-out infinite',
+                      }}>:</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom urgency text */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginTop: '4px',
+            }}>
+              <span style={{
+                fontSize: 'clamp(12px, 3vw, 14px)',
+                color: 'rgba(255, 255, 255, 0.9)',
+                fontWeight: 500,
+              }}>
+                ⚠️ Solo quedan <span style={{ color: '#FFB81D', fontWeight: 800 }}>7 CUPOS</span> disponibles
+              </span>
             </div>
           </div>
         </div>

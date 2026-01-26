@@ -281,6 +281,86 @@ const MentoriaUtahPeru: React.FC = () => {
           50% { opacity: 0.5; }
         }
 
+        /* ===== URGENCY BAR ANIMATIONS ===== */
+        @keyframes urgencyGlow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(255, 184, 29, 0.3), 0 0 40px rgba(170, 2, 0, 0.2);
+          }
+          50% {
+            box-shadow: 0 0 40px rgba(255, 184, 29, 0.6), 0 0 80px rgba(170, 2, 0, 0.4);
+          }
+        }
+
+        @keyframes numberPulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+
+        @keyframes urgencyShake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+          20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+
+        @keyframes fireFlicker {
+          0%, 100% { opacity: 1; transform: scale(1) rotate(-2deg); }
+          25% { opacity: 0.9; transform: scale(1.1) rotate(2deg); }
+          50% { opacity: 1; transform: scale(0.95) rotate(-1deg); }
+          75% { opacity: 0.95; transform: scale(1.05) rotate(1deg); }
+        }
+
+        @keyframes slideInDown {
+          from { transform: translateY(-100%); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes countdownTick {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); color: #FFB81D; }
+          100% { transform: scale(1); }
+        }
+
+        @keyframes borderPulse {
+          0%, 100% { border-color: rgba(255, 184, 29, 0.3); }
+          50% { border-color: rgba(255, 184, 29, 0.8); }
+        }
+
+        @keyframes textGlow {
+          0%, 100% { text-shadow: 0 0 10px rgba(255, 184, 29, 0.5); }
+          50% { text-shadow: 0 0 20px rgba(255, 184, 29, 0.8), 0 0 40px rgba(255, 184, 29, 0.4); }
+        }
+
+        .urgency-bar {
+          animation: slideInDown 0.6s ease-out, urgencyGlow 2s ease-in-out infinite;
+        }
+
+        .urgency-number {
+          animation: numberPulse 1s ease-in-out infinite;
+        }
+
+        .urgency-fire {
+          animation: fireFlicker 0.5s ease-in-out infinite;
+          display: inline-block;
+        }
+
+        .urgency-text-glow {
+          animation: textGlow 2s ease-in-out infinite;
+        }
+
+        .countdown-box {
+          animation: borderPulse 2s ease-in-out infinite;
+          transition: all 0.3s ease;
+        }
+
+        .countdown-box:hover {
+          transform: scale(1.1);
+          background: rgba(255, 184, 29, 0.2) !important;
+        }
+
+        .countdown-seconds {
+          animation: countdownTick 1s ease-in-out infinite;
+        }
+
         @keyframes shimmer {
           0% { background-position: -200% center; }
           100% { background-position: 200% center; }
@@ -624,52 +704,175 @@ const MentoriaUtahPeru: React.FC = () => {
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
-            URGENCY BAR
+            EPIC URGENCY BAR - COUNTDOWN TIMER
         ══════════════════════════════════════════════════════════════ */}
-        <div style={{
+        <div className="urgency-bar-epic" style={{
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          background: 'linear-gradient(90deg, #AA0200 0%, #CC2A2A 50%, #AA0200 100%)',
-          padding: '12px 16px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+          background: 'linear-gradient(135deg, #071D49 0%, #AA0200 50%, #071D49 100%)',
+          backgroundSize: '200% 200%',
+          animation: 'urgencyGlow 3s ease-in-out infinite, gradientShift 8s ease infinite',
+          padding: 'clamp(16px, 3vw, 28px) 16px',
+          borderBottom: '3px solid #FFB81D',
+          boxShadow: '0 10px 60px rgba(170, 2, 0, 0.5), 0 0 100px rgba(255, 184, 29, 0.3)',
+          overflow: 'hidden',
         }}>
+          {/* Animated background particles */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: `
+              radial-gradient(circle at 20% 50%, rgba(255, 184, 29, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(255, 184, 29, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 30%)
+            `,
+            animation: 'particleFloat 4s ease-in-out infinite',
+          }} />
+
+          {/* Shimmer overlay */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%)',
+            animation: 'shimmerMove 2s linear infinite',
+          }} />
+
           <div style={{
             ...styles.maxWidth,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '12px',
+            gap: 'clamp(12px, 2vw, 20px)',
             textAlign: 'center',
+            position: 'relative',
+            zIndex: 2,
           }}>
-            <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.8)', fontWeight: 300 }}>
+            {/* Top badge */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              animation: 'slideInDown 0.5s ease-out',
+            }}>
+              <span style={{
+                fontSize: 'clamp(16px, 3vw, 24px)',
+                animation: 'fireFlicker 0.5s ease-in-out infinite',
+              }}>🔥</span>
+              <span style={{
+                fontSize: 'clamp(12px, 2.5vw, 18px)',
+                color: '#FFB81D',
+                fontWeight: 700,
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                textShadow: '0 0 20px rgba(255, 184, 29, 0.8), 0 0 40px rgba(255, 184, 29, 0.4)',
+                animation: 'textGlow 2s ease-in-out infinite',
+              }}>
+                OFERTA POR TIEMPO LIMITADO
+              </span>
+              <span style={{
+                fontSize: 'clamp(16px, 3vw, 24px)',
+                animation: 'fireFlicker 0.5s ease-in-out infinite 0.25s',
+              }}>🔥</span>
+            </div>
+
+            {/* Main countdown label */}
+            <p style={{
+              fontSize: 'clamp(14px, 2.5vw, 20px)',
+              color: 'rgba(255, 255, 255, 0.95)',
+              fontWeight: 500,
+              letterSpacing: '1px',
+              margin: 0,
+            }}>
               ⚡ Precio especial termina en:
-            </span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'monospace' }}>
+            </p>
+
+            {/* GIANT COUNTDOWN */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'clamp(8px, 2vw, 20px)',
+              fontFamily: '"SF Mono", "Fira Code", "Consolas", monospace',
+            }}>
               {[
-                { value: timeLeft.hours, label: 'h' },
-                { value: timeLeft.minutes, label: 'm' },
-                { value: timeLeft.seconds, label: 's' },
+                { value: timeLeft.hours, label: 'HORAS', isSeconds: false },
+                { value: timeLeft.minutes, label: 'MIN', isSeconds: false },
+                { value: timeLeft.seconds, label: 'SEG', isSeconds: true },
               ].map((unit, i) => (
                 <React.Fragment key={i}>
                   <div style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    backdropFilter: 'blur(10px)',
-                    padding: '8px 12px',
-                    borderRadius: '8px',
+                    background: 'linear-gradient(180deg, rgba(7, 29, 73, 0.9) 0%, rgba(7, 29, 73, 0.7) 100%)',
+                    backdropFilter: 'blur(20px)',
+                    padding: 'clamp(12px, 3vw, 24px) clamp(16px, 4vw, 32px)',
+                    borderRadius: '16px',
+                    border: '2px solid rgba(255, 184, 29, 0.5)',
+                    boxShadow: `
+                      0 10px 40px rgba(0, 0, 0, 0.4),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                      0 0 30px rgba(255, 184, 29, 0.2)
+                    `,
                     display: 'flex',
-                    alignItems: 'baseline',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                     gap: '4px',
+                    minWidth: 'clamp(60px, 15vw, 110px)',
+                    animation: unit.isSeconds ? 'borderPulse 1s ease-in-out infinite' : 'none',
                   }}>
-                    <span style={{ fontSize: '18px', fontWeight: 600, color: '#ffffff' }}>
+                    <span className={unit.isSeconds ? 'countdown-seconds' : ''} style={{
+                      fontSize: 'clamp(28px, 8vw, 56px)',
+                      fontWeight: 800,
+                      color: '#FFFFFF',
+                      textShadow: `
+                        0 0 20px rgba(255, 184, 29, 0.8),
+                        0 0 40px rgba(255, 184, 29, 0.4),
+                        0 4px 8px rgba(0, 0, 0, 0.5)
+                      `,
+                      lineHeight: 1,
+                      fontVariantNumeric: 'tabular-nums',
+                    }}>
                       {String(unit.value).padStart(2, '0')}
                     </span>
-                    <span style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.5)' }}>{unit.label}</span>
+                    <span style={{
+                      fontSize: 'clamp(8px, 1.5vw, 12px)',
+                      color: '#FFB81D',
+                      fontWeight: 600,
+                      letterSpacing: '2px',
+                    }}>{unit.label}</span>
                   </div>
-                  {i < 2 && <span style={{ color: 'rgba(255, 255, 255, 0.3)' }}>:</span>}
+                  {i < 2 && (
+                    <span style={{
+                      color: '#FFB81D',
+                      fontSize: 'clamp(24px, 6vw, 48px)',
+                      fontWeight: 700,
+                      textShadow: '0 0 20px rgba(255, 184, 29, 0.8)',
+                      animation: 'countdownTick 1s ease-in-out infinite',
+                    }}>:</span>
+                  )}
                 </React.Fragment>
               ))}
+            </div>
+
+            {/* Bottom urgency text */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginTop: '8px',
+            }}>
+              <span style={{
+                background: 'linear-gradient(135deg, #FFB81D 0%, #E5A000 100%)',
+                color: '#071D49',
+                padding: '6px 16px',
+                borderRadius: '50px',
+                fontSize: 'clamp(11px, 2vw, 14px)',
+                fontWeight: 800,
+                letterSpacing: '0.5px',
+                boxShadow: '0 4px 20px rgba(255, 184, 29, 0.5)',
+                animation: 'numberPulse 2s ease-in-out infinite',
+              }}>
+                Solo quedan 7 CUPOS disponibles
+              </span>
             </div>
           </div>
         </div>

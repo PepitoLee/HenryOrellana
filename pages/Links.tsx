@@ -1,6 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
+// ===== UTAH COLORS =====
+const COLORS = {
+  blue: '#071D49',
+  blueLight: '#0a2a5c',
+  gold: '#FFB81D',
+  goldLight: '#FFD966',
+  goldDark: '#E5A000',
+  red: '#AA0200',
+  redLight: '#CC2A2A',
+  white: '#FFFFFF',
+};
+
 // Reveal component with intersection observer
 const Reveal = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,8 +37,8 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       ref={ref}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)',
+        transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
       }}
     >
       {children}
@@ -70,9 +82,9 @@ const Links: React.FC = () => {
       link: '/ceo-junior',
       isExternal: false,
       badge: 'Popular',
-      badgeColor: '#FFB81D',
+      badgeColor: COLORS.gold,
       image: '/images/links/ceo-junior.jpg',
-      cols: 1, // 1 columna (vertical image 9:16)
+      cols: 1,
       imageHeight: 280,
       objectPosition: 'center 20%',
     },
@@ -83,10 +95,10 @@ const Links: React.FC = () => {
       description: 'De la adicción digital',
       link: 'https://www.henryorellana.com/landingpage',
       isExternal: true,
-      badge: 'Hot',
-      badgeColor: '#AA0200',
+      badge: '🔥 Hot',
+      badgeColor: COLORS.red,
       image: '/images/links/desconexion.png',
-      cols: 1, // 1 columna (cuadrada)
+      cols: 1,
       imageHeight: 280,
       objectPosition: 'center center',
     },
@@ -97,10 +109,10 @@ const Links: React.FC = () => {
       description: 'Estudia en USA con tu familia',
       link: '/mentoria-utah',
       isExternal: false,
-      badge: 'Nuevo',
-      badgeColor: '#FFB81D',
+      badge: '⭐ Nuevo',
+      badgeColor: COLORS.gold,
       image: '/images/links/utah.jpg',
-      cols: 2, // 2 columnas (horizontal image 16:9)
+      cols: 2,
       imageHeight: 180,
       objectPosition: 'center center',
     },
@@ -111,10 +123,10 @@ const Links: React.FC = () => {
       description: 'Versión para LATAM',
       link: '/mentoria-utah-peru',
       isExternal: false,
-      badge: 'LATAM',
-      badgeColor: '#AA0200',
+      badge: '🌎 LATAM',
+      badgeColor: COLORS.red,
       image: '/images/links/utah-peru.jpg',
-      cols: 2, // 2 columnas (horizontal image 16:9)
+      cols: 2,
       imageHeight: 180,
       objectPosition: 'center 30%',
     },
@@ -152,50 +164,175 @@ const Links: React.FC = () => {
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes floatReverse {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(-3deg); }
+        }
+
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+
+        @keyframes glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(255, 184, 29, 0.4), 0 0 40px rgba(255, 184, 29, 0.2); }
+          50% { box-shadow: 0 0 30px rgba(255, 184, 29, 0.6), 0 0 60px rgba(255, 184, 29, 0.3); }
+        }
+
+        @keyframes borderGlow {
+          0%, 100% { border-color: rgba(255, 184, 29, 0.3); }
+          50% { border-color: rgba(255, 184, 29, 0.8); }
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes badgePulse {
+          0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+          50% { transform: scale(1.1); box-shadow: 0 6px 25px rgba(0,0,0,0.4); }
+        }
+
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
 
         .card-link {
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
+          position: relative;
+        }
+
+        .card-link::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: 26px;
+          padding: 2px;
+          background: linear-gradient(135deg, ${COLORS.gold}, ${COLORS.blue}, ${COLORS.gold});
+          background-size: 200% 200%;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+
+        .card-link:hover::before {
+          opacity: 1;
+          animation: gradientMove 2s ease infinite;
         }
 
         .card-link:hover {
-          transform: translateY(-8px) scale(1.02);
-          box-shadow: 0 8px 16px rgba(7, 29, 73, 0.06), 0 20px 40px rgba(7, 29, 73, 0.10), 0 40px 80px rgba(255, 184, 29, 0.12);
+          transform: translateY(-12px) scale(1.03);
+          box-shadow: 0 20px 40px rgba(7, 29, 73, 0.25), 0 0 60px rgba(255, 184, 29, 0.2);
         }
 
         .card-link:hover .card-image {
-          transform: scale(1.05);
+          transform: scale(1.1);
+        }
+
+        .card-link:hover .badge {
+          animation: badgePulse 0.6s ease infinite;
         }
 
         .social-btn {
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .social-btn::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, transparent, rgba(255,255,255,0.3), transparent);
+          transform: translateX(-100%);
+          transition: transform 0.6s ease;
+        }
+
+        .social-btn:hover::after {
+          transform: translateX(100%);
         }
 
         .social-btn:hover {
-          transform: scale(1.1) translateY(-2px);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+          transform: scale(1.15) translateY(-5px) rotate(5deg);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
         }
 
         .hero-image-container {
-          transition: all 0.5s ease;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: glow 3s ease-in-out infinite;
         }
 
         .hero-image-container:hover {
-          transform: scale(1.02);
+          transform: scale(1.05) rotate(2deg);
+        }
+
+        .floating-circle {
+          animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-circle-2 {
+          animation: floatReverse 10s ease-in-out infinite;
+        }
+
+        .floating-circle-3 {
+          animation: float 12s ease-in-out infinite;
+        }
+
+        .section-title {
+          position: relative;
+          display: inline-block;
+        }
+
+        .section-title::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, ${COLORS.gold}, transparent);
+          transition: width 0.4s ease;
+        }
+
+        .section-title:hover::after {
+          width: 100%;
+        }
+
+        .shimmer-text {
+          background: linear-gradient(90deg, ${COLORS.blue} 0%, ${COLORS.gold} 50%, ${COLORS.blue} 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 3s linear infinite;
         }
 
         ::selection {
-          background: #FFB81D;
-          color: #071D49;
+          background: ${COLORS.gold};
+          color: ${COLORS.blue};
         }
 
         @media (max-width: 640px) {
@@ -210,52 +347,69 @@ const Links: React.FC = () => {
 
       <div style={{
         minHeight: '100vh',
-        background: 'linear-gradient(160deg, #E8F0FA 0%, #FFF8E7 25%, #F0F4FA 50%, #FFFBF0 75%, #E8F0FA 100%)',
+        background: `linear-gradient(135deg, ${COLORS.blue} 0%, ${COLORS.blueLight} 50%, ${COLORS.blue} 100%)`,
         fontFamily: "'Outfit', system-ui, sans-serif",
         padding: '40px 20px 60px',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Decorative gradient circles - Utah colors pastel */}
-        <div style={{
+        {/* Animated background circles - Utah colors */}
+        <div className="floating-circle" style={{
           position: 'absolute',
-          top: '-80px',
-          right: '-80px',
+          top: '-100px',
+          right: '-100px',
+          width: '400px',
+          height: '400px',
+          background: `radial-gradient(circle, ${COLORS.gold}40 0%, ${COLORS.gold}15 40%, transparent 70%)`,
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          filter: 'blur(20px)',
+        }} />
+        <div className="floating-circle-2" style={{
+          position: 'absolute',
+          bottom: '10%',
+          left: '-150px',
           width: '350px',
           height: '350px',
-          background: 'radial-gradient(circle, rgba(255,200,100,0.20) 0%, rgba(255,184,29,0.10) 50%, transparent 70%)',
+          background: `radial-gradient(circle, ${COLORS.red}30 0%, ${COLORS.red}10 40%, transparent 70%)`,
           borderRadius: '50%',
           pointerEvents: 'none',
+          filter: 'blur(30px)',
         }} />
+        <div className="floating-circle-3" style={{
+          position: 'absolute',
+          top: '40%',
+          right: '-80px',
+          width: '250px',
+          height: '250px',
+          background: `radial-gradient(circle, ${COLORS.goldLight}35 0%, transparent 70%)`,
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          filter: 'blur(25px)',
+        }} />
+        <div className="floating-circle" style={{
+          position: 'absolute',
+          top: '15%',
+          left: '5%',
+          width: '180px',
+          height: '180px',
+          background: `radial-gradient(circle, ${COLORS.gold}25 0%, transparent 70%)`,
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          filter: 'blur(15px)',
+        }} />
+        {/* Extra decorative ring */}
         <div style={{
           position: 'absolute',
-          bottom: '15%',
-          left: '-120px',
-          width: '300px',
-          height: '300px',
-          background: 'radial-gradient(circle, rgba(26,58,107,0.08) 0%, rgba(7,29,73,0.04) 50%, transparent 70%)',
+          top: '60%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '600px',
+          height: '600px',
+          border: `1px solid ${COLORS.gold}15`,
           borderRadius: '50%',
           pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          right: '-60px',
-          width: '200px',
-          height: '200px',
-          background: 'radial-gradient(circle, rgba(212,114,106,0.08) 0%, transparent 70%)',
-          borderRadius: '50%',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute',
-          top: '20%',
-          left: '10%',
-          width: '150px',
-          height: '150px',
-          background: 'radial-gradient(circle, rgba(255,217,102,0.20) 0%, transparent 70%)',
-          borderRadius: '50%',
-          pointerEvents: 'none',
+          animation: 'spin 60s linear infinite',
         }} />
 
         <div style={{
@@ -267,7 +421,7 @@ const Links: React.FC = () => {
           {/* ========== HERO SECTION ========== */}
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-              {/* Hero Image - Rectangular with rounded corners */}
+              {/* Hero Image - With glow effect */}
               <div
                 className="hero-image-container"
                 style={{
@@ -276,9 +430,9 @@ const Links: React.FC = () => {
                   margin: '0 auto 24px',
                   borderRadius: '24px',
                   overflow: 'hidden',
-                  boxShadow: '0 20px 60px rgba(7, 29, 73, 0.10), 0 0 40px rgba(255, 184, 29, 0.08)',
-                  background: 'linear-gradient(135deg, #071D49 0%, #0a2a5c 100%)',
-                  border: '2px solid rgba(255, 184, 29, 0.15)',
+                  background: `linear-gradient(135deg, ${COLORS.blue} 0%, ${COLORS.blueLight} 100%)`,
+                  border: `3px solid ${COLORS.gold}`,
+                  position: 'relative',
                 }}
               >
                 <img
@@ -293,15 +447,21 @@ const Links: React.FC = () => {
                     objectPosition: 'center top',
                   }}
                 />
+                {/* Golden overlay gradient */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: `linear-gradient(to top, ${COLORS.gold}20 0%, transparent 30%)`,
+                  pointerEvents: 'none',
+                }} />
               </div>
 
-              {/* Name - Script/Elegant style */}
-              <h1 style={{
+              {/* Name - Shimmer effect */}
+              <h1 className="shimmer-text" style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: '48px',
-                fontWeight: 500,
+                fontSize: '52px',
+                fontWeight: 600,
                 fontStyle: 'italic',
-                color: '#1a3a6b',
                 marginBottom: '8px',
                 letterSpacing: '-0.02em',
               }}>
@@ -311,19 +471,26 @@ const Links: React.FC = () => {
               {/* Subtitle */}
               <p style={{
                 fontSize: '14px',
-                color: '#666',
+                color: COLORS.white,
                 marginBottom: '20px',
                 lineHeight: 1.6,
+                opacity: 0.9,
               }}>
                 ✨ Empresario · Educador · Mentor<br />
-                <span style={{ color: '#D4A017', fontWeight: 500 }}>Fundador ORELLANA GROUP</span>
+                <span style={{
+                  color: COLORS.gold,
+                  fontWeight: 600,
+                  textShadow: `0 0 20px ${COLORS.gold}60`,
+                }}>
+                  Fundador ORELLANA GROUP
+                </span>
               </p>
 
               {/* Social Links Row */}
               <div style={{
                 display: 'flex',
                 justifyContent: 'center',
-                gap: '12px',
+                gap: '14px',
               }}>
                 {socialLinks.map((social, index) => (
                   <a
@@ -333,17 +500,17 @@ const Links: React.FC = () => {
                     rel="noopener noreferrer"
                     className="social-btn"
                     style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: '14px',
-                      background: 'linear-gradient(145deg, #ffffff 0%, #fafafa 100%)',
-                      boxShadow: '0 2px 8px rgba(7, 29, 73, 0.06), 0 8px 24px rgba(7, 29, 73, 0.08)',
+                      width: '50px',
+                      height: '50px',
+                      borderRadius: '16px',
+                      background: `linear-gradient(145deg, ${COLORS.white} 0%, #f0f0f0 100%)`,
+                      boxShadow: `0 4px 15px rgba(0, 0, 0, 0.2), 0 0 20px ${COLORS.gold}30`,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: social.color,
                       textDecoration: 'none',
-                      border: '1px solid rgba(255, 255, 255, 0.9)',
+                      border: `2px solid ${COLORS.gold}50`,
                     }}
                     title={social.label}
                   >
@@ -359,27 +526,28 @@ const Links: React.FC = () => {
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '12px',
-              marginBottom: '20px',
+              gap: '16px',
+              marginBottom: '24px',
             }}>
               <div style={{
                 flex: 1,
-                height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(255, 184, 29, 0.25))',
+                height: '2px',
+                background: `linear-gradient(90deg, transparent, ${COLORS.gold})`,
               }} />
-              <h2 style={{
-                fontSize: '13px',
-                color: '#1a3a6b',
-                letterSpacing: '0.15em',
+              <h2 className="section-title" style={{
+                fontSize: '14px',
+                color: COLORS.gold,
+                letterSpacing: '0.2em',
                 textTransform: 'uppercase',
-                fontWeight: 500,
+                fontWeight: 600,
+                textShadow: `0 0 20px ${COLORS.gold}60`,
               }}>
-                Mis Programas ✨
+                🚀 Mis Programas
               </h2>
               <div style={{
                 flex: 1,
-                height: '1px',
-                background: 'linear-gradient(90deg, rgba(255, 184, 29, 0.25), transparent)',
+                height: '2px',
+                background: `linear-gradient(90deg, ${COLORS.gold}, transparent)`,
               }} />
             </div>
           </Reveal>
@@ -390,7 +558,7 @@ const Links: React.FC = () => {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '16px',
+              gap: '18px',
               marginBottom: '40px',
             }}
           >
@@ -401,30 +569,30 @@ const Links: React.FC = () => {
                   onClick={() => handleLinkClick(product.link, product.isExternal)}
                   style={{
                     gridColumn: `span ${product.cols}`,
-                    background: 'linear-gradient(145deg, #ffffff 0%, #fefefe 100%)',
+                    background: `linear-gradient(145deg, ${COLORS.white} 0%, #f8f8f8 100%)`,
                     borderRadius: '24px',
                     overflow: 'hidden',
-                    boxShadow: '0 4px 6px rgba(7, 29, 73, 0.03), 0 10px 20px rgba(7, 29, 73, 0.06)',
-                    position: 'relative',
-                    border: '1px solid rgba(255, 184, 29, 0.08)',
+                    boxShadow: `0 10px 30px rgba(0, 0, 0, 0.3), 0 0 30px ${COLORS.gold}15`,
                   }}
                 >
-                  {/* Badge */}
+                  {/* Badge with pulse effect */}
                   {product.badge && (
-                    <span style={{
+                    <span className="badge" style={{
                       position: 'absolute',
                       top: '12px',
                       right: '12px',
                       zIndex: 10,
-                      background: product.badgeColor,
-                      color: product.badgeColor === '#FFB81D' ? '#071D49' : '#ffffff',
-                      fontSize: '10px',
-                      fontWeight: 600,
-                      padding: '5px 12px',
+                      background: product.badgeColor === COLORS.gold
+                        ? `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldDark})`
+                        : `linear-gradient(135deg, ${COLORS.red}, ${COLORS.redLight})`,
+                      color: product.badgeColor === COLORS.gold ? COLORS.blue : COLORS.white,
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      padding: '6px 14px',
                       borderRadius: '50px',
                       letterSpacing: '0.05em',
                       textTransform: 'uppercase',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                      boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
                     }}>
                       {product.badge}
                     </span>
@@ -435,7 +603,7 @@ const Links: React.FC = () => {
                     width: '100%',
                     height: `${product.imageHeight}px`,
                     overflow: 'hidden',
-                    background: '#071D49',
+                    background: COLORS.blue,
                     position: 'relative',
                   }}>
                     <img
@@ -447,45 +615,46 @@ const Links: React.FC = () => {
                         height: '100%',
                         objectFit: 'cover',
                         objectPosition: product.objectPosition,
-                        transition: 'transform 0.5s ease',
+                        transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                       }}
                     />
-                    {/* Overlay gradient for better text readability on hover */}
+                    {/* Overlay gradient */}
                     <div style={{
                       position: 'absolute',
                       inset: 0,
-                      background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.15) 100%)',
+                      background: `linear-gradient(to bottom, transparent 50%, ${COLORS.blue}40 100%)`,
                       pointerEvents: 'none',
                     }} />
                   </div>
 
                   {/* Content */}
                   <div style={{
-                    padding: '16px 18px 18px',
+                    padding: '18px 20px 20px',
+                    background: `linear-gradient(180deg, ${COLORS.white} 0%, #fafafa 100%)`,
                   }}>
                     {/* Title Row */}
                     <div style={{
                       display: 'flex',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
-                      marginBottom: '6px',
+                      marginBottom: '8px',
                     }}>
                       <h3 style={{
-                        fontSize: '16px',
-                        fontWeight: 600,
-                        color: '#1a3a6b',
+                        fontSize: '17px',
+                        fontWeight: 700,
+                        color: COLORS.blue,
                         lineHeight: 1.3,
                       }}>
                         {product.title}
                       </h3>
                       <svg
-                        width="18"
-                        height="18"
+                        width="20"
+                        height="20"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="#FFB81D"
-                        strokeWidth="2.5"
-                        style={{ flexShrink: 0, marginLeft: '8px', marginTop: '2px' }}
+                        stroke={COLORS.gold}
+                        strokeWidth="3"
+                        style={{ flexShrink: 0, marginLeft: '10px', marginTop: '2px' }}
                       >
                         <path d="M7 17L17 7M17 7H7M17 7V17" />
                       </svg>
@@ -493,10 +662,11 @@ const Links: React.FC = () => {
 
                     {/* Subtitle/Price */}
                     <p style={{
-                      fontSize: '14px',
-                      color: '#FFB81D',
-                      fontWeight: 600,
+                      fontSize: '15px',
+                      color: COLORS.gold,
+                      fontWeight: 700,
                       marginBottom: '4px',
+                      textShadow: `0 0 10px ${COLORS.gold}40`,
                     }}>
                       {product.subtitle}
                     </p>
@@ -504,8 +674,8 @@ const Links: React.FC = () => {
                     {/* Description */}
                     <p style={{
                       fontSize: '13px',
-                      color: '#888',
-                      lineHeight: 1.4,
+                      color: '#666',
+                      lineHeight: 1.5,
                     }}>
                       {product.description}
                     </p>
@@ -519,33 +689,34 @@ const Links: React.FC = () => {
           <Reveal delay={600}>
             <footer style={{
               textAlign: 'center',
-              paddingTop: '24px',
-              borderTop: '1px solid rgba(255, 184, 29, 0.15)',
+              paddingTop: '28px',
+              borderTop: `2px solid ${COLORS.gold}30`,
             }}>
               <p style={{
                 fontSize: '12px',
-                color: '#999',
-                marginBottom: '6px',
+                color: COLORS.white,
+                marginBottom: '8px',
+                opacity: 0.7,
               }}>
                 © {new Date().getFullYear()} ORELLANA GROUP
               </p>
               <a
                 href="/"
                 style={{
-                  fontSize: '13px',
-                  color: '#1a3a6b',
+                  fontSize: '14px',
+                  color: COLORS.gold,
                   textDecoration: 'none',
-                  fontWeight: 500,
-                  opacity: 0.7,
+                  fontWeight: 600,
                   transition: 'all 0.3s ease',
+                  textShadow: `0 0 15px ${COLORS.gold}50`,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.opacity = '1';
-                  e.currentTarget.style.color = '#D4A017';
+                  e.currentTarget.style.textShadow = `0 0 25px ${COLORS.gold}`;
+                  e.currentTarget.style.transform = 'scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.opacity = '0.7';
-                  e.currentTarget.style.color = '#1a3a6b';
+                  e.currentTarget.style.textShadow = `0 0 15px ${COLORS.gold}50`;
+                  e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
                 henryorellana.com →

@@ -83,6 +83,7 @@ const Links: React.FC = () => {
       isExternal: false,
       badge: 'Popular',
       badgeColor: COLORS.gold,
+      type: 'programa',
       image: '/images/links/ceo-junior.jpg',
       cols: 1,
       imageHeight: 280,
@@ -91,12 +92,13 @@ const Links: React.FC = () => {
     {
       id: 2,
       title: 'Protocolo Desconexión',
-      subtitle: 'Rescata a tu hijo',
-      description: 'De la adicción digital',
+      subtitle: 'Rescata a tu hijo de la adicción digital',
+      description: 'Curso completo con estrategias probadas',
       link: 'https://www.henryorellana.com/landingpage',
       isExternal: true,
       badge: '🔥 Hot',
       badgeColor: COLORS.red,
+      type: 'curso',
       image: '/images/links/desconexion.png',
       cols: 1,
       imageHeight: 280,
@@ -106,11 +108,12 @@ const Links: React.FC = () => {
       id: 3,
       title: 'Utah Mentorship USA',
       subtitle: '$30 USD',
-      description: 'Estudia en USA con tu familia',
+      description: 'Mentoría personalizada para estudiar en USA',
       link: '/mentoria-utah',
       isExternal: false,
       badge: '⭐ Nuevo',
       badgeColor: COLORS.gold,
+      type: 'mentoria',
       image: '/images/links/utah.jpg',
       cols: 2,
       imageHeight: 180,
@@ -120,11 +123,12 @@ const Links: React.FC = () => {
       id: 4,
       title: 'Utah Mentorship Perú',
       subtitle: 'S/50 PEN',
-      description: 'Versión para LATAM',
+      description: 'Mentoría para familias LATAM',
       link: '/mentoria-utah-peru',
       isExternal: false,
       badge: '🌎 LATAM',
       badgeColor: COLORS.red,
+      type: 'mentoria',
       image: '/images/links/utah-peru.jpg',
       cols: 2,
       imageHeight: 180,
@@ -632,6 +636,44 @@ const Links: React.FC = () => {
                     padding: '18px 20px 20px',
                     background: `linear-gradient(180deg, ${COLORS.white} 0%, #fafafa 100%)`,
                   }}>
+                    {/* Type Label - CURSO / MENTORÍA */}
+                    <div style={{
+                      marginBottom: '10px',
+                    }}>
+                      <span style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        padding: '4px 12px',
+                        borderRadius: '6px',
+                        fontSize: '10px',
+                        fontWeight: 800,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                        background: product.type === 'curso'
+                          ? `linear-gradient(135deg, ${COLORS.red} 0%, ${COLORS.redLight} 100%)`
+                          : product.type === 'mentoria'
+                          ? `linear-gradient(135deg, ${COLORS.blue} 0%, ${COLORS.blueLight} 100%)`
+                          : `linear-gradient(135deg, ${COLORS.gold} 0%, ${COLORS.goldDark} 100%)`,
+                        color: product.type === 'programa' ? COLORS.blue : COLORS.white,
+                        boxShadow: product.type === 'curso'
+                          ? `0 2px 10px ${COLORS.red}50`
+                          : product.type === 'mentoria'
+                          ? `0 2px 10px ${COLORS.blue}50`
+                          : `0 2px 10px ${COLORS.gold}50`,
+                        border: product.type === 'curso'
+                          ? `2px solid ${COLORS.red}`
+                          : product.type === 'mentoria'
+                          ? `2px solid ${COLORS.gold}`
+                          : `2px solid ${COLORS.goldDark}`,
+                      }}>
+                        {product.type === 'curso' && '📚'}
+                        {product.type === 'mentoria' && '🎯'}
+                        {product.type === 'programa' && '⭐'}
+                        {product.type === 'curso' ? 'CURSO' : product.type === 'mentoria' ? 'MENTORÍA' : 'PROGRAMA'}
+                      </span>
+                    </div>
+
                     {/* Title Row */}
                     <div style={{
                       display: 'flex',
@@ -663,10 +705,10 @@ const Links: React.FC = () => {
                     {/* Subtitle/Price */}
                     <p style={{
                       fontSize: '15px',
-                      color: COLORS.gold,
+                      color: product.type === 'mentoria' ? COLORS.gold : COLORS.blue,
                       fontWeight: 700,
-                      marginBottom: '4px',
-                      textShadow: `0 0 10px ${COLORS.gold}40`,
+                      marginBottom: '6px',
+                      textShadow: product.type === 'mentoria' ? `0 0 10px ${COLORS.gold}40` : 'none',
                     }}>
                       {product.subtitle}
                     </p>
@@ -674,8 +716,9 @@ const Links: React.FC = () => {
                     {/* Description */}
                     <p style={{
                       fontSize: '13px',
-                      color: '#666',
+                      color: '#555',
                       lineHeight: 1.5,
+                      fontWeight: 500,
                     }}>
                       {product.description}
                     </p>

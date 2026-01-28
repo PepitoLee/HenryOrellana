@@ -76,14 +76,14 @@ const Links: React.FC = () => {
   const products = [
     {
       id: 1,
-      title: 'Utah Mentorship USA',
+      title: 'UsaLatino Prime',
       subtitle: '$30 USD',
-      description: 'Asesoría personalizada para estudiar y vivir en Utah',
+      description: 'Mentoría personalizada para soluciones migratorias',
       link: '/mentoria-utah',
       isExternal: false,
       badge: '⭐ Nuevo',
       badgeColor: COLORS.gold,
-      type: 'asesoria',
+      type: 'mentoria',
       image: '/images/links/utah.jpg',
       cols: 2,
       imageHeight: 180,
@@ -98,7 +98,7 @@ const Links: React.FC = () => {
       isExternal: false,
       badge: '🌎 LATAM',
       badgeColor: COLORS.red,
-      type: 'asesoria',
+      type: 'mentoria',
       image: '/images/links/utah-peru.jpg',
       cols: 2,
       imageHeight: 180,
@@ -652,25 +652,25 @@ const Links: React.FC = () => {
                         textTransform: 'uppercase',
                         background: product.type === 'curso'
                           ? `linear-gradient(135deg, ${COLORS.red} 0%, ${COLORS.redLight} 100%)`
-                          : product.type === 'asesoria'
+                          : product.type === 'mentoria'
                           ? `linear-gradient(135deg, ${COLORS.blue} 0%, ${COLORS.blueLight} 100%)`
                           : `linear-gradient(135deg, ${COLORS.gold} 0%, ${COLORS.goldDark} 100%)`,
                         color: product.type === 'programa' ? COLORS.blue : COLORS.white,
                         boxShadow: product.type === 'curso'
                           ? `0 2px 10px ${COLORS.red}50`
-                          : product.type === 'asesoria'
+                          : product.type === 'mentoria'
                           ? `0 2px 10px ${COLORS.blue}50`
                           : `0 2px 10px ${COLORS.gold}50`,
                         border: product.type === 'curso'
                           ? `2px solid ${COLORS.red}`
-                          : product.type === 'asesoria'
+                          : product.type === 'mentoria'
                           ? `2px solid ${COLORS.gold}`
                           : `2px solid ${COLORS.goldDark}`,
                       }}>
                         {product.type === 'curso' && '📚'}
-                        {product.type === 'asesoria' && '🎯'}
+                        {product.type === 'mentoria' && '🎯'}
                         {product.type === 'programa' && '⭐'}
-                        {product.type === 'curso' ? 'CURSO' : product.type === 'asesoria' ? 'ASESORÍA' : 'PROGRAMA'}
+                        {product.type === 'curso' ? 'CURSO' : product.type === 'mentoria' ? 'MENTORÍA' : 'PROGRAMA'}
                       </span>
                     </div>
 

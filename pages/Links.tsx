@@ -124,7 +124,7 @@ const Links: React.FC = () => {
       title: 'StarbizAcademy',
       subtitle: 'CEO Junior',
       description: 'Formación empresarial para jóvenes',
-      link: '/ceo-junior',
+      link: '/starbizacademy',
       isExternal: false,
       badge: 'Popular',
       badgeColor: COLORS.gold,

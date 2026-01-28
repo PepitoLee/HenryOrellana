@@ -78,7 +78,7 @@ const Links: React.FC = () => {
       id: 1,
       title: 'Utah Mentorship USA',
       subtitle: '$30 USD',
-      description: 'Asesoría personalizada para estudiar en USA',
+      description: 'Asesoría personalizada para estudiar y vivir en Utah',
       link: '/asesoria-utah',
       isExternal: false,
       badge: '⭐ Nuevo',

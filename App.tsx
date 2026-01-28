@@ -19,7 +19,6 @@ import LandingPage from './src/landing/LandingPage';
 import MentoriaUtah from './pages/MentoriaUtah';
 import MentoriaUtahPeru from './pages/MentoriaUtahPeru';
 import Links from './pages/Links';
-import StarbizAcademy from './pages/StarbizAcademy';
 
 // Admin imports
 import { AdminAuthProvider } from './admin/context/AdminAuthContext';
@@ -75,7 +74,6 @@ const App: React.FC = () => {
                 <Route path="/mentoria-utah" element={<MentoriaUtah />} />
                 <Route path="/mentoria-utah-peru" element={<MentoriaUtahPeru />} />
                 <Route path="/links" element={<Links />} />
-                <Route path="/starbizacademy" element={<StarbizAcademy />} />
 
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

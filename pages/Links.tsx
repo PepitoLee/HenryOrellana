@@ -132,7 +132,7 @@ const Links: React.FC = () => {
       image: '/images/links/starbiz-ceo-junior.jpg',
       cols: 1,
       imageHeight: 280,
-      objectPosition: 'center top',
+      objectPosition: 'center 5%',
     },
   ];
 

@@ -78,7 +78,7 @@ const Links: React.FC = () => {
       id: 1,
       title: 'UsaLatino Prime',
       subtitle: '$30 USD',
-      description: 'Mentoría personalizada para soluciones migratorias',
+      description: 'Analizamos tu situación migratoria y elaboramos un plan de acción y solución inmediata',
       link: '/mentoria-utah',
       isExternal: false,
       badge: '⭐ Nuevo',

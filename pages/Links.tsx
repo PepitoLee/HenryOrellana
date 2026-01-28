@@ -128,7 +128,7 @@ const Links: React.FC = () => {
       isExternal: false,
       badge: 'Popular',
       badgeColor: COLORS.gold,
-      type: 'programa',
+      type: 'mentoria',
       image: '/images/links/ceo-junior.jpg',
       cols: 1,
       imageHeight: 280,

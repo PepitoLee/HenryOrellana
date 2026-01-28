@@ -91,7 +91,7 @@ const Links: React.FC = () => {
     },
     {
       id: 2,
-      title: 'Utah Mentorship Perú',
+      title: 'Estudia y vive en Utah',
       subtitle: 'S/50 PEN',
       description: 'Asesoría personalizada para estudiar y vivir en Utah',
       link: '/mentoria-utah-peru',

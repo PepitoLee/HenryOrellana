@@ -575,7 +575,7 @@ const Links: React.FC = () => {
                 fontWeight: 600,
                 textShadow: `0 0 20px ${COLORS.gold}60`,
               }}>
-                🚀 Mis Programas
+                🚀 Mis Servicios
               </h2>
               <div style={{
                 flex: 1,

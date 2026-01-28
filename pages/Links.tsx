@@ -301,6 +301,19 @@ const Links: React.FC = () => {
           animation: buttonPulse 2s ease-in-out infinite;
         }
 
+        @keyframes buttonPulseBlue {
+          0%, 100% { box-shadow: 0 4px 15px rgba(7, 29, 73, 0.4); }
+          50% { box-shadow: 0 4px 25px rgba(7, 29, 73, 0.7), 0 0 30px rgba(7, 29, 73, 0.3); }
+        }
+
+        .cta-button-pulse-blue {
+          animation: buttonPulseBlue 2s ease-in-out infinite;
+        }
+
+        .cta-button-pulse-blue:hover {
+          box-shadow: 0 10px 30px rgba(7, 29, 73, 0.5), 0 0 20px rgba(7, 29, 73, 0.3) !important;
+        }
+
         .floating-circle {
           animation: float 8s ease-in-out infinite;
         }
@@ -748,14 +761,16 @@ const Links: React.FC = () => {
 
                     {/* CTA Button */}
                     <button
-                      className="cta-button cta-button-pulse"
+                      className={`cta-button ${product.id === 1 ? 'cta-button-pulse' : 'cta-button-pulse-blue'}`}
                       style={{
                         width: '100%',
                         padding: '12px 20px',
-                        background: `linear-gradient(135deg, ${COLORS.gold} 0%, ${COLORS.goldDark} 100%)`,
+                        background: product.id === 1
+                          ? `linear-gradient(135deg, ${COLORS.gold} 0%, ${COLORS.goldDark} 100%)`
+                          : `linear-gradient(135deg, ${COLORS.blue} 0%, ${COLORS.blueLight} 100%)`,
                         border: 'none',
                         borderRadius: '12px',
-                        color: COLORS.blue,
+                        color: product.id === 1 ? COLORS.blue : COLORS.white,
                         fontSize: '14px',
                         fontWeight: 700,
                         letterSpacing: '0.05em',

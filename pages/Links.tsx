@@ -262,6 +262,45 @@ const Links: React.FC = () => {
           transform: scale(1.05) rotate(2deg);
         }
 
+        .cta-button {
+          position: relative;
+          overflow: hidden;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cta-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+          transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+          left: 100%;
+        }
+
+        .cta-button:hover {
+          transform: scale(1.05) translateY(-3px);
+          box-shadow: 0 10px 30px rgba(255, 184, 29, 0.5), 0 0 20px rgba(255, 184, 29, 0.3);
+        }
+
+        .cta-button:active {
+          transform: scale(0.98);
+        }
+
+        @keyframes buttonPulse {
+          0%, 100% { box-shadow: 0 4px 15px rgba(255, 184, 29, 0.4); }
+          50% { box-shadow: 0 4px 25px rgba(255, 184, 29, 0.7), 0 0 30px rgba(255, 184, 29, 0.3); }
+        }
+
+        .cta-button-pulse {
+          animation: buttonPulse 2s ease-in-out infinite;
+        }
+
         .floating-circle {
           animation: float 8s ease-in-out infinite;
         }
@@ -702,9 +741,37 @@ const Links: React.FC = () => {
                       color: '#555',
                       lineHeight: 1.5,
                       fontWeight: 500,
+                      marginBottom: '14px',
                     }}>
                       {product.description}
                     </p>
+
+                    {/* CTA Button */}
+                    <button
+                      className="cta-button cta-button-pulse"
+                      style={{
+                        width: '100%',
+                        padding: '12px 20px',
+                        background: `linear-gradient(135deg, ${COLORS.gold} 0%, ${COLORS.goldDark} 100%)`,
+                        border: 'none',
+                        borderRadius: '12px',
+                        color: COLORS.blue,
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        letterSpacing: '0.05em',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                      }}
+                    >
+                      <span>📅</span>
+                      Reserva tu Cita
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </Reveal>

@@ -1,82 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 
-// ===== CONFIGURABLE CTA URL =====
-const CTA_URL = 'https://tu-link-de-pago.com';
-// ================================
-
-// Responsive image component for desktop/mobile
-const ResponsiveImage = ({
-  desktopSrc,
-  mobileSrc,
-  alt,
-  className = '',
-  style = {},
-}: {
-  desktopSrc: string;
-  mobileSrc: string;
-  alt: string;
-  className?: string;
-  style?: React.CSSProperties;
-}) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  return (
-    <img
-      src={isMobile ? mobileSrc : desktopSrc}
-      alt={alt}
-      className={className}
-      style={style}
-      loading="lazy"
-    />
-  );
-};
-
-// Counter animation component
-const AnimatedNumber = ({ value, suffix = '', duration = 2000 }: { value: number; suffix?: string; duration?: number }) => {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-    let start = 0;
-    const increment = value / (duration / 16);
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [isVisible, value, duration]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
-};
+// ===== CONFIGURABLE CTA - WHATSAPP =====
+const WHATSAPP_NUMBER = '18019012007';
+const WHATSAPP_MESSAGE = encodeURIComponent('Hola Henry, me interesa agendar una consulta de mentoría migratoria.');
+const CTA_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+// ========================================
 
 // Reveal component with intersection observer
 const Reveal = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
@@ -113,159 +42,232 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 const MentoriaUtah: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
   const [isStickyCTAVisible, setIsStickyCTAVisible] = useState(false);
-
-  // Countdown timer
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        return { hours: 23, minutes: 59, seconds: 59 };
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   // Sticky CTA visibility
   useEffect(() => {
-    const handleScroll = () => setIsStickyCTAVisible(window.scrollY > 800);
+    const handleScroll = () => setIsStickyCTAVisible(window.scrollY > 600);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleCTA = () => window.open(CTA_URL, '_blank');
 
+  // Nueva paleta de colores - UsaLatino Prime
+  const colors = {
+    primary: '#1E3A5F',      // Azul Confianza
+    primaryLight: '#2C5282',
+    primaryDark: '#153152',
+    success: '#2E7D32',      // Verde Esperanza
+    successLight: '#4CAF50',
+    accent: '#F5A623',       // Dorado Cálido
+    accentLight: '#FFD54F',
+    white: '#FFFFFF',
+    offWhite: '#F5F5F5',
+    gray: '#6B7280',
+    grayLight: '#9CA3AF',
+    text: '#1F2937',
+    danger: '#DC2626',
+  };
+
   const styles = {
-    // Base colors
-    colors: {
-      onyx: '#071D49',
-      onyxLight: '#0a2a5c',
-      champagne: '#FFB81D',
-      champagneLight: '#FFD966',
-      champagneDark: '#E5A000',
-      forest: '#AA0200',
-      forestLight: '#CC2A2A',
-      sage: '#FFFFFF',
-      cream: '#faf8f5',
-    },
-    // Base container
     container: {
       minHeight: '100vh',
-      backgroundColor: '#071D49',
-      color: '#ffffff',
+      backgroundColor: colors.white,
+      color: colors.text,
       fontFamily: "'Outfit', system-ui, sans-serif",
       overflowX: 'hidden' as const,
     },
-    // Section styles
     section: {
       padding: '80px 24px',
     },
-    sectionLg: {
-      padding: '128px 24px',
+    sectionAlt: {
+      padding: '80px 24px',
+      backgroundColor: colors.offWhite,
     },
-    // Max width container
     maxWidth: {
       maxWidth: '1200px',
       margin: '0 auto',
       width: '100%',
     },
-    // Typography
     fontEditorial: {
       fontFamily: "'Cormorant Garamond', Georgia, serif",
     },
-    // Glass effect
-    glass: {
-      background: 'rgba(255, 255, 255, 0.03)',
-      backdropFilter: 'blur(40px)',
-      WebkitBackdropFilter: 'blur(40px)',
-      border: '1px solid rgba(255, 255, 255, 0.05)',
-    },
-    glassGold: {
-      background: 'linear-gradient(135deg, rgba(255, 184, 29, 0.1) 0%, rgba(255, 184, 29, 0.02) 100%)',
-      backdropFilter: 'blur(40px)',
-      WebkitBackdropFilter: 'blur(40px)',
-      border: '1px solid rgba(255, 184, 29, 0.2)',
-    },
-    // CTA Button
     ctaButton: {
-      position: 'relative' as const,
       display: 'inline-flex',
       alignItems: 'center',
       gap: '12px',
-      background: 'linear-gradient(135deg, #FFB81D 0%, #E5A000 100%)',
-      color: '#071D49',
+      background: `linear-gradient(135deg, ${colors.success} 0%, ${colors.successLight} 100%)`,
+      color: colors.white,
       fontWeight: 600,
       fontSize: '16px',
-      letterSpacing: '0.05em',
-      padding: '20px 40px',
-      borderRadius: '50px',
+      letterSpacing: '0.02em',
+      padding: '18px 36px',
+      borderRadius: '12px',
       border: 'none',
       cursor: 'pointer',
-      transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-      boxShadow: '0 20px 60px -15px rgba(255, 184, 29, 0.4)',
+      transition: 'all 0.3s ease',
+      boxShadow: `0 8px 24px -8px ${colors.success}80`,
     },
-    ctaButtonHover: {
-      transform: 'translateY(-3px)',
-      boxShadow: '0 30px 80px -15px rgba(255, 184, 29, 0.5)',
+    ctaButtonSecondary: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '12px',
+      background: 'transparent',
+      color: colors.primary,
+      fontWeight: 600,
+      fontSize: '16px',
+      padding: '18px 36px',
+      borderRadius: '12px',
+      border: `2px solid ${colors.primary}`,
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
     },
-    // Card
     card: {
       padding: '32px',
-      borderRadius: '24px',
-      transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+      borderRadius: '16px',
+      backgroundColor: colors.white,
+      boxShadow: '0 4px 24px -4px rgba(0, 0, 0, 0.08)',
+      border: '1px solid rgba(0, 0, 0, 0.05)',
+      transition: 'all 0.3s ease',
     },
-    // Badge
     badge: {
       display: 'inline-flex',
       alignItems: 'center',
       padding: '8px 16px',
       borderRadius: '50px',
       fontSize: '12px',
-      letterSpacing: '0.2em',
+      letterSpacing: '0.15em',
       textTransform: 'uppercase' as const,
+      fontWeight: 600,
     },
-    // Grid
+    grid4: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+      gap: '24px',
+    },
     grid2: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
       gap: '24px',
     },
-    grid3: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '24px',
-    },
-    // Flex
-    flexCenter: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    flexCol: {
-      display: 'flex',
-      flexDirection: 'column' as const,
-    },
-    // Text center
     textCenter: {
       textAlign: 'center' as const,
     },
   };
 
+  // Servicios principales
+  const servicios = [
+    {
+      icon: '🏛️',
+      title: 'Asilo Político',
+      desc: 'Para personas que huyen de persecución en su país de origen por razones políticas, religiosas o sociales.',
+      color: colors.primary,
+    },
+    {
+      icon: '📋',
+      title: 'Restructuración de Casos',
+      desc: 'Si tu caso fue denegado o está complicado, te oriento sobre opciones para reestructurarlo.',
+      color: colors.success,
+    },
+    {
+      icon: '👶',
+      title: 'Visa Juvenil (SIJS)',
+      desc: 'Para menores de 21 años en situaciones especiales que califican para este beneficio migratorio.',
+      color: colors.accent,
+    },
+    {
+      icon: '🔄',
+      title: 'Ajustes de Status',
+      desc: 'Cambio de estatus migratorio dentro de Estados Unidos. Te explico las opciones disponibles.',
+      color: colors.primaryLight,
+    },
+  ];
+
+  // Proceso de 4 pasos
+  const pasos = [
+    {
+      num: '01',
+      title: 'Agenda tu consulta',
+      desc: 'Reserva tu sesión 1-a-1 por solo $30 USD vía WhatsApp.',
+    },
+    {
+      num: '02',
+      title: 'Conversamos',
+      desc: 'Me cuentas tu situación migratoria y tus objetivos.',
+    },
+    {
+      num: '03',
+      title: 'Te oriento',
+      desc: 'Te explico qué opciones tienes y qué camino seguir.',
+    },
+    {
+      num: '04',
+      title: 'Siguientes pasos',
+      desc: 'Te conecto con recursos o abogados si es necesario.',
+    },
+  ];
+
+  // Razones para elegir
+  const razones = [
+    {
+      icon: '🌎',
+      title: 'Viví el proceso',
+      desc: 'Conozco de primera mano los desafíos del proceso migratorio.',
+    },
+    {
+      icon: '💬',
+      title: 'Hablo tu idioma',
+      desc: 'Todo en español, sin barreras de comunicación.',
+    },
+    {
+      icon: '🤝',
+      title: 'Entiendo tu cultura',
+      desc: 'Comprendo las dificultades que enfrentamos como latinos.',
+    },
+    {
+      icon: '💰',
+      title: 'Precio accesible',
+      desc: 'Solo $30 por consulta, sin compromisos adicionales.',
+    },
+  ];
+
+  // FAQs
+  const faqs = [
+    {
+      q: '¿Eres abogado de inmigración?',
+      a: 'NO, NO soy abogado. Soy un MENTOR que comparte su experiencia personal con el sistema migratorio. No ofrezco asesoría legal ni representación. Si necesitas un abogado, te puedo orientar sobre cómo encontrar uno.',
+    },
+    {
+      q: '¿Qué incluye la consulta de $30?',
+      a: 'Una sesión 1-a-1 conmigo donde escucho tu situación, te explico las opciones que conozco basado en mi experiencia, y te oriento sobre los siguientes pasos que podrías considerar.',
+    },
+    {
+      q: '¿Puedes garantizar resultados?',
+      a: 'NO puedo garantizar ningún resultado. Cada caso es único y depende de muchos factores. Mi rol es orientarte basado en mi experiencia, pero las decisiones finales y los resultados dependen de muchos otros factores.',
+    },
+    {
+      q: '¿Trabajas con abogados?',
+      a: 'Conozco profesionales en el área y puedo orientarte sobre cómo buscar un abogado de inmigración si tu caso lo requiere. Pero no represento ni trabajo para ningún bufete de abogados.',
+    },
+    {
+      q: '¿Cómo agendo mi consulta?',
+      a: 'Simplemente haz clic en cualquier botón de esta página para contactarme por WhatsApp. Coordinaremos el día y hora, y te enviaré el link de pago de $30 USD.',
+    },
+  ];
+
   return (
     <>
       <Helmet>
         <html lang="es" />
-        <title>Estudiar en Utah | Mentoría Exclusiva - StarbizAcademy</title>
-        <meta name="description" content="Descubre el secreto mejor guardado de USA. Trae a tu familia a estudiar en Utah con universidades 40% más baratas. Mentoría en vivo por $30." />
-        <meta property="og:title" content="El Sueño Americano Está en Utah | Mentoría $30" />
-        <meta property="og:description" content="Universidades accesibles, comunidad segura, el estado #1 en crecimiento. Tu familia merece esta oportunidad." />
-        <meta name="robots" content="noindex" />
+        <title>UsaLatino Prime | Mentoría Migratoria con Henry Orellana</title>
+        <meta name="description" content="Mentoría migratoria personalizada. NO soy abogado - Soy tu MENTOR. Orientación basada en experiencia real por $30 USD. Asilo, SIJS, Ajustes de Status." />
+        <meta property="og:title" content="UsaLatino Prime - Mentoría Migratoria" />
+        <meta property="og:description" content="Orientación migratoria de alguien que ha vivido el proceso. Consulta 1-a-1 por $30 USD." />
+        <meta name="robots" content="index, follow" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Helmet>
 
       <style>{`
@@ -277,200 +279,38 @@ const MentoriaUtah: React.FC = () => {
         }
 
         @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-
-        /* ===== URGENCY BAR ANIMATIONS ===== */
-        @keyframes urgencyGlow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(255, 184, 29, 0.3), 0 0 40px rgba(170, 2, 0, 0.2);
-          }
-          50% {
-            box-shadow: 0 0 40px rgba(255, 184, 29, 0.6), 0 0 80px rgba(170, 2, 0, 0.4);
-          }
-        }
-
-        @keyframes numberPulse {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.05); }
         }
 
-        @keyframes urgencyShake {
-          0%, 100% { transform: translateX(0); }
-          10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-          20%, 40%, 60%, 80% { transform: translateX(2px); }
-        }
-
-        @keyframes fireFlicker {
-          0%, 100% { opacity: 1; transform: scale(1) rotate(-2deg); }
-          25% { opacity: 0.9; transform: scale(1.1) rotate(2deg); }
-          50% { opacity: 1; transform: scale(0.95) rotate(-1deg); }
-          75% { opacity: 0.95; transform: scale(1.05) rotate(1deg); }
-        }
-
-        @keyframes slideInDown {
-          from { transform: translateY(-100%); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes countdownTick {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.1); color: #FFB81D; }
-          100% { transform: scale(1); }
-        }
-
-        @keyframes borderPulse {
-          0%, 100% { border-color: rgba(255, 184, 29, 0.3); }
-          50% { border-color: rgba(255, 184, 29, 0.8); }
-        }
-
-        @keyframes textGlow {
-          0%, 100% { text-shadow: 0 0 10px rgba(255, 184, 29, 0.5); }
-          50% { text-shadow: 0 0 20px rgba(255, 184, 29, 0.8), 0 0 40px rgba(255, 184, 29, 0.4); }
-        }
-
-        .urgency-bar {
-          animation: slideInDown 0.6s ease-out, urgencyGlow 2s ease-in-out infinite;
-        }
-
-        .urgency-number {
-          animation: numberPulse 1s ease-in-out infinite;
-        }
-
-        .urgency-fire {
-          animation: fireFlicker 0.5s ease-in-out infinite;
-          display: inline-block;
-        }
-
-        .urgency-text-glow {
-          animation: textGlow 2s ease-in-out infinite;
-        }
-
-        .countdown-box {
-          animation: borderPulse 2s ease-in-out infinite;
-          transition: all 0.3s ease;
-        }
-
-        .countdown-box:hover {
-          transform: scale(1.1);
-          background: rgba(255, 184, 29, 0.2) !important;
-        }
-
-        .countdown-seconds {
-          animation: countdownTick 1s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-          0% { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-
-        @keyframes drawLine {
-          from { width: 0; }
-          to { width: 120px; }
-        }
-
-        @keyframes scrollDown {
-          0%, 100% { transform: translateY(0); opacity: 1; }
-          50% { transform: translateY(8px); opacity: 0.5; }
-        }
-
-        /* ===== PREMIUM IMAGE ANIMATIONS ===== */
-
-        /* Hero: Cinematic slow zoom */
-        @keyframes heroZoom {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.1); }
-        }
-
-        /* Ken Burns: Zoom + Pan for landscapes */
-        @keyframes kenBurns {
-          0% { transform: scale(1) translate(0, 0); }
-          100% { transform: scale(1.15) translate(-2%, -2%); }
-        }
-
-        /* Floating particles effect */
-        @keyframes floatParticle {
-          0%, 100% {
-            transform: translateY(0) translateX(0);
-            opacity: 0.3;
-          }
-          50% {
-            transform: translateY(-30px) translateX(10px);
-            opacity: 0.7;
-          }
-        }
-
-        /* Sun pulse for logo */
-        @keyframes sunPulse {
-          0%, 100% {
-            filter: brightness(1) drop-shadow(0 0 10px rgba(255,184,29,0.3));
-          }
-          50% {
-            filter: brightness(1.15) drop-shadow(0 0 25px rgba(255,184,29,0.5));
-          }
-        }
-
-        /* Shimmer background */
-        @keyframes shimmerBg {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-
-        /* Parallax subtle float */
-        @keyframes subtleFloat {
+        @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
 
-        .animate-hero-zoom {
-          animation: heroZoom 20s ease-out forwards;
-        }
-
-        .animate-ken-burns {
-          animation: kenBurns 25s ease-in-out infinite alternate;
-        }
-
-        .animate-sun-pulse {
-          animation: sunPulse 3s ease-in-out infinite;
-        }
-
-        .animate-float {
-          animation: subtleFloat 6s ease-in-out infinite;
-        }
-
-        .animate-fade-1 { animation: fadeUp 0.8s ease-out 0.2s both; }
-        .animate-fade-2 { animation: fadeUp 0.8s ease-out 0.4s both; }
-        .animate-fade-3 { animation: fadeUp 0.8s ease-out 0.6s both; }
-        .animate-fade-4 { animation: fadeUp 0.8s ease-out 0.8s both; }
-        .animate-fade-5 { animation: fadeUp 0.8s ease-out 1s both; }
-        .animate-fade-6 { animation: fadeUp 0.8s ease-out 1.2s both; }
-
-        .shimmer-text {
-          background: linear-gradient(90deg, #FFB81D 0%, #FFD966 50%, #FFB81D 100%);
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: shimmer 3s linear infinite;
-        }
-
-        .text-gold {
-          background: linear-gradient(135deg, #FFD966 0%, #FFB81D 50%, #E5A000 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
+        .animate-fade-1 { animation: fadeUp 0.8s ease-out 0.1s both; }
+        .animate-fade-2 { animation: fadeUp 0.8s ease-out 0.2s both; }
+        .animate-fade-3 { animation: fadeUp 0.8s ease-out 0.3s both; }
+        .animate-fade-4 { animation: fadeUp 0.8s ease-out 0.4s both; }
+        .animate-fade-5 { animation: fadeUp 0.8s ease-out 0.5s both; }
 
         .cta-btn:hover {
-          transform: translateY(-3px) !important;
-          box-shadow: 0 30px 80px -15px rgba(255, 184, 29, 0.5) !important;
+          transform: translateY(-2px) !important;
+          box-shadow: 0 12px 32px -8px rgba(46, 125, 50, 0.5) !important;
+        }
+
+        .cta-btn-secondary:hover {
+          background-color: #1E3A5F !important;
+          color: white !important;
         }
 
         .card-hover:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card:hover {
+          transform: translateY(-6px);
         }
 
         .faq-item { cursor: pointer; }
@@ -479,17 +319,22 @@ const MentoriaUtah: React.FC = () => {
           overflow: hidden;
           transition: max-height 0.4s ease;
         }
-        .faq-content.open { max-height: 200px; }
+        .faq-content.open { max-height: 300px; }
+
+        .disclaimer-box {
+          animation: pulse 3s ease-in-out infinite;
+        }
 
         ::selection {
-          background: #FFB81D;
-          color: #071D49;
+          background: #F5A623;
+          color: #1E3A5F;
         }
 
         @media (max-width: 768px) {
           .hero-title { font-size: 2.5rem !important; }
-          .hero-subtitle { font-size: 1.25rem !important; }
-          .section-title { font-size: 2rem !important; }
+          .hero-subtitle { font-size: 1.125rem !important; }
+          .section-title { font-size: 1.75rem !important; }
+          .step-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -502,178 +347,236 @@ const MentoriaUtah: React.FC = () => {
           position: 'relative',
           minHeight: '100vh',
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
+          alignItems: 'center',
+          background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`,
           overflow: 'hidden',
         }}>
-          {/* Background Image with Cinematic Zoom */}
+          {/* Background Pattern */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            overflow: 'hidden',
-          }}>
-            <ResponsiveImage
-              desktopSrc="/images/utah/hero-desktop.jpeg"
-              mobileSrc="/images/utah/hero-mobile.jpeg"
-              alt="Estudiante latino en campus universitario de Utah"
-              className="animate-hero-zoom"
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center',
-              }}
-            />
-            {/* Dark gradient overlay for text readability */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to bottom, rgba(7,29,73,0.7) 0%, rgba(7,29,73,0.5) 40%, rgba(7,29,73,0.8) 100%)',
-            }} />
-            {/* Gold accent glow */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '150vw',
-              height: '150vh',
-              background: 'radial-gradient(ellipse at center, rgba(255, 184, 29, 0.08) 0%, transparent 50%)',
-              pointerEvents: 'none',
-            }} />
-          </div>
+            backgroundImage: `radial-gradient(circle at 20% 80%, ${colors.primaryLight}30 0%, transparent 50%), radial-gradient(circle at 80% 20%, ${colors.accent}20 0%, transparent 50%)`,
+            pointerEvents: 'none',
+          }} />
 
-          {/* Content */}
           <div style={{
+            ...styles.maxWidth,
+            padding: '120px 24px 80px',
             position: 'relative',
             zIndex: 10,
-            padding: '80px 24px',
-            maxWidth: '1200px',
-            margin: '0 auto',
-            width: '100%',
           }}>
-            {/* Pre-headline badge */}
-            <div className="animate-fade-1" style={{ marginBottom: '32px' }}>
-              <span style={{
-                ...styles.glassGold,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '10px 20px',
-                borderRadius: '50px',
-                fontSize: '11px',
-                letterSpacing: '0.25em',
-                textTransform: 'uppercase',
-                color: '#FFD966',
-              }}>
-                <span style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  background: '#FFFFFF',
-                  animation: 'pulse 2s ease-in-out infinite',
-                }} />
-                Mentoría en Vivo
-              </span>
-            </div>
-
-            {/* Main headline */}
-            <h1 style={{ ...styles.fontEditorial, marginBottom: '32px' }}>
-              <span className="animate-fade-2 hero-title" style={{
-                display: 'block',
-                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-                fontWeight: 300,
-                color: 'rgba(255, 255, 255, 0.9)',
-                lineHeight: 0.95,
-                letterSpacing: '-0.02em',
-              }}>
-                Trae a tu familia
-              </span>
-              <span className="animate-fade-3 hero-title text-gold" style={{
-                display: 'block',
-                fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-                fontWeight: 300,
-                fontStyle: 'italic',
-                lineHeight: 0.95,
-                marginTop: '8px',
-              }}>
-                a estudiar en USA
-              </span>
-            </h1>
-
-            {/* Decorative line */}
-            <div className="animate-fade-4" style={{
-              height: '1px',
-              width: '120px',
-              background: 'linear-gradient(90deg, #FFB81D, transparent)',
-              marginBottom: '32px',
-            }} />
-
-            {/* Subheadline */}
-            <p className="animate-fade-4 hero-subtitle" style={{
-              fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
-              color: 'rgba(255, 255, 255, 0.6)',
-              fontWeight: 300,
-              maxWidth: '500px',
-              marginBottom: '40px',
-              lineHeight: 1.6,
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '64px',
+              alignItems: 'center',
             }}>
-              El camino más accesible existe.{' '}
-              <span style={{ color: '#ffffff', fontWeight: 400 }}>Y está en Utah.</span>
-            </p>
+              {/* Left Content */}
+              <div>
+                {/* Pre-headline badge */}
+                <div className="animate-fade-1" style={{ marginBottom: '24px' }}>
+                  <span style={{
+                    ...styles.badge,
+                    background: `${colors.accent}20`,
+                    color: colors.accent,
+                    border: `1px solid ${colors.accent}40`,
+                  }}>
+                    <span style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      background: colors.accent,
+                      marginRight: '10px',
+                      animation: 'pulse 2s ease-in-out infinite',
+                    }} />
+                    UsaLatino Prime
+                  </span>
+                </div>
 
-            {/* Value props */}
-            <div className="animate-fade-5" style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '12px',
-              marginBottom: '40px',
-            }}>
-              {[
-                { label: 'Solo $30 USD', accent: true },
-                { label: 'Grabación incluida', accent: false },
-                { label: 'Q&A en vivo', accent: false },
-              ].map((item, i) => (
-                <span key={i} style={{
-                  ...(item.accent ? styles.glassGold : styles.glass),
-                  padding: '12px 20px',
-                  borderRadius: '50px',
-                  fontSize: '14px',
-                  color: item.accent ? '#FFD966' : 'rgba(255, 255, 255, 0.7)',
-                  fontWeight: item.accent ? 500 : 400,
+                {/* Main headline */}
+                <h1 className="animate-fade-2 hero-title" style={{
+                  ...styles.fontEditorial,
+                  fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                  fontWeight: 400,
+                  color: colors.white,
+                  lineHeight: 1.1,
+                  marginBottom: '24px',
                 }}>
-                  {item.label}
-                </span>
-              ))}
-            </div>
+                  Mentoría Migratoria{' '}
+                  <span style={{
+                    color: colors.accent,
+                    fontStyle: 'italic',
+                  }}>Personalizada</span>
+                </h1>
 
-            {/* CTA Button */}
-            <div className="animate-fade-6">
-              <button
-                onClick={handleCTA}
-                className="cta-btn"
-                style={styles.ctaButton}
-              >
-                RESERVAR MI LUGAR
-                <svg style={{ width: '20px', height: '20px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
+                {/* Subheadline */}
+                <p className="animate-fade-3 hero-subtitle" style={{
+                  fontSize: 'clamp(1.125rem, 2vw, 1.375rem)',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  fontWeight: 300,
+                  maxWidth: '500px',
+                  marginBottom: '32px',
+                  lineHeight: 1.6,
+                }}>
+                  Orientación de alguien que ha vivido el proceso migratorio.{' '}
+                  <span style={{ color: colors.white, fontWeight: 500 }}>
+                    Consulta 1-a-1 por solo $30 USD.
+                  </span>
+                </p>
 
-              <p style={{
-                marginTop: '20px',
-                fontSize: '14px',
-                color: 'rgba(255, 255, 255, 0.4)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
+                {/* Important Disclaimer Badge */}
+                <div className="animate-fade-4" style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  background: 'rgba(220, 38, 38, 0.15)',
+                  border: '2px solid rgba(220, 38, 38, 0.4)',
+                  padding: '14px 20px',
+                  borderRadius: '12px',
+                  marginBottom: '32px',
+                }}>
+                  <span style={{ fontSize: '24px' }}>⚠️</span>
+                  <span style={{
+                    color: colors.white,
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    lineHeight: 1.4,
+                  }}>
+                    IMPORTANTE: <span style={{ fontWeight: 400, opacity: 0.9 }}>NO soy abogado - Soy tu MENTOR</span>
+                  </span>
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="animate-fade-5" style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '16px',
+                  marginBottom: '32px',
+                }}>
+                  <button
+                    onClick={handleCTA}
+                    className="cta-btn"
+                    style={styles.ctaButton}
+                  >
+                    <svg style={{ width: '24px', height: '24px' }} fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    AGENDA TU CONSULTA - $30
+                  </button>
+                </div>
+
+                {/* Trust indicators */}
+                <div className="animate-fade-5" style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '20px',
+                  fontSize: '14px',
+                  color: 'rgba(255, 255, 255, 0.6)',
+                }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg style={{ width: '16px', height: '16px', color: colors.success }} fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Respuesta en 24h
+                  </span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg style={{ width: '16px', height: '16px', color: colors.success }} fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    100% en español
+                  </span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <svg style={{ width: '16px', height: '16px', color: colors.success }} fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    Sin compromisos
+                  </span>
+                </div>
+              </div>
+
+              {/* Right - Price Card */}
+              <div className="animate-fade-3" style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '24px',
+                padding: '40px 32px',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                textAlign: 'center',
               }}>
-                <svg style={{ width: '16px', height: '16px', color: '#FFFFFF' }} fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Empresa constituida en Estados Unidos
-              </p>
+                <div style={{
+                  background: colors.accent,
+                  color: colors.primaryDark,
+                  padding: '8px 20px',
+                  borderRadius: '50px',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  display: 'inline-block',
+                  marginBottom: '24px',
+                }}>
+                  Consulta 1-a-1
+                </div>
+
+                <div style={{
+                  ...styles.fontEditorial,
+                  fontSize: '72px',
+                  fontWeight: 400,
+                  color: colors.white,
+                  lineHeight: 1,
+                  marginBottom: '8px',
+                }}>
+                  $30
+                </div>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  fontSize: '14px',
+                  marginBottom: '24px',
+                }}>
+                  USD · Pago único
+                </p>
+
+                <div style={{
+                  textAlign: 'left',
+                  marginBottom: '24px',
+                }}>
+                  {[
+                    'Sesión personalizada 1-a-1',
+                    'Análisis de tu situación',
+                    'Orientación sobre opciones',
+                    'Siguientes pasos claros',
+                    'Vía WhatsApp o llamada',
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      padding: '10px 0',
+                      borderBottom: i < 4 ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
+                    }}>
+                      <svg style={{ width: '18px', height: '18px', color: colors.success, flexShrink: 0 }} fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.9)' }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={handleCTA}
+                  className="cta-btn"
+                  style={{
+                    ...styles.ctaButton,
+                    width: '100%',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <svg style={{ width: '20px', height: '20px' }} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  CONTACTAR AHORA
+                </button>
+              </div>
             </div>
           </div>
 
@@ -686,227 +589,260 @@ const MentoriaUtah: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '12px',
-            animation: 'scrollDown 2s ease-in-out infinite',
+            gap: '8px',
+            animation: 'float 2s ease-in-out infinite',
           }}>
             <span style={{
               fontSize: '10px',
-              letterSpacing: '0.3em',
+              letterSpacing: '0.2em',
               textTransform: 'uppercase',
-              color: 'rgba(255, 255, 255, 0.3)',
+              color: 'rgba(255, 255, 255, 0.4)',
             }}>Scroll</span>
-            <div style={{
-              width: '1px',
-              height: '40px',
-              background: 'linear-gradient(to bottom, #FFB81D, transparent)',
-            }} />
+            <svg style={{ width: '20px', height: '20px', color: 'rgba(255, 255, 255, 0.4)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </div>
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
-            URGENCY BAR - EPIC VERSION
-        ══════════════════════════════════════════════════════════════ */}
-        <div
-          className="urgency-bar"
-          style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: 50,
-            background: 'linear-gradient(135deg, #AA0200 0%, #8B0000 25%, #AA0200 50%, #CC2A2A 75%, #AA0200 100%)',
-            backgroundSize: '400% 400%',
-            padding: '16px 16px 20px',
-            borderBottom: '3px solid #FFB81D',
-            overflow: 'hidden',
-          }}>
-          {/* Animated background particles */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'radial-gradient(circle at 20% 50%, rgba(255, 184, 29, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(255, 184, 29, 0.15) 0%, transparent 50%)',
-            pointerEvents: 'none',
-          }} />
-
-          {/* Shimmer overlay */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%)',
-            backgroundSize: '200% 100%',
-            animation: 'shimmer 3s linear infinite',
-            pointerEvents: 'none',
-          }} />
-
-          <div style={{
-            ...styles.maxWidth,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '12px',
-            textAlign: 'center',
-            position: 'relative',
-            zIndex: 1,
-          }}>
-            {/* Top badge */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(0, 0, 0, 0.3)',
-              padding: '6px 16px',
-              borderRadius: '50px',
-              border: '1px solid rgba(255, 184, 29, 0.3)',
-            }}>
-              <span className="urgency-fire" style={{ fontSize: '18px' }}>🔥</span>
-              <span style={{
-                fontSize: '13px',
-                color: '#FFB81D',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-              }}>
-                ¡OFERTA POR TIEMPO LIMITADO!
-              </span>
-              <span className="urgency-fire" style={{ fontSize: '18px' }}>🔥</span>
-            </div>
-
-            {/* Main countdown section */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '8px',
-            }}>
-              <span className="urgency-text-glow" style={{
-                fontSize: 'clamp(16px, 4vw, 22px)',
-                color: '#ffffff',
-                fontWeight: 600,
-                letterSpacing: '0.05em',
-              }}>
-                ⚡ El precio especial termina en:
-              </span>
-
-              {/* Giant countdown numbers */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'clamp(8px, 2vw, 16px)',
-              }}>
-                {[
-                  { value: timeLeft.hours, label: 'HORAS' },
-                  { value: timeLeft.minutes, label: 'MIN' },
-                  { value: timeLeft.seconds, label: 'SEG' },
-                ].map((unit, i) => (
-                  <React.Fragment key={i}>
-                    <div
-                      className={`countdown-box ${i === 2 ? 'countdown-seconds' : 'urgency-number'}`}
-                      style={{
-                        background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)',
-                        backdropFilter: 'blur(10px)',
-                        padding: 'clamp(12px, 3vw, 20px) clamp(16px, 4vw, 28px)',
-                        borderRadius: '12px',
-                        border: '2px solid rgba(255, 184, 29, 0.4)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '4px',
-                        minWidth: 'clamp(60px, 15vw, 90px)',
-                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                      }}>
-                      <span style={{
-                        fontSize: 'clamp(32px, 8vw, 52px)',
-                        fontWeight: 800,
-                        color: '#FFB81D',
-                        fontFamily: "'Outfit', system-ui, sans-serif",
-                        lineHeight: 1,
-                        textShadow: '0 0 20px rgba(255, 184, 29, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3)',
-                      }}>
-                        {String(unit.value).padStart(2, '0')}
-                      </span>
-                      <span style={{
-                        fontSize: 'clamp(9px, 2vw, 11px)',
-                        color: 'rgba(255, 255, 255, 0.7)',
-                        letterSpacing: '0.15em',
-                        fontWeight: 600,
-                      }}>
-                        {unit.label}
-                      </span>
-                    </div>
-                    {i < 2 && (
-                      <span style={{
-                        color: '#FFB81D',
-                        fontSize: 'clamp(28px, 6vw, 40px)',
-                        fontWeight: 700,
-                        textShadow: '0 0 10px rgba(255, 184, 29, 0.5)',
-                        animation: 'pulse 1s ease-in-out infinite',
-                      }}>:</span>
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-
-            {/* Bottom urgency text */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginTop: '4px',
-            }}>
-              <span style={{
-                fontSize: 'clamp(12px, 3vw, 14px)',
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontWeight: 500,
-              }}>
-                ⚠️ Solo quedan <span style={{ color: '#FFB81D', fontWeight: 800 }}>7 CUPOS</span> disponibles
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════════════════════
-            PROBLEM SECTION
+            DISCLAIMER SECTION - MUY IMPORTANTE
         ══════════════════════════════════════════════════════════════ */}
         <section style={{
-          ...styles.sectionLg,
-          background: '#0a2a5c',
+          padding: '48px 24px',
+          background: `linear-gradient(135deg, ${colors.danger}15 0%, ${colors.accent}10 100%)`,
+          borderTop: `3px solid ${colors.danger}`,
+          borderBottom: `3px solid ${colors.danger}`,
         }}>
+          <div style={{ ...styles.maxWidth, maxWidth: '900px' }}>
+            <div className="disclaimer-box" style={{
+              background: colors.white,
+              borderRadius: '16px',
+              padding: '32px',
+              border: `2px solid ${colors.danger}40`,
+              boxShadow: '0 8px 32px rgba(220, 38, 38, 0.1)',
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '20px',
+              }}>
+                <span style={{
+                  fontSize: '48px',
+                  lineHeight: 1,
+                  flexShrink: 0,
+                }}>⚠️</span>
+                <div>
+                  <h2 style={{
+                    fontSize: '24px',
+                    fontWeight: 700,
+                    color: colors.danger,
+                    marginBottom: '16px',
+                  }}>
+                    IMPORTANTE: Disclaimer Legal
+                  </h2>
+                  <div style={{
+                    fontSize: '16px',
+                    color: colors.text,
+                    lineHeight: 1.8,
+                  }}>
+                    <p style={{ marginBottom: '12px' }}>
+                      <strong>Henry Orellana NO es abogado de inmigración.</strong> No estoy licenciado para practicar leyes ni proporciono asesoría legal.
+                    </p>
+                    <p style={{ marginBottom: '12px' }}>
+                      Ofrezco <strong>MENTORÍA</strong> basada en mi experiencia personal con el sistema migratorio estadounidense. Mi rol es:
+                    </p>
+                    <ul style={{ marginLeft: '24px', marginBottom: '12px' }}>
+                      <li>Orientarte sobre opciones que podrías considerar</li>
+                      <li>Compartir mi experiencia y conocimiento general</li>
+                      <li>Ayudarte a entender mejor tu situación</li>
+                      <li>Conectarte con recursos y profesionales si es necesario</li>
+                    </ul>
+                    <p style={{
+                      background: `${colors.accent}20`,
+                      padding: '12px 16px',
+                      borderRadius: '8px',
+                      fontWeight: 500,
+                    }}>
+                      Para asesoría legal o representación, debes consultar con un abogado de inmigración licenciado.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════
+            SERVICIOS SECTION
+        ══════════════════════════════════════════════════════════════ */}
+        <section style={styles.section}>
           <div style={styles.maxWidth}>
             <Reveal>
               <div style={{ ...styles.textCenter, marginBottom: '64px' }}>
                 <span style={{
-                  ...styles.glass,
                   ...styles.badge,
-                  color: '#FFB81D',
-                  marginBottom: '24px',
-                }}>El Problema</span>
+                  background: `${colors.primary}10`,
+                  color: colors.primary,
+                  marginBottom: '16px',
+                }}>Áreas de Orientación</span>
                 <h2 className="section-title" style={{
                   ...styles.fontEditorial,
-                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                  fontWeight: 300,
-                  lineHeight: 1.2,
+                  fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+                  fontWeight: 400,
+                  color: colors.text,
+                  marginBottom: '16px',
                 }}>
-                  ¿Sueñas con que tus hijos{' '}
-                  <span style={{ fontStyle: 'italic', color: 'rgba(255, 255, 255, 0.5)' }}>estudien en USA?</span>
+                  ¿En qué puedo orientarte?
+                </h2>
+                <p style={{
+                  fontSize: '18px',
+                  color: colors.gray,
+                  maxWidth: '600px',
+                  margin: '0 auto',
+                }}>
+                  Basado en mi experiencia, puedo ayudarte a entender mejor estos procesos migratorios:
+                </p>
+              </div>
+            </Reveal>
+
+            <div style={styles.grid4}>
+              {servicios.map((servicio, i) => (
+                <Reveal key={i} delay={i * 100}>
+                  <div
+                    className="service-card card-hover"
+                    style={{
+                      ...styles.card,
+                      height: '100%',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                    }}
+                    onClick={handleCTA}
+                  >
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '4px',
+                      background: servicio.color,
+                    }} />
+                    <span style={{
+                      fontSize: '48px',
+                      display: 'block',
+                      marginBottom: '20px',
+                    }}>{servicio.icon}</span>
+                    <h3 style={{
+                      fontSize: '20px',
+                      fontWeight: 600,
+                      color: colors.text,
+                      marginBottom: '12px',
+                    }}>{servicio.title}</h3>
+                    <p style={{
+                      color: colors.gray,
+                      lineHeight: 1.6,
+                      fontSize: '15px',
+                    }}>{servicio.desc}</p>
+                    <div style={{
+                      marginTop: '20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      color: servicio.color,
+                      fontSize: '14px',
+                      fontWeight: 600,
+                    }}>
+                      Consultar
+                      <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════
+            PROCESO - 4 PASOS
+        ══════════════════════════════════════════════════════════════ */}
+        <section style={styles.sectionAlt}>
+          <div style={styles.maxWidth}>
+            <Reveal>
+              <div style={{ ...styles.textCenter, marginBottom: '64px' }}>
+                <span style={{
+                  ...styles.badge,
+                  background: `${colors.success}15`,
+                  color: colors.success,
+                  marginBottom: '16px',
+                }}>Proceso Simple</span>
+                <h2 className="section-title" style={{
+                  ...styles.fontEditorial,
+                  fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+                  fontWeight: 400,
+                  color: colors.text,
+                }}>
+                  ¿Cómo funciona?
                 </h2>
               </div>
             </Reveal>
 
-            <div style={styles.grid3}>
-              {[
-                { emoji: '🤯', title: 'Proceso confuso', desc: 'Visas, requisitos, trámites... un laberinto sin guía clara.' },
-                { emoji: '💸', title: 'Costos aterradores', desc: 'Las universidades parecen inalcanzables económicamente.' },
-                { emoji: '😔', title: 'Sin guía confiable', desc: 'No conoces a nadie que lo haya logrado antes.' },
-              ].map((item, i) => (
-                <Reveal key={i} delay={i * 150}>
-                  <div className="card-hover" style={{
-                    ...styles.glass,
-                    ...styles.card,
-                    height: '100%',
+            <div className="step-grid" style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '24px',
+            }}>
+              {pasos.map((paso, i) => (
+                <Reveal key={i} delay={i * 100}>
+                  <div style={{
+                    textAlign: 'center',
+                    position: 'relative',
                   }}>
-                    <span style={{ fontSize: '48px', display: 'block', marginBottom: '20px' }}>{item.emoji}</span>
-                    <h3 style={{ fontSize: '20px', fontWeight: 500, marginBottom: '12px' }}>{item.title}</h3>
-                    <p style={{ color: 'rgba(255, 255, 255, 0.5)', lineHeight: 1.6 }}>{item.desc}</p>
+                    {/* Connector line */}
+                    {i < 3 && (
+                      <div style={{
+                        position: 'absolute',
+                        top: '40px',
+                        left: '60%',
+                        width: '80%',
+                        height: '2px',
+                        background: `linear-gradient(90deg, ${colors.success}, ${colors.success}30)`,
+                        display: 'none',
+                      }} className="connector" />
+                    )}
+
+                    <div style={{
+                      width: '80px',
+                      height: '80px',
+                      borderRadius: '50%',
+                      background: `linear-gradient(135deg, ${colors.success} 0%, ${colors.successLight} 100%)`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto 24px',
+                      boxShadow: `0 8px 24px -8px ${colors.success}60`,
+                    }}>
+                      <span style={{
+                        fontSize: '24px',
+                        fontWeight: 700,
+                        color: colors.white,
+                      }}>{paso.num}</span>
+                    </div>
+
+                    <h3 style={{
+                      fontSize: '18px',
+                      fontWeight: 600,
+                      color: colors.text,
+                      marginBottom: '12px',
+                    }}>{paso.title}</h3>
+                    <p style={{
+                      color: colors.gray,
+                      fontSize: '14px',
+                      lineHeight: 1.6,
+                      maxWidth: '200px',
+                      margin: '0 auto',
+                    }}>{paso.desc}</p>
                   </div>
                 </Reveal>
               ))}
@@ -914,241 +850,76 @@ const MentoriaUtah: React.FC = () => {
 
             <Reveal delay={500}>
               <div style={{ ...styles.textCenter, marginTop: '48px' }}>
-                <div style={{
-                  ...styles.glassGold,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: '20px 32px',
-                  borderRadius: '50px',
-                }}>
-                  <span style={{ fontSize: '24px' }}>✨</span>
-                  <p style={{ fontSize: '18px', color: 'rgba(255, 255, 255, 0.8)' }}>
-                    La buena noticia:{' '}
-                    <span style={{ color: '#FFB81D', fontWeight: 500 }}>hay un camino más simple.</span>
-                  </p>
-                </div>
+                <button
+                  onClick={handleCTA}
+                  className="cta-btn"
+                  style={styles.ctaButton}
+                >
+                  <svg style={{ width: '20px', height: '20px' }} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                  EMPEZAR AHORA - $30
+                </button>
               </div>
             </Reveal>
           </div>
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
-            SOLUTION - WHY UTAH
+            ¿POR QUÉ ELEGIRME?
         ══════════════════════════════════════════════════════════════ */}
         <section style={{
-          ...styles.sectionLg,
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          {/* Background Image with Ken Burns */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            overflow: 'hidden',
-          }}>
-            <ResponsiveImage
-              desktopSrc="/images/utah/utah-city-desktop.jpeg"
-              mobileSrc="/images/utah/utah-city-mobile.jpeg"
-              alt="Vista panorámica de Salt Lake City, Utah"
-              className="animate-ken-burns"
-              style={{
-                position: 'absolute',
-                width: '110%',
-                height: '110%',
-                objectFit: 'cover',
-                objectPosition: 'center',
-                left: '-5%',
-                top: '-5%',
-              }}
-            />
-            {/* Dark overlay for content readability */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to bottom, rgba(7,29,73,0.85) 0%, rgba(7,29,73,0.75) 50%, rgba(7,29,73,0.9) 100%)',
-            }} />
-          </div>
-
-          <div style={{ ...styles.maxWidth, position: 'relative', zIndex: 10 }}>
-            <Reveal>
-              <div style={{ ...styles.textCenter, marginBottom: '64px' }}>
-                <span style={{
-                  ...styles.badge,
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  color: '#FFFFFF',
-                  marginBottom: '24px',
-                }}>El Secreto Mejor Guardado</span>
-                <h2 className="section-title" style={{
-                  ...styles.fontEditorial,
-                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                  fontWeight: 300,
-                }}>
-                  ¿Por qué <span className="shimmer-text" style={{ fontWeight: 500 }}>UTAH</span>?
-                </h2>
-              </div>
-            </Reveal>
-
-            <div style={styles.grid2}>
-              {[
-                { icon: '💰', stat: '40%', label: 'más baratas', title: 'Universidades accesibles', desc: 'Opciones reales para familias latinas. Sin endeudarte de por vida.', accent: '#FFB81D' },
-                { icon: '🏠', stat: '#1', label: 'en seguridad', title: 'Ambiente familiar', desc: 'Comunidad acogedora y segura. Ideal para jóvenes lejos de casa.', accent: '#FFFFFF' },
-                { icon: '📈', stat: '#1', label: 'en crecimiento', title: 'Oportunidades laborales', desc: 'El estado con mayor crecimiento económico de USA.', accent: '#FFB81D' },
-                { icon: '🏔️', stat: '25%', label: 'más accesible', title: 'Calidad de vida', desc: 'Naturaleza, seguridad y costo de vida razonable.', accent: '#FFFFFF' },
-              ].map((item, i) => (
-                <Reveal key={i} delay={i * 100}>
-                  <div className="card-hover" style={{
-                    ...styles.glass,
-                    ...styles.card,
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}>
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '3px',
-                      background: `linear-gradient(90deg, ${item.accent}, transparent)`,
-                    }} />
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
-                      <span style={{ fontSize: '40px' }}>{item.icon}</span>
-                      <div>
-                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-                          <span style={{ fontSize: '32px', fontWeight: 700, color: item.accent }}>{item.stat}</span>
-                          <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)' }}>{item.label}</span>
-                        </div>
-                        <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '8px' }}>{item.title}</h3>
-                        <p style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '14px', lineHeight: 1.6 }}>{item.desc}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════════════════════════
-            STATS SECTION
-        ══════════════════════════════════════════════════════════════ */}
-        <section style={{
-          padding: '64px 24px',
-          background: 'linear-gradient(180deg, #071D49 0%, #0a2a5c 50%, #071D49 100%)',
+          ...styles.section,
+          background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`,
         }}>
           <div style={styles.maxWidth}>
-            <div style={{
-              ...styles.glassGold,
-              borderRadius: '32px',
-              padding: '48px 32px',
-            }}>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                gap: '32px',
-                textAlign: 'center',
-              }}>
-                {[
-                  { value: 500, suffix: '+', label: 'Familias ayudadas' },
-                  { value: 15, suffix: '', label: 'Años de experiencia' },
-                  { value: 98, suffix: '%', label: 'Satisfacción' },
-                ].map((item, i) => (
-                  <div key={i}>
-                    <div style={{
-                      ...styles.fontEditorial,
-                      fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-                      fontWeight: 300,
-                      color: '#FFB81D',
-                      marginBottom: '8px',
-                    }}>
-                      <AnimatedNumber value={item.value} suffix={item.suffix} />
-                    </div>
-                    <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.6)', letterSpacing: '0.05em' }}>
-                      {item.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════════════════════════
-            FOR WHO SECTION
-        ══════════════════════════════════════════════════════════════ */}
-        <section style={{
-          ...styles.sectionLg,
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          {/* Background Image - Students in Library */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            overflow: 'hidden',
-          }}>
-            <ResponsiveImage
-              desktopSrc="/images/utah/students-desktop.jpeg"
-              mobileSrc="/images/utah/students-mobile.jpeg"
-              alt="Estudiantes latinos en biblioteca universitaria"
-              className="animate-float"
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '110%',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                top: '-5%',
-              }}
-            />
-            {/* Dark overlay */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(135deg, rgba(7,29,73,0.92) 0%, rgba(7,29,73,0.85) 50%, rgba(7,29,73,0.92) 100%)',
-            }} />
-          </div>
-
-          <div style={{ ...styles.maxWidth, position: 'relative', zIndex: 10 }}>
             <Reveal>
               <div style={{ ...styles.textCenter, marginBottom: '64px' }}>
                 <span style={{
-                  ...styles.glass,
                   ...styles.badge,
-                  color: '#FFB81D',
-                  marginBottom: '24px',
-                }}>¿Es Para Ti?</span>
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  color: colors.white,
+                  marginBottom: '16px',
+                }}>Mi Compromiso</span>
                 <h2 className="section-title" style={{
                   ...styles.fontEditorial,
-                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                  fontWeight: 300,
+                  fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+                  fontWeight: 400,
+                  color: colors.white,
                 }}>
-                  Esta mentoría es perfecta si...
+                  ¿Por qué elegirme como tu mentor?
                 </h2>
               </div>
             </Reveal>
 
-            <div style={styles.grid2}>
-              {[
-                { icon: '👨‍👩‍👧‍👦', text: 'Tienes hijos o hermanos que sueñan con estudiar en USA' },
-                { icon: '🌎', text: 'Eres latino en Estados Unidos buscando opciones accesibles' },
-                { icon: '💡', text: 'Quieres un plan claro, paso a paso, sin complicaciones' },
-                { icon: '🎯', text: 'Buscas la mejor inversión para el futuro de tu familia' },
-              ].map((item, i) => (
+            <div style={styles.grid4}>
+              {razones.map((razon, i) => (
                 <Reveal key={i} delay={i * 100}>
                   <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '20px',
-                    padding: '24px',
-                    background: 'rgba(255, 255, 255, 0.02)',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(10px)',
                     borderRadius: '16px',
-                    border: '1px solid rgba(255, 255, 255, 0.05)',
-                    transition: 'all 0.3s ease',
+                    padding: '32px 24px',
+                    textAlign: 'center',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    height: '100%',
                   }}>
-                    <span style={{ fontSize: '32px' }}>{item.icon}</span>
-                    <p style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1.5 }}>{item.text}</p>
+                    <span style={{
+                      fontSize: '48px',
+                      display: 'block',
+                      marginBottom: '20px',
+                    }}>{razon.icon}</span>
+                    <h3 style={{
+                      fontSize: '18px',
+                      fontWeight: 600,
+                      color: colors.white,
+                      marginBottom: '12px',
+                    }}>{razon.title}</h3>
+                    <p style={{
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      fontSize: '14px',
+                      lineHeight: 1.6,
+                    }}>{razon.desc}</p>
                   </div>
                 </Reveal>
               ))}
@@ -1157,373 +928,144 @@ const MentoriaUtah: React.FC = () => {
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
-            WHAT YOU'LL LEARN
+            ABOUT HENRY
         ══════════════════════════════════════════════════════════════ */}
-        <section style={{
-          ...styles.sectionLg,
-          background: '#0a2a5c',
-        }}>
+        <section style={styles.section}>
           <div style={styles.maxWidth}>
-            <Reveal>
-              <div style={{ ...styles.textCenter, marginBottom: '64px' }}>
-                <span style={{
-                  ...styles.badge,
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  color: '#FFFFFF',
-                  marginBottom: '24px',
-                }}>El Contenido</span>
-                <h2 className="section-title" style={{
-                  ...styles.fontEditorial,
-                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                  fontWeight: 300,
-                }}>
-                  ¿Qué aprenderás?
-                </h2>
-              </div>
-            </Reveal>
-
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '16px',
+              gap: '48px',
+              alignItems: 'center',
             }}>
-              {[
-                'Proceso completo de aplicación paso a paso',
-                'Requisitos de visa y documentación necesaria',
-                'Las mejores universidades en Utah (costo-beneficio)',
-                'Opciones de financiamiento y becas disponibles',
-                'Cómo preparar a tu familiar para la entrevista',
-                'Vida estudiantil y adaptación en Utah',
-              ].map((item, i) => (
-                <Reveal key={i} delay={i * 80}>
+              <Reveal>
+                <div style={{
+                  ...styles.card,
+                  textAlign: 'center',
+                  padding: '48px 32px',
+                }}>
+                  {/* Photo placeholder */}
                   <div style={{
+                    width: '150px',
+                    height: '150px',
+                    borderRadius: '50%',
+                    margin: '0 auto 24px',
+                    background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryLight} 100%)`,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '16px',
-                    padding: '20px 24px',
-                    background: 'rgba(255, 184, 29, 0.03)',
-                    borderRadius: '12px',
-                    border: '1px solid rgba(255, 184, 29, 0.1)',
+                    justifyContent: 'center',
+                    boxShadow: '0 12px 40px -12px rgba(30, 58, 95, 0.4)',
+                    border: `4px solid ${colors.accent}`,
                   }}>
-                    <div style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #FFB81D 0%, #E5A000 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                    }}>
-                      <svg style={{ width: '16px', height: '16px', color: '#071D49' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1.4 }}>{item}</span>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════════════════════════
-            PRICING CARD
-        ══════════════════════════════════════════════════════════════ */}
-        <section style={{
-          ...styles.sectionLg,
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          {/* Abstract Golden Background */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            overflow: 'hidden',
-          }}>
-            <ResponsiveImage
-              desktopSrc="/images/utah/abstract-desktop.jpeg"
-              mobileSrc="/images/utah/abstract-mobile.jpeg"
-              alt=""
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center',
-                opacity: 0.4,
-              }}
-            />
-            {/* Animated shimmer overlay */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(90deg, transparent 0%, rgba(255,184,29,0.1) 50%, transparent 100%)',
-              backgroundSize: '200% 100%',
-              animation: 'shimmerBg 4s ease-in-out infinite',
-            }} />
-            {/* Dark gradient overlay */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'radial-gradient(ellipse at center, rgba(7,29,73,0.7) 0%, rgba(7,29,73,0.9) 70%, rgba(7,29,73,0.95) 100%)',
-            }} />
-          </div>
-
-          <div style={{ ...styles.maxWidth, position: 'relative', zIndex: 10 }}>
-            <Reveal>
-              <div style={{
-                maxWidth: '500px',
-                margin: '0 auto',
-                textAlign: 'center',
-              }}>
-                <div style={{
-                  ...styles.glassGold,
-                  borderRadius: '32px',
-                  padding: '48px 32px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}>
-                  {/* Badge */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '20px',
-                    right: '20px',
-                    background: '#FFFFFF',
-                    color: '#071D49',
-                    padding: '6px 12px',
-                    borderRadius: '50px',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                  }}>
-                    MEJOR VALOR
+                    <span style={{
+                      fontSize: '64px',
+                      color: colors.white,
+                    }}>👤</span>
                   </div>
 
                   <h3 style={{
                     ...styles.fontEditorial,
-                    fontSize: '24px',
-                    fontWeight: 400,
+                    fontSize: '28px',
+                    fontWeight: 500,
+                    color: colors.text,
                     marginBottom: '8px',
-                  }}>Mentoría Grupal en Vivo</h3>
-
-                  <p style={{ color: 'rgba(255, 255, 255, 0.5)', marginBottom: '24px', fontSize: '14px' }}>
-                    Acceso completo + grabación
-                  </p>
-
-                  {/* Price */}
-                  <div style={{ marginBottom: '32px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-                      <span style={{
-                        fontSize: '20px',
-                        color: 'rgba(255, 255, 255, 0.4)',
-                        textDecoration: 'line-through',
-                      }}>$97</span>
-                      <span style={{
-                        ...styles.fontEditorial,
-                        fontSize: '64px',
-                        fontWeight: 300,
-                        color: '#FFB81D',
-                      }}>$30</span>
-                    </div>
-                    <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)' }}>USD · Pago único</p>
-                  </div>
-
-                  {/* What's included */}
-                  <div style={{
-                    textAlign: 'left',
-                    marginBottom: '32px',
-                    padding: '24px',
-                    background: 'rgba(0, 0, 0, 0.2)',
-                    borderRadius: '16px',
-                  }}>
-                    {[
-                      'Sesión en vivo de 90+ minutos',
-                      'Q&A para resolver todas tus dudas',
-                      'Grabación disponible por 30 días',
-                      'Guía PDF con recursos adicionales',
-                      'Acceso a grupo privado de WhatsApp',
-                    ].map((item, i) => (
-                      <div key={i} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '8px 0',
-                        borderBottom: i < 4 ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
-                      }}>
-                        <svg style={{ width: '18px', height: '18px', color: '#FFFFFF', flexShrink: 0 }} fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.8)' }}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTA */}
-                  <button
-                    onClick={handleCTA}
-                    className="cta-btn"
-                    style={{
-                      ...styles.ctaButton,
-                      width: '100%',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    RESERVAR AHORA
-                    <svg style={{ width: '20px', height: '20px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
-
+                  }}>Henry Orellana</h3>
                   <p style={{
-                    marginTop: '16px',
-                    fontSize: '13px',
-                    color: 'rgba(255, 255, 255, 0.4)',
+                    fontSize: '14px',
+                    color: colors.accent,
+                    fontWeight: 600,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    marginBottom: '16px',
+                  }}>Mentor Migratorio</p>
+                  <p style={{
+                    color: colors.gray,
+                    fontSize: '14px',
+                    fontStyle: 'italic',
                   }}>
-                    🔒 Pago seguro · Satisfacción garantizada
+                    "Viví el proceso migratorio. Entiendo tus miedos y tus sueños."
                   </p>
                 </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
+              </Reveal>
 
-        {/* ══════════════════════════════════════════════════════════════
-            ABOUT / AUTHORITY
-        ══════════════════════════════════════════════════════════════ */}
-        <section style={{
-          ...styles.sectionLg,
-          background: '#0a2a5c',
-        }}>
-          <div style={styles.maxWidth}>
-            <Reveal>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                gap: '48px',
-                alignItems: 'center',
-              }}>
+              <Reveal delay={200}>
                 <div>
-                  <span style={{
-                    ...styles.badge,
-                    ...styles.glassGold,
-                    color: '#FFD966',
-                    marginBottom: '24px',
-                  }}>Sobre StarbizAcademy</span>
-
                   <h2 style={{
                     ...styles.fontEditorial,
                     fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-                    fontWeight: 300,
+                    fontWeight: 400,
+                    color: colors.text,
                     marginBottom: '24px',
-                    lineHeight: 1.3,
                   }}>
-                    Ayudando a familias latinas a alcanzar el sueño americano
+                    Mi historia es{' '}
+                    <span style={{ color: colors.accent, fontStyle: 'italic' }}>tu historia</span>
                   </h2>
 
-                  <p style={{
-                    color: 'rgba(255, 255, 255, 0.6)',
-                    lineHeight: 1.8,
-                    marginBottom: '24px',
+                  <div style={{
                     fontSize: '16px',
+                    color: colors.gray,
+                    lineHeight: 1.8,
                   }}>
-                    StarbizAcademy es una empresa constituida en Estados Unidos dedicada a guiar
-                    a familias latinas en su camino hacia una mejor educación. Con más de 15 años
-                    de experiencia y cientos de familias ayudadas, conocemos el proceso de primera mano.
-                  </p>
+                    <p style={{ marginBottom: '16px' }}>
+                      Como inmigrante latino, conozco de primera mano lo confuso y abrumador que puede ser navegar el sistema migratorio de Estados Unidos.
+                    </p>
+                    <p style={{ marginBottom: '16px' }}>
+                      Después de años ayudando a amigos y familiares con sus procesos, decidí formalizar mi experiencia para ayudar a más personas de nuestra comunidad.
+                    </p>
+                    <p style={{ marginBottom: '24px' }}>
+                      <strong>Mi misión:</strong> Orientarte con información clara y accesible, en español, sin el lenguaje complicado que usan muchos en la industria.
+                    </p>
+                  </div>
 
                   <div style={{
                     display: 'flex',
                     flexWrap: 'wrap',
-                    gap: '16px',
+                    gap: '12px',
                   }}>
                     {[
-                      { icon: '🏢', text: 'Empresa en USA' },
-                      { icon: '🎓', text: '+15 años' },
-                      { icon: '🌟', text: '+500 familias' },
+                      { icon: '🇺🇸', text: 'Residente en USA' },
+                      { icon: '🗣️', text: 'Español nativo' },
+                      { icon: '💼', text: 'Empresario' },
                     ].map((item, i) => (
-                      <div key={i} style={{
+                      <span key={i} style={{
                         display: 'flex',
                         alignItems: 'center',
                         gap: '8px',
-                        padding: '12px 16px',
-                        background: 'rgba(255, 255, 255, 0.03)',
+                        padding: '10px 16px',
+                        background: colors.offWhite,
                         borderRadius: '8px',
                         fontSize: '14px',
+                        color: colors.text,
                       }}>
                         <span>{item.icon}</span>
-                        <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{item.text}</span>
-                      </div>
+                        {item.text}
+                      </span>
                     ))}
                   </div>
                 </div>
-
-                <div style={{
-                  ...styles.glassGold,
-                  borderRadius: '24px',
-                  padding: '32px',
-                  textAlign: 'center',
-                }}>
-                  {/* Henry's Professional Photo */}
-                  <div style={{
-                    width: '140px',
-                    height: '140px',
-                    borderRadius: '50%',
-                    margin: '0 auto 24px',
-                    overflow: 'hidden',
-                    border: '3px solid rgba(255, 184, 29, 0.4)',
-                    boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
-                  }}>
-                    <ResponsiveImage
-                      desktopSrc="/images/utah/henry-desktop.jpeg"
-                      mobileSrc="/images/utah/henry-mobile.jpeg"
-                      alt="Henry Orellana - Fundador de StarbizAcademy"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        objectPosition: 'center top',
-                      }}
-                    />
-                  </div>
-                  <h3 style={{
-                    ...styles.fontEditorial,
-                    fontSize: '24px',
-                    fontWeight: 400,
-                    marginBottom: '12px',
-                  }}>Henry Orellana</h3>
-                  <p style={{
-                    fontSize: '14px',
-                    color: '#FFB81D',
-                    marginBottom: '16px',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                  }}>Fundador · Mentor</p>
-                  <p style={{
-                    color: 'rgba(255, 255, 255, 0.6)',
-                    fontSize: '14px',
-                    lineHeight: 1.6,
-                  }}>
-                    Empresario y educador con más de 15 años ayudando a la comunidad latina
-                    a navegar el sistema educativo estadounidense.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
           </div>
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
             FAQ
         ══════════════════════════════════════════════════════════════ */}
-        <section style={styles.sectionLg}>
-          <div style={{ ...styles.maxWidth, maxWidth: '700px' }}>
+        <section style={styles.sectionAlt}>
+          <div style={{ ...styles.maxWidth, maxWidth: '800px' }}>
             <Reveal>
               <div style={{ ...styles.textCenter, marginBottom: '48px' }}>
+                <span style={{
+                  ...styles.badge,
+                  background: `${colors.primary}10`,
+                  color: colors.primary,
+                  marginBottom: '16px',
+                }}>FAQ</span>
                 <h2 className="section-title" style={{
                   ...styles.fontEditorial,
-                  fontSize: 'clamp(2rem, 5vw, 3rem)',
-                  fontWeight: 300,
+                  fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                  fontWeight: 400,
+                  color: colors.text,
                 }}>
                   Preguntas Frecuentes
                 </h2>
@@ -1531,21 +1073,18 @@ const MentoriaUtah: React.FC = () => {
             </Reveal>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {[
-                { q: '¿Qué pasa si no puedo asistir en vivo?', a: 'No te preocupes. La grabación estará disponible por 30 días para que puedas verla cuando quieras.' },
-                { q: '¿Es en español?', a: '¡Sí! Toda la mentoría es 100% en español, pensada para nuestra comunidad latina.' },
-                { q: '¿Cómo recibo el acceso?', a: 'Inmediatamente después de tu pago recibirás un email con el link a la sesión en vivo y al grupo de WhatsApp.' },
-                { q: '¿Puedo hacer preguntas durante la sesión?', a: '¡Por supuesto! Habrá un espacio dedicado de Q&A para resolver todas tus dudas específicas.' },
-                { q: '¿Este proceso aplica para cualquier familiar?', a: 'Sí, el proceso es similar para hijos, hermanos, sobrinos o cualquier familiar que quiera estudiar en USA.' },
-              ].map((faq, i) => (
+              {faqs.map((faq, i) => (
                 <Reveal key={i} delay={i * 80}>
                   <div
                     className="faq-item"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     style={{
-                      ...styles.glass,
-                      borderRadius: '16px',
+                      background: colors.white,
+                      borderRadius: '12px',
                       overflow: 'hidden',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                      border: `1px solid ${openFaq === i ? colors.primary : 'rgba(0, 0, 0, 0.08)'}`,
+                      transition: 'all 0.3s ease',
                     }}
                   >
                     <div style={{
@@ -1554,12 +1093,16 @@ const MentoriaUtah: React.FC = () => {
                       justifyContent: 'space-between',
                       padding: '20px 24px',
                     }}>
-                      <span style={{ fontWeight: 500, color: 'rgba(255, 255, 255, 0.9)' }}>{faq.q}</span>
+                      <span style={{
+                        fontWeight: 600,
+                        color: colors.text,
+                        fontSize: '16px',
+                      }}>{faq.q}</span>
                       <svg
                         style={{
                           width: '20px',
                           height: '20px',
-                          color: '#FFB81D',
+                          color: colors.primary,
                           transform: openFaq === i ? 'rotate(180deg)' : 'rotate(0)',
                           transition: 'transform 0.3s ease',
                           flexShrink: 0,
@@ -1575,8 +1118,9 @@ const MentoriaUtah: React.FC = () => {
                     <div className={`faq-content ${openFaq === i ? 'open' : ''}`}>
                       <p style={{
                         padding: '0 24px 20px',
-                        color: 'rgba(255, 255, 255, 0.6)',
-                        lineHeight: 1.6,
+                        color: colors.gray,
+                        lineHeight: 1.7,
+                        fontSize: '15px',
                       }}>{faq.a}</p>
                     </div>
                   </div>
@@ -1590,60 +1134,49 @@ const MentoriaUtah: React.FC = () => {
             FINAL CTA
         ══════════════════════════════════════════════════════════════ */}
         <section style={{
-          padding: '128px 24px',
+          padding: '100px 24px',
+          background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`,
+          textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          textAlign: 'center',
         }}>
-          {/* Background Image - Graduation Family */}
+          {/* Background pattern */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            overflow: 'hidden',
-          }}>
-            <ResponsiveImage
-              desktopSrc="/images/utah/graduation-desktop.jpeg"
-              mobileSrc="/images/utah/graduation-mobile.jpeg"
-              alt="Familia latina celebrando graduación universitaria"
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center',
-                filter: 'brightness(0.9)',
-                transition: 'filter 0.5s ease',
-              }}
-            />
-            {/* Gradient overlay combining dark with forest green accent */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(180deg, rgba(7,29,73,0.85) 0%, rgba(170,2,0,0.7) 50%, rgba(7,29,73,0.9) 100%)',
-            }} />
-          </div>
+            backgroundImage: `radial-gradient(circle at 30% 70%, ${colors.accent}15 0%, transparent 40%), radial-gradient(circle at 70% 30%, ${colors.success}10 0%, transparent 40%)`,
+            pointerEvents: 'none',
+          }} />
 
           <div style={{ ...styles.maxWidth, position: 'relative', zIndex: 10 }}>
             <Reveal>
+              <span style={{
+                ...styles.badge,
+                background: 'rgba(255, 255, 255, 0.15)',
+                color: colors.white,
+                marginBottom: '24px',
+              }}>Da el primer paso</span>
+
               <h2 style={{
                 ...styles.fontEditorial,
-                fontSize: 'clamp(2rem, 6vw, 4rem)',
-                fontWeight: 300,
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontWeight: 400,
+                color: colors.white,
                 marginBottom: '24px',
                 lineHeight: 1.2,
               }}>
-                Tu familia merece{' '}
-                <span className="text-gold" style={{ fontStyle: 'italic' }}>esta oportunidad</span>
+                No tienes que navegar esto{' '}
+                <span style={{ color: colors.accent, fontStyle: 'italic' }}>solo</span>
               </h2>
 
               <p style={{
                 fontSize: '18px',
-                color: 'rgba(255, 255, 255, 0.6)',
-                maxWidth: '500px',
+                color: 'rgba(255, 255, 255, 0.7)',
+                maxWidth: '600px',
                 margin: '0 auto 40px',
                 lineHeight: 1.6,
               }}>
-                No dejes pasar más tiempo. El sueño de estudiar en USA está más cerca de lo que crees.
+                Agenda tu consulta hoy y empecemos a explorar tus opciones. Por solo $30 USD, tendrás orientación personalizada de alguien que entiende tu situación.
               </p>
 
               <button
@@ -1652,21 +1185,21 @@ const MentoriaUtah: React.FC = () => {
                 style={{
                   ...styles.ctaButton,
                   fontSize: '18px',
-                  padding: '24px 48px',
+                  padding: '22px 44px',
                 }}
               >
-                RESERVAR MI LUGAR POR $30
-                <svg style={{ width: '24px', height: '24px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg style={{ width: '24px', height: '24px' }} fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
+                AGENDAR MI CONSULTA - $30 USD
               </button>
 
               <p style={{
                 marginTop: '24px',
                 fontSize: '14px',
-                color: 'rgba(255, 255, 255, 0.4)',
+                color: 'rgba(255, 255, 255, 0.5)',
               }}>
-                ⏰ Cupos limitados · Grabación incluida si no puedes asistir
+                ⚡ Respuesta en menos de 24 horas · 100% en español
               </p>
             </Reveal>
           </div>
@@ -1677,39 +1210,46 @@ const MentoriaUtah: React.FC = () => {
         ══════════════════════════════════════════════════════════════ */}
         <footer style={{
           padding: '48px 24px',
-          borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+          backgroundColor: colors.primaryDark,
           textAlign: 'center',
-          background: 'linear-gradient(180deg, #071D49 0%, #0d0d0d 100%)',
         }}>
           <div style={styles.maxWidth}>
-            {/* Utah Logo with Pulse Animation */}
-            <div style={{
-              marginBottom: '24px',
-            }}>
-              <ResponsiveImage
-                desktopSrc="/images/utah/logo-utah-desktop.jpeg"
-                mobileSrc="/images/utah/logo-utah-mobile.jpeg"
-                alt="Logo Utah - Montañas y Sol"
-                className="animate-sun-pulse"
-                style={{
-                  width: '80px',
-                  height: '80px',
-                  objectFit: 'contain',
-                  borderRadius: '16px',
-                }}
-              />
-            </div>
             <p style={{
               ...styles.fontEditorial,
-              fontSize: '20px',
-              color: '#FFB81D',
+              fontSize: '24px',
+              color: colors.accent,
               marginBottom: '8px',
-            }}>StarbizAcademy</p>
+            }}>UsaLatino Prime</p>
+            <p style={{
+              fontSize: '14px',
+              color: 'rgba(255, 255, 255, 0.5)',
+              marginBottom: '24px',
+            }}>
+              Mentoría Migratoria
+            </p>
+
+            <div style={{
+              padding: '16px',
+              background: 'rgba(220, 38, 38, 0.1)',
+              borderRadius: '8px',
+              marginBottom: '24px',
+              maxWidth: '600px',
+              margin: '0 auto 24px',
+            }}>
+              <p style={{
+                fontSize: '12px',
+                color: 'rgba(255, 255, 255, 0.6)',
+                lineHeight: 1.6,
+              }}>
+                <strong style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Disclaimer:</strong> Henry Orellana no es abogado y no proporciona asesoría legal. Los servicios ofrecidos son de mentoría basada en experiencia personal. Para asesoría legal, consulte con un abogado licenciado.
+              </p>
+            </div>
+
             <p style={{
               fontSize: '13px',
               color: 'rgba(255, 255, 255, 0.4)',
             }}>
-              © {new Date().getFullYear()} · Empresa constituida en Estados Unidos
+              © {new Date().getFullYear()} UsaLatino Prime · Todos los derechos reservados
             </p>
           </div>
         </footer>
@@ -1724,8 +1264,9 @@ const MentoriaUtah: React.FC = () => {
           right: 0,
           zIndex: 100,
           padding: '16px 24px',
-          background: 'linear-gradient(to top, #071D49 0%, rgba(7, 29, 73, 0.95) 100%)',
-          borderTop: '1px solid rgba(255, 184, 29, 0.2)',
+          background: colors.white,
+          borderTop: `1px solid rgba(0, 0, 0, 0.1)`,
+          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.1)',
           transform: isStickyCTAVisible ? 'translateY(0)' : 'translateY(100%)',
           transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}>
@@ -1738,24 +1279,30 @@ const MentoriaUtah: React.FC = () => {
             margin: '0 auto',
           }}>
             <div>
-              <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.6)' }}>Mentoría Utah</p>
-              <p style={{ fontSize: '24px', fontWeight: 600, color: '#FFB81D' }}>$30 USD</p>
+              <p style={{ fontSize: '12px', color: colors.gray }}>Consulta 1-a-1</p>
+              <p style={{ fontSize: '24px', fontWeight: 700, color: colors.success }}>$30 USD</p>
             </div>
             <button
               onClick={handleCTA}
               style={{
-                background: 'linear-gradient(135deg, #FFB81D 0%, #E5A000 100%)',
-                color: '#071D49',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: `linear-gradient(135deg, ${colors.success} 0%, ${colors.successLight} 100%)`,
+                color: colors.white,
                 fontWeight: 600,
                 fontSize: '14px',
-                padding: '14px 28px',
-                borderRadius: '50px',
+                padding: '14px 24px',
+                borderRadius: '10px',
                 border: 'none',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
               }}
             >
-              RESERVAR →
+              <svg style={{ width: '18px', height: '18px' }} fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              WhatsApp
             </button>
           </div>
         </div>

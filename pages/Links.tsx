@@ -450,13 +450,20 @@ const Links: React.FC = () => {
                 lineHeight: 1.6,
                 opacity: 0.9,
               }}>
-                ✨ Empresario · Educador · Mentor<br />
+                Te ayudo a migrar y vivir el Sueño 🇺🇸<br />
                 <span style={{
                   color: COLORS.gold,
                   fontWeight: 600,
                   textShadow: `0 0 20px ${COLORS.gold}60`,
                 }}>
-                  Fundador ORELLANA GROUP
+                  (Visas - Migración - Taxes - Legal)
+                </span>
+                <br />
+                <span style={{
+                  color: COLORS.white,
+                  fontWeight: 500,
+                }}>
+                  Teléfono +1 (385) 456-4470
                 </span>
               </p>
 

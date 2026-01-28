@@ -652,7 +652,7 @@ const Links: React.FC = () => {
                       }}>
                         {product.type === 'curso' && '📚'}
                         {product.type === 'asesoria' && '💼'}
-                        {product.type === 'mentoria' && '🎯'}
+                        {product.type === 'mentoria' && '🇺🇸'}
                         {product.type === 'curso' ? 'CURSO' : product.type === 'asesoria' ? 'ASESORÍA' : product.type === 'mentoria' ? 'MENTORÍA' : 'PROGRAMA'}
                       </span>
                     </div>

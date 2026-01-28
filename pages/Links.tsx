@@ -450,7 +450,7 @@ const Links: React.FC = () => {
                 lineHeight: 1.6,
                 opacity: 0.9,
               }}>
-                Te ayudo a migrar y vivir el Sueño 🇺🇸<br />
+                Te ayudo a migrar y vivir el Sueño Americano 🇺🇸<br />
                 <span style={{
                   color: COLORS.gold,
                   fontWeight: 600,

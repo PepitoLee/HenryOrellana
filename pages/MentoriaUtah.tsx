@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 // ===== CONFIGURABLE CTA - WHATSAPP =====
-const WHATSAPP_NUMBER = '18019012007';
+const WHATSAPP_NUMBER = '3854564470';
 const WHATSAPP_MESSAGE = encodeURIComponent('Hola Henry, me interesa agendar una consulta de mentoría migratoria.');
 const CTA_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 // ========================================

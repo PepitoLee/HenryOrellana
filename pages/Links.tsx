@@ -76,7 +76,7 @@ const Links: React.FC = () => {
   const products = [
     {
       id: 1,
-      title: 'UsaLatino Prime',
+      title: 'Formalización y exito en USA',
       subtitle: '$30 USD',
       description: 'Analizamos tu situación migratoria y elaboramos un plan de acción y solución inmediata',
       link: '/mentoria-utah',

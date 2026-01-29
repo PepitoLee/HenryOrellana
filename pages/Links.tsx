@@ -77,7 +77,7 @@ const Links: React.FC = () => {
     {
       id: 1,
       title: 'Formalización y Éxito en USA',
-      subtitle: '$30 USD',
+      subtitle: '$50 USD',
       description: 'Regularizamos tu estatus y diseñamos una estrategia inmediata para potenciar tu crecimiento en EEUU.',
       link: '/mentoria-utah',
       isExternal: false,

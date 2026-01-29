@@ -189,7 +189,7 @@ const MentoriaUtah: React.FC = () => {
     {
       num: '01',
       title: 'Agenda tu consulta',
-      desc: 'Reserva tu sesión 1-a-1 por solo $30 USD vía WhatsApp.',
+      desc: 'Reserva tu sesión 1-a-1 por solo $50 USD vía WhatsApp.',
     },
     {
       num: '02',
@@ -228,7 +228,7 @@ const MentoriaUtah: React.FC = () => {
     {
       icon: '💰',
       title: 'Precio accesible',
-      desc: 'Solo $30 por consulta, sin compromisos adicionales.',
+      desc: 'Solo $50 por consulta, sin compromisos adicionales.',
     },
   ];
 
@@ -239,7 +239,7 @@ const MentoriaUtah: React.FC = () => {
       a: 'NO, NO soy abogado. Soy un MENTOR que comparte su experiencia personal con el sistema migratorio. No ofrezco asesoría legal ni representación. Si necesitas un abogado, te puedo orientar sobre cómo encontrar uno.',
     },
     {
-      q: '¿Qué incluye la consulta de $30?',
+      q: '¿Qué incluye la consulta de $50?',
       a: 'Una sesión 1-a-1 conmigo donde escucho tu situación, te explico las opciones que conozco basado en mi experiencia, y te oriento sobre los siguientes pasos que podrías considerar.',
     },
     {
@@ -252,7 +252,7 @@ const MentoriaUtah: React.FC = () => {
     },
     {
       q: '¿Cómo agendo mi consulta?',
-      a: 'Simplemente haz clic en cualquier botón de esta página para contactarme por WhatsApp. Coordinaremos el día y hora, y te enviaré el link de pago de $30 USD.',
+      a: 'Simplemente haz clic en cualquier botón de esta página para contactarme por WhatsApp. Coordinaremos el día y hora, y te enviaré el link de pago de $50 USD.',
     },
   ];
 
@@ -261,9 +261,9 @@ const MentoriaUtah: React.FC = () => {
       <Helmet>
         <html lang="es" />
         <title>UsaLatino Prime | Mentoría Migratoria con Henry Orellana</title>
-        <meta name="description" content="Mentoría migratoria personalizada. NO soy abogado - Soy tu MENTOR. Orientación basada en experiencia real por $30 USD. Asilo, SIJS, Ajustes de Status." />
+        <meta name="description" content="Mentoría migratoria personalizada. NO soy abogado - Soy tu MENTOR. Orientación basada en experiencia real por $50 USD. Asilo, SIJS, Ajustes de Status." />
         <meta property="og:title" content="UsaLatino Prime - Mentoría Migratoria" />
-        <meta property="og:description" content="Orientación migratoria de alguien que ha vivido el proceso. Consulta 1-a-1 por $30 USD." />
+        <meta property="og:description" content="Orientación migratoria de alguien que ha vivido el proceso. Consulta 1-a-1 por $50 USD." />
         <meta name="robots" content="index, follow" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -420,7 +420,7 @@ const MentoriaUtah: React.FC = () => {
                 }}>
                   Orientación de alguien que ha vivido el proceso migratorio.{' '}
                   <span style={{ color: colors.white, fontWeight: 500 }}>
-                    Consulta 1-a-1 por solo $30 USD.
+                    Consulta 1-a-1 por solo $50 USD.
                   </span>
                 </p>
 
@@ -461,7 +461,7 @@ const MentoriaUtah: React.FC = () => {
                     <svg style={{ width: '24px', height: '24px' }} fill="currentColor" viewBox="0 0 24 24">
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                     </svg>
-                    AGENDA TU CONSULTA - $30
+                    AGENDA TU CONSULTA - $50
                   </button>
                 </div>
 
@@ -526,7 +526,7 @@ const MentoriaUtah: React.FC = () => {
                   lineHeight: 1,
                   marginBottom: '8px',
                 }}>
-                  $30
+                  $50
                 </div>
                 <p style={{
                   color: 'rgba(255, 255, 255, 0.6)',
@@ -858,7 +858,7 @@ const MentoriaUtah: React.FC = () => {
                   <svg style={{ width: '20px', height: '20px' }} fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                   </svg>
-                  EMPEZAR AHORA - $30
+                  EMPEZAR AHORA - $50
                 </button>
               </div>
             </Reveal>
@@ -1176,7 +1176,7 @@ const MentoriaUtah: React.FC = () => {
                 margin: '0 auto 40px',
                 lineHeight: 1.6,
               }}>
-                Agenda tu consulta hoy y empecemos a explorar tus opciones. Por solo $30 USD, tendrás orientación personalizada de alguien que entiende tu situación.
+                Agenda tu consulta hoy y empecemos a explorar tus opciones. Por solo $50 USD, tendrás orientación personalizada de alguien que entiende tu situación.
               </p>
 
               <button
@@ -1191,7 +1191,7 @@ const MentoriaUtah: React.FC = () => {
                 <svg style={{ width: '24px', height: '24px' }} fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
-                AGENDAR MI CONSULTA - $30 USD
+                AGENDAR MI CONSULTA - $50 USD
               </button>
 
               <p style={{
@@ -1280,7 +1280,7 @@ const MentoriaUtah: React.FC = () => {
           }}>
             <div>
               <p style={{ fontSize: '12px', color: colors.gray }}>Consulta 1-a-1</p>
-              <p style={{ fontSize: '24px', fontWeight: 700, color: colors.success }}>$30 USD</p>
+              <p style={{ fontSize: '24px', fontWeight: 700, color: colors.success }}>$50 USD</p>
             </div>
             <button
               onClick={handleCTA}

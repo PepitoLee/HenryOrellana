@@ -705,7 +705,7 @@ const Links: React.FC = () => {
                         {product.type === 'curso' && '📚'}
                         {product.type === 'asesoria' && '💼'}
                         {product.type === 'mentoria' && <img src="/images/links/usa-flag.png" alt="USA" style={{ width: '14px', height: '10px', objectFit: 'contain' }} />}
-                        {product.type === 'curso' ? 'CURSO' : product.type === 'asesoria' ? 'ASESORÍA' : product.type === 'mentoria' ? 'MENTORÍA' : 'PROGRAMA'}
+                        {product.type === 'curso' ? 'CURSO' : product.type === 'asesoria' ? 'ASESORÍA PARA LATINOAMÉRICA' : product.type === 'mentoria' ? 'MENTORÍA' : 'PROGRAMA'}
                       </span>
                     </div>
 

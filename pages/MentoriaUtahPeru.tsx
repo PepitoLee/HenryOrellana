@@ -259,8 +259,8 @@ const MentoriaUtahPeru: React.FC = () => {
       <Helmet>
         <html lang="es" />
         <title>Estudiar en USA desde Perú | Mentoría Utah - StarbizAcademy</title>
-        <meta name="description" content="Descubre cómo enviar a tus hijos a estudiar en Utah, USA. Universidades 40% más baratas. Mentoría en vivo por S/50." />
-        <meta property="og:title" content="Estudiar en USA desde Perú | Mentoría S/50" />
+        <meta name="description" content="Descubre cómo enviar a tus hijos a estudiar en Utah, USA. Universidades 40% más baratas. Mentoría en vivo por S/70." />
+        <meta property="og:title" content="Estudiar en USA desde Perú | Mentoría S/70" />
         <meta property="og:description" content="Universidades accesibles, comunidad segura, el estado #1 en crecimiento. Tus hijos merecen esta oportunidad." />
         <meta name="robots" content="noindex" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -631,7 +631,7 @@ const MentoriaUtahPeru: React.FC = () => {
               marginBottom: '40px',
             }}>
               {[
-                { label: 'Solo S/ 50', accent: true },
+                { label: 'Solo S/ 70', accent: true },
                 { label: 'Grabación incluida', accent: false },
                 { label: 'Q&A en vivo', accent: false },
               ].map((item, i) => (
@@ -1337,7 +1337,7 @@ const MentoriaUtahPeru: React.FC = () => {
                         fontSize: '64px',
                         fontWeight: 300,
                         color: '#FFB81D',
-                      }}>S/ 50</span>
+                      }}>S/ 70</span>
                     </div>
                     <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)' }}>Soles · Pago único · Acepta tarjetas internacionales</p>
                   </div>
@@ -1668,7 +1668,7 @@ const MentoriaUtahPeru: React.FC = () => {
                   padding: '24px 48px',
                 }}
               >
-                RESERVAR MI LUGAR POR S/ 50
+                RESERVAR MI LUGAR POR S/ 70
                 <svg style={{ width: '24px', height: '24px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -1752,7 +1752,7 @@ const MentoriaUtahPeru: React.FC = () => {
           }}>
             <div>
               <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.6)' }}>Mentoría Utah</p>
-              <p style={{ fontSize: '24px', fontWeight: 600, color: '#FFB81D' }}>S/ 50</p>
+              <p style={{ fontSize: '24px', fontWeight: 600, color: '#FFB81D' }}>S/ 70</p>
             </div>
             <button
               onClick={handleCTA}

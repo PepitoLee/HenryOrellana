@@ -92,7 +92,7 @@ const Links: React.FC = () => {
     {
       id: 2,
       title: 'Estudia y vive en Utah',
-      subtitle: 'S/50 PEN',
+      subtitle: 'S/70 PEN',
       description: 'Guiamos a tus hijos hacia universidades de prestigio y valores en Utah, optimizando costos con nuestra experiencia local.',
       link: '/mentoria-utah-peru',
       isExternal: false,

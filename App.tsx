@@ -18,6 +18,8 @@ import { UsalatinoPrime } from './pages/UsalatinoPrime';
 import LandingPage from './src/landing/LandingPage';
 import MentoriaUtah from './pages/MentoriaUtah';
 import MentoriaUtahPeru from './pages/MentoriaUtahPeru';
+import MentoriaUtahPromo from './pages/MentoriaUtahPromo';
+import MentoriaUtahPeruPromo from './pages/MentoriaUtahPeruPromo';
 import Links from './pages/Links';
 
 // Admin imports
@@ -73,6 +75,8 @@ const App: React.FC = () => {
                 <Route path="/landingpage" element={<LandingPage />} />
                 <Route path="/mentoria-utah" element={<MentoriaUtah />} />
                 <Route path="/mentoria-utah-peru" element={<MentoriaUtahPeru />} />
+                <Route path="/mentoria-utah-promo" element={<MentoriaUtahPromo />} />
+                <Route path="/mentoria-utah-peru-promo" element={<MentoriaUtahPeruPromo />} />
                 <Route path="/links" element={<Links />} />
 
                 {/* Admin Routes */}

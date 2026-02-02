@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { BookingCalendar, ColorTheme } from '../components/Booking';
 
 // ===== CONFIGURABLE CTA - WHATSAPP =====
 const WHATSAPP_NUMBER = '13854564470';
@@ -51,7 +52,12 @@ const MentoriaUtah: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleCTA = () => window.open(CTA_URL, '_blank');
+  const handleCTA = () => {
+    const agendaSection = document.getElementById('agenda');
+    if (agendaSection) {
+      agendaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   // Nueva paleta de colores - UsaLatino Prime
   const colors = {
@@ -861,6 +867,61 @@ const MentoriaUtah: React.FC = () => {
                   EMPEZAR AHORA - $50
                 </button>
               </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════
+            CALENDARIO DE RESERVAS
+        ══════════════════════════════════════════════════════════════ */}
+        <section id="agenda" style={styles.section}>
+          <div style={styles.maxWidth}>
+            <Reveal>
+              <div style={{ ...styles.textCenter, marginBottom: '48px' }}>
+                <span style={{
+                  ...styles.badge,
+                  background: `${colors.success}15`,
+                  color: colors.success,
+                  marginBottom: '16px',
+                }}>Agenda tu Consulta</span>
+                <h2 className="section-title" style={{
+                  ...styles.fontEditorial,
+                  fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+                  fontWeight: 400,
+                  color: colors.text,
+                }}>
+                  Selecciona tu Horario
+                </h2>
+                <p style={{
+                  fontSize: '1.1rem',
+                  color: colors.gray,
+                  maxWidth: '600px',
+                  margin: '16px auto 0',
+                  lineHeight: 1.7,
+                }}>
+                  Elige el día y hora que mejor se adapte a tu agenda para nuestra sesión de mentoría personalizada.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <BookingCalendar
+                serviceType="mentoria-usa"
+                priceAmount={50}
+                priceCurrency="USD"
+                whatsappNumber={WHATSAPP_NUMBER}
+                colors={{
+                  primary: colors.primary,
+                  secondary: colors.primaryLight,
+                  success: colors.success,
+                  accent: colors.accent,
+                  background: colors.white,
+                  backgroundAlt: colors.offWhite,
+                  text: colors.text,
+                  textLight: colors.gray,
+                  border: '#E5E7EB',
+                }}
+              />
             </Reveal>
           </div>
         </section>

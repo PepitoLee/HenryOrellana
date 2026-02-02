@@ -182,6 +182,100 @@ export interface Database {
           created_at?: string
         }
       }
+      booking_slots: {
+        Row: {
+          id: string
+          mentor_id: string
+          date: string
+          start_time: string
+          end_time: string
+          status: 'available' | 'pending' | 'confirmed' | 'cancelled'
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          mentor_id?: string
+          date: string
+          start_time: string
+          end_time: string
+          status?: 'available' | 'pending' | 'confirmed' | 'cancelled'
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          mentor_id?: string
+          date?: string
+          start_time?: string
+          end_time?: string
+          status?: 'available' | 'pending' | 'confirmed' | 'cancelled'
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      bookings: {
+        Row: {
+          id: string
+          slot_id: string | null
+          client_name: string
+          client_email: string
+          client_phone: string
+          client_country: string
+          service_type: 'mentoria-usa' | 'mentoria-peru'
+          price_amount: number
+          price_currency: 'USD' | 'PEN'
+          booking_date: string
+          booking_start_time: string
+          booking_end_time: string
+          notes: string | null
+          status: 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'no_show'
+          whatsapp_sent_at: string | null
+          confirmed_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slot_id?: string | null
+          client_name: string
+          client_email: string
+          client_phone: string
+          client_country: string
+          service_type: 'mentoria-usa' | 'mentoria-peru'
+          price_amount: number
+          price_currency: 'USD' | 'PEN'
+          booking_date: string
+          booking_start_time: string
+          booking_end_time: string
+          notes?: string | null
+          status?: 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'no_show'
+          whatsapp_sent_at?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slot_id?: string | null
+          client_name?: string
+          client_email?: string
+          client_phone?: string
+          client_country?: string
+          service_type?: 'mentoria-usa' | 'mentoria-peru'
+          price_amount?: number
+          price_currency?: 'USD' | 'PEN'
+          booking_date?: string
+          booking_start_time?: string
+          booking_end_time?: string
+          notes?: string | null
+          status?: 'pending' | 'confirmed' | 'completed' | 'cancelled' | 'no_show'
+          whatsapp_sent_at?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
@@ -231,3 +325,9 @@ export interface BlogPostWithTranslations {
     }
   }
 }
+
+// Booking types
+export type BookingSlotRow = Database['public']['Tables']['booking_slots']['Row']
+export type BookingRow = Database['public']['Tables']['bookings']['Row']
+export type BookingSlotInsert = Database['public']['Tables']['booking_slots']['Insert']
+export type BookingInsert = Database['public']['Tables']['bookings']['Insert']

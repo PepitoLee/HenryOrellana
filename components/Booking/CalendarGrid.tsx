@@ -1,6 +1,6 @@
 // =============================================
-// CALENDAR GRID COMPONENT
-// Grid de días del mes con navegación
+// CALENDAR GRID COMPONENT - PREMIUM EDITION
+// Grid de días con animaciones y visual hierarchy
 // =============================================
 
 import React, { useState } from 'react';
@@ -18,7 +18,6 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
   const styles = createBookingStyles(colors);
   const [hoveredDay, setHoveredDay] = useState<number | null>(null);
 
-  // Obtener días del mes
   const getDaysInMonth = (date: Date): Date[] => {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -26,18 +25,15 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
     const lastDay = new Date(year, month + 1, 0);
     const days: Date[] = [];
 
-    // Añadir días vacíos para alinear con el día de la semana
     const startDayOfWeek = firstDay.getDay();
     for (let i = 0; i < startDayOfWeek; i++) {
       days.push(new Date(year, month, -startDayOfWeek + i + 1));
     }
 
-    // Añadir días del mes
     for (let i = 1; i <= lastDay.getDate(); i++) {
       days.push(new Date(year, month, i));
     }
 
-    // Completar última semana
     const remainingDays = 7 - (days.length % 7);
     if (remainingDays < 7) {
       for (let i = 1; i <= remainingDays; i++) {
@@ -48,7 +44,6 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
     return days;
   };
 
-  // Verificar si una fecha es hoy
   const isToday = (date: Date): boolean => {
     const today = new Date();
     return (
@@ -58,7 +53,6 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
     );
   };
 
-  // Verificar si una fecha está seleccionada
   const isSelected = (date: Date): boolean => {
     if (!selectedDate) return false;
     return (
@@ -68,26 +62,22 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
     );
   };
 
-  // Verificar si una fecha es del mes actual
   const isCurrentMonth = (date: Date): boolean => {
     return date.getMonth() === currentMonth.getMonth();
   };
 
-  // Verificar si una fecha es pasada
   const isPastDate = (date: Date): boolean => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return date < today;
   };
 
-  // Verificar si una fecha es disponible (Martes o Jueves, no pasada)
   const isAvailableDate = (date: Date): boolean => {
     if (isPastDate(date)) return false;
     if (!isCurrentMonth(date)) return false;
     return AVAILABLE_DAYS.includes(date.getDay());
   };
 
-  // Obtener slots disponibles para una fecha
   const getAvailableSlotsCount = (date: Date): number => {
     const dateKey = date.toISOString().split('T')[0];
     const slots = availableSlots.get(dateKey);
@@ -112,7 +102,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
           onMouseLeave={() => setHoveredDay(null)}
           aria-label="Mes anterior"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
@@ -129,7 +119,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
           onMouseLeave={() => setHoveredDay(null)}
           aria-label="Mes siguiente"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
@@ -137,18 +127,35 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
 
       {/* Días de la semana */}
       <div style={styles.daysHeader}>
-        {DAYS_ES.map((day, index) => (
-          <div
-            key={day}
-            style={{
-              ...styles.dayHeaderCell,
-              color: AVAILABLE_DAYS.includes(index) ? colors.success : colors.textLight,
-              fontWeight: AVAILABLE_DAYS.includes(index) ? 700 : 600,
-            }}
-          >
-            {day}
-          </div>
-        ))}
+        {DAYS_ES.map((day, index) => {
+          const isAvailDay = AVAILABLE_DAYS.includes(index);
+          return (
+            <div
+              key={day}
+              style={{
+                ...styles.dayHeaderCell,
+                color: isAvailDay ? colors.success : colors.textLight,
+                fontWeight: isAvailDay ? 800 : 600,
+                position: 'relative' as const,
+              }}
+            >
+              {day}
+              {isAvailDay && (
+                <div style={{
+                  position: 'absolute',
+                  bottom: '2px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '16px',
+                  height: '2px',
+                  borderRadius: '1px',
+                  backgroundColor: colors.success,
+                  opacity: 0.6,
+                }} />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Grid de días */}
@@ -159,23 +166,26 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
           const today = isToday(date);
           const currentMo = isCurrentMonth(date);
           const slotsCount = available ? getAvailableSlotsCount(date) : 0;
+          const isHovered = hoveredDay === index && available;
 
           let cellStyle: React.CSSProperties = {
             ...styles.dayCell,
           };
 
           if (!currentMo) {
-            cellStyle = { ...cellStyle, opacity: 0.3 };
+            cellStyle = { ...cellStyle, opacity: 0.2, cursor: 'default' };
           } else if (selected) {
             cellStyle = { ...cellStyle, ...styles.dayCellSelected(colors) };
           } else if (available) {
             cellStyle = {
               ...cellStyle,
               ...styles.dayCellAvailable(colors),
-              ...(hoveredDay === index
+              ...(isHovered
                 ? {
-                    transform: 'scale(1.05)',
-                    boxShadow: `0 4px 15px ${colors.success}30`,
+                    transform: 'scale(1.1)',
+                    boxShadow: `0 8px 24px ${colors.success}30`,
+                    borderColor: colors.success,
+                    backgroundColor: `${colors.success}20`,
                   }
                 : {}),
             };
@@ -194,56 +204,83 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
               onMouseEnter={() => available && setHoveredDay(index)}
               onMouseLeave={() => setHoveredDay(null)}
               style={cellStyle}
-              disabled={!available}
+              disabled={!available && currentMo}
               aria-label={`${date.getDate()} de ${MONTHS_ES[date.getMonth()]}${available ? `, ${slotsCount} horarios disponibles` : ''}`}
             >
-              {date.getDate()}
+              <span>{date.getDate()}</span>
               {available && slotsCount > 0 && (
                 <span
                   style={{
                     ...styles.availabilityDot,
                     backgroundColor: selected ? '#fff' : colors.success,
+                    animation: !selected ? 'booking-pulse 2s ease-in-out infinite' : 'none',
                   }}
                 />
+              )}
+              {today && !selected && (
+                <span style={{
+                  position: 'absolute',
+                  top: '3px',
+                  right: '3px',
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: colors.accent,
+                }} />
               )}
             </button>
           );
         })}
       </div>
 
-      {/* Leyenda */}
+      {/* Leyenda elegante */}
       <div
         style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: '24px',
-          marginTop: '20px',
-          fontSize: '0.85rem',
+          gap: '20px',
+          marginTop: '24px',
+          fontSize: '0.82rem',
           color: colors.textLight,
+          padding: '12px 0',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span
             style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '4px',
-              backgroundColor: `${colors.success}30`,
-              border: `2px solid ${colors.success}`,
+              width: '14px',
+              height: '14px',
+              borderRadius: '6px',
+              backgroundColor: `${colors.success}15`,
+              border: `2px solid ${colors.success}50`,
+              display: 'inline-block',
             }}
           />
-          Disponible
+          <span>Disponible</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span
             style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '4px',
-              backgroundColor: colors.success,
+              width: '14px',
+              height: '14px',
+              borderRadius: '6px',
+              background: `linear-gradient(135deg, ${colors.success}, ${colors.primary})`,
+              display: 'inline-block',
             }}
           />
-          Seleccionado
+          <span>Seleccionado</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span
+            style={{
+              width: '14px',
+              height: '14px',
+              borderRadius: '6px',
+              border: `2px solid ${colors.accent}`,
+              display: 'inline-block',
+            }}
+          />
+          <span>Hoy</span>
         </div>
       </div>
     </div>

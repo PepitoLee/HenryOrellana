@@ -88,7 +88,7 @@ Quedo atento a la confirmación. ¡Gracias!`;
         {/* Header con gradiente de éxito */}
         <div style={{
           background: `linear-gradient(135deg, ${colors.success}15, ${colors.primary}10)`,
-          padding: '36px 32px 24px',
+          padding: '28px 24px 20px',
           textAlign: 'center' as const,
           position: 'relative' as const,
           overflow: 'hidden' as const,
@@ -146,7 +146,7 @@ Quedo atento a la confirmación. ¡Gracias!`;
         </div>
 
         {/* Body */}
-        <div style={{ padding: '24px 32px 32px' }}>
+        <div style={{ padding: '20px 24px 28px' }}>
           {/* Step indicator - paso 3 activo */}
           <div style={{
             ...styles.stepIndicator,

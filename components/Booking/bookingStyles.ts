@@ -230,30 +230,33 @@ export const createBookingStyles = (colors: ColorTheme) => ({
     inset: 0,
     backgroundColor: 'rgba(0,0,0,0.65)',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     zIndex: 9999,
-    padding: '20px',
+    padding: '12px',
+    paddingTop: '20px',
+    overflowY: 'auto' as const,
+    WebkitOverflowScrolling: 'touch' as const,
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
   } as React.CSSProperties,
 
   modalContent: {
     backgroundColor: colors.background,
-    borderRadius: '28px',
+    borderRadius: '24px',
     padding: '0',
     maxWidth: '520px',
     width: '100%',
-    maxHeight: '90vh',
-    overflowY: 'auto' as const,
     position: 'relative' as const,
     boxShadow: '0 25px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.1)',
     border: `1px solid ${colors.border}`,
+    marginBottom: '20px',
+    flexShrink: 0,
   } as React.CSSProperties,
 
   // Header del modal con gradiente
   modalHeader: {
-    padding: '28px 32px 20px',
+    padding: '24px 24px 16px',
     borderBottom: `1px solid ${colors.border}`,
     position: 'relative' as const,
     overflow: 'hidden' as const,
@@ -269,7 +272,7 @@ export const createBookingStyles = (colors: ColorTheme) => ({
   } as React.CSSProperties,
 
   modalBody: {
-    padding: '24px 32px 32px',
+    padding: '20px 24px 28px',
   } as React.CSSProperties,
 
   modalClose: {

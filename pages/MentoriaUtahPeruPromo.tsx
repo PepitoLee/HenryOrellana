@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 
-// ===== CONFIGURABLE CTA URL =====
-const CTA_URL = 'https://tu-link-de-pago-peru.com';
-// ================================
+// ===== CONFIGURABLE CTA - WHATSAPP =====
+const WHATSAPP_NUMBER = '13854564470';
+const WHATSAPP_MESSAGE = encodeURIComponent('Hola Henry, vengo del LIVE de TikTok y quiero aprovechar la oferta de S/50 para la asesoría de estudios en Utah.');
+const CTA_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+// ========================================
 
 // Responsive image component for desktop/mobile
 const ResponsiveImage = ({

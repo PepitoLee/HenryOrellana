@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { BookingCalendar } from '../components/Booking';
 
 // ===== CONFIGURABLE CTA - WHATSAPP =====
 const WHATSAPP_NUMBER = '13854564470';
@@ -85,7 +86,12 @@ const MentoriaUtahPeruPromo: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleCTA = () => window.open(CTA_URL, '_blank');
+  const handleCTA = () => {
+    const agendaSection = document.getElementById('agenda');
+    if (agendaSection) {
+      agendaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const styles = {
     colors: {
@@ -576,6 +582,70 @@ const MentoriaUtahPeruPromo: React.FC = () => {
               height: '40px',
               background: 'linear-gradient(to bottom, #FFB81D, transparent)',
             }} />
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════
+            CALENDARIO DE RESERVAS
+        ══════════════════════════════════════════════════════════════ */}
+        <section id="agenda" style={{
+          ...styles.sectionLg,
+          background: '#0a2a5c',
+        }}>
+          <div style={styles.maxWidth}>
+            <Reveal>
+              <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+                <span style={{
+                  display: 'inline-block',
+                  padding: '8px 20px',
+                  background: 'rgba(255, 184, 29, 0.15)',
+                  borderRadius: '100px',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  color: styles.colors.champagne,
+                  marginBottom: '16px',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                }}>Reserva tu Lugar</span>
+                <h2 style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+                  fontWeight: 400,
+                  color: '#ffffff',
+                }}>
+                  Reserva tu Horario Promocional
+                </h2>
+                <p style={{
+                  fontSize: '1.1rem',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  maxWidth: '600px',
+                  margin: '16px auto 0',
+                  lineHeight: 1.7,
+                }}>
+                  Aprovecha el precio exclusivo del LIVE. Selecciona el día y hora para tu sesión de asesoría.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <BookingCalendar
+                serviceType="mentoria-peru"
+                priceAmount={50}
+                priceCurrency="PEN"
+                whatsappNumber={WHATSAPP_NUMBER}
+                colors={{
+                  primary: styles.colors.onyx,
+                  secondary: styles.colors.onyxLight,
+                  success: styles.colors.champagne,
+                  accent: styles.colors.forest,
+                  background: '#0d3366',
+                  backgroundAlt: '#0a2a5c',
+                  text: '#ffffff',
+                  textLight: 'rgba(255, 255, 255, 0.7)',
+                  border: 'rgba(255, 255, 255, 0.2)',
+                }}
+              />
+            </Reveal>
           </div>
         </section>
 

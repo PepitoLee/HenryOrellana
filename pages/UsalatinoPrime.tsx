@@ -14,49 +14,104 @@ import {
   Heart,
   Lock,
   Handshake,
-  Sparkles
+  Sparkles,
+  MapPin,
+  Navigation,
+  Scale,
+  Landmark,
+  FileText,
+  Calculator,
+  Hash,
+  Car,
+  Globe,
+  Headphones,
+  DollarSign
 } from 'lucide-react';
 import { SEOHead } from '../components/SEO/SEOHead';
 
 export const UsalatinoPrime: React.FC = () => {
-  const servicios = [
+  const serviciosDetallados = [
     {
-      icon: Shield,
-      title: 'Asilo Político',
-      subtitle: 'Defensivo y Afirmativo',
-      description: 'Defensa especializada de casos de asilo. Preparación exhaustiva de expedientes, entrevistas y representación completa ante las autoridades migratorias.',
-      color: "from-[#1a3a6e] to-[#0d1b2a]"
+      num: '01', icon: Shield, title: 'Asilo Afirmativo',
+      description: '¿Sufriste persecución en tu país por tu raza, religión, nacionalidad, opinión política o pertenencia a un grupo social? Si estás dentro de Estados Unidos y NO estás en proceso de deportación, Henry te ayuda a presentar tu solicitud de asilo ante USCIS.',
+      forms: ['I-589', 'I-765 (permiso de trabajo)'],
+      timeline: '1 a 3+ años',
+      henryHelp: 'Henry prepara tu caso completo, te acompaña en la entrevista y pelea por tu protección.',
+      tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'migratorio',
     },
     {
-      icon: FileCheck,
-      title: 'Visa Juvenil SIJS',
-      subtitle: 'Protección para Menores',
-      description: 'Especialización en casos de menores que califican para protección especial bajo la ley de inmigración. Acompañamiento integral durante todo el proceso.',
-      color: "from-[#c41e3a] to-[#8b1428]"
+      num: '02', icon: Scale, title: 'Asilo Defensivo',
+      description: '¿Ya estás en proceso de deportación? No te rindas. Henry presenta tu caso de asilo directamente ante la Corte de Inmigración para defenderte y evitar tu deportación.',
+      forms: ['I-589', 'EOIR-28'],
+      timeline: '1 a 3+ años',
+      henryHelp: 'Representación completa ante el juez de inmigración.',
+      tabGradient: 'from-[#c41e3a] to-[#8b1428]', accent: '#c41e3a', category: 'migratorio',
     },
     {
-      icon: CheckCircle2,
-      title: 'Ajuste de Status',
-      subtitle: 'Residencia Permanente',
-      description: 'Transición estratégica hacia la Green Card. Análisis de elegibilidad, preparación de documentación y seguimiento hasta la aprobación.',
-      color: "from-[#ffd700] to-[#b8860b]"
+      num: '03', icon: Users, title: 'Visa Juvenil (SIJS)',
+      description: '¿Tu hijo menor de 21 años fue víctima de abuso, abandono o negligencia? El Estatus de Inmigrante Juvenil Especial puede darle residencia permanente y protección en Estados Unidos.',
+      forms: ['I-360', 'I-485', 'I-912', 'I-765'],
+      timeline: '6 a 18 meses',
+      henryHelp: 'Henry maneja todo el proceso: desde la petición hasta la Green Card del menor.',
+      tabGradient: 'from-[#b8860b] to-[#8b6508]', accent: '#b8860b', category: 'migratorio',
     },
     {
-      icon: Star,
-      title: 'Asesoría VIP',
-      subtitle: 'Casos Complejos',
-      description: 'Atención exclusiva para situaciones migratorias complicadas. Análisis profundo, soluciones creativas y estrategia personalizada.',
-      color: "from-[#1a3a6e] to-[#c41e3a]"
-    }
+      num: '04', icon: FileCheck, title: 'Ajuste de Estatus (Green Card)',
+      description: '¿Eres elegible para la residencia permanente? Ya sea por matrimonio con ciudadano/residente, por ser padre/hijo de ciudadano, por empleo, o por asilo/SIJS aprobado, Henry te lleva paso a paso hasta tu Green Card.',
+      forms: ['I-485', 'I-130', 'I-864', 'I-765', 'I-131', 'I-693'],
+      timeline: '8 a 36 meses',
+      henryHelp: 'Incluye permiso de trabajo y permiso de viaje mientras esperas.',
+      tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'migratorio',
+    },
+    {
+      num: '05', icon: Landmark, title: 'Cambio de Corte',
+      description: '¿Tu caso está en una corte lejos de donde vives? Henry presenta la moción para transferir tu caso a una corte más cercana a ti, para que puedas asistir sin complicaciones.',
+      forms: ['Motion to Change Venue'],
+      timeline: '2 a 4 meses',
+      henryHelp: 'No pierdas tu caso por no poder viajar a otra ciudad.',
+      tabGradient: 'from-[#c41e3a] to-[#8b1428]', accent: '#c41e3a', category: 'migratorio',
+    },
+    {
+      num: '06', icon: FileText, title: 'Mociones ante Corte',
+      description: '¿Te negaron tu caso? ¿Necesitas reabrir o reconsiderar una decisión? Henry presenta mociones legales ante la Corte de Inmigración para darte una segunda oportunidad.',
+      forms: ['Motion to Reopen', 'Motion to Reconsider', 'EOIR-26'],
+      timeline: '3 a 12 meses',
+      henryHelp: 'Cada caso merece una pelea justa.',
+      tabGradient: 'from-[#b8860b] to-[#8b6508]', accent: '#b8860b', category: 'migratorio',
+    },
+    {
+      num: '07', icon: Calculator, title: 'Declaración de Impuestos',
+      description: '¿Necesitas presentar tus taxes? Henry prepara y presenta tu declaración de impuestos ante el IRS. Tener tus taxes al día es clave para cualquier proceso migratorio futuro.',
+      forms: ['1040', '1040-NR'],
+      timeline: '2 a 4 semanas',
+      henryHelp: 'Proceso rápido y sin complicaciones.',
+      tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'complementario',
+    },
+    {
+      num: '08', icon: Hash, title: 'Número ITIN',
+      description: '¿No tienes Social Security? El ITIN te permite declarar impuestos, abrir cuentas bancarias y construir historial financiero en EE.UU. Henry gestiona tu solicitud completa ante el IRS.',
+      forms: ['W-7', '1040'],
+      timeline: '7 a 11 semanas',
+      henryHelp: 'Tu primer paso para establecerte legalmente.',
+      tabGradient: 'from-[#c41e3a] to-[#8b1428]', accent: '#c41e3a', category: 'complementario',
+    },
+    {
+      num: '09', icon: Car, title: 'Licencia de Conducir',
+      description: 'Henry te asiste con todo el proceso de solicitud de licencia de conducir en el estado de Utah. Te guía con los documentos, formularios y requisitos necesarios.',
+      forms: ['State DMV Form'],
+      timeline: '2 a 6 semanas',
+      henryHelp: 'Maneja legal, maneja tranquilo.',
+      tabGradient: 'from-[#b8860b] to-[#8b6508]', accent: '#b8860b', category: 'complementario',
+    },
   ];
 
-  const beneficios = [
-    { icon: Award, text: 'Experiencia comprobada en casos migratorios' },
-    { icon: Users, text: 'Atención personalizada, no masiva' },
-    { icon: Phone, text: 'Comunicación constante y transparente' },
-    { icon: Heart, text: 'Estrategia adaptada a tu situación única' },
-    { icon: Handshake, text: 'Red de profesionales legales de confianza' },
-    { icon: Lock, text: 'Confidencialidad absoluta en tu caso' }
+  const porQueHenry = [
+    { icon: Globe, title: '100% en Español', desc: 'Te entiende y te escucha en tu idioma' },
+    { icon: Users, title: '+500 Familias', desc: 'Ya confiaron en él' },
+    { icon: DollarSign, title: 'Planes Flexibles', desc: 'Pregunta por las opciones de pago' },
+    { icon: Headphones, title: 'Seguimiento Personal', desc: 'No eres un número, eres familia' },
+    { icon: Lock, title: 'Confidencialidad', desc: 'Tu información siempre segura' },
+    { icon: Sparkles, title: 'Consulta Gratuita', desc: 'Conoce tus opciones sin compromiso' },
   ];
 
   const proceso = [
@@ -419,35 +474,152 @@ export const UsalatinoPrime: React.FC = () => {
         </section>
 
         {/* ============================================
-            SERVICIOS SECTION
+            SERVICIOS SECTION - DETALLADO
         ============================================ */}
         <section id="servicios" className="py-20 md:py-28 bg-white relative">
-          <div className="max-w-6xl mx-auto px-6">
+          {/* Subtle dot pattern */}
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, #1a3a6e 1px, transparent 0)',
+            backgroundSize: '32px 32px',
+          }} />
+
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <Reveal className="text-center mb-16">
-              <span className="inline-block bg-[#1a3a6e]/10 text-[#1a3a6e] px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6">
+              <span className="inline-flex items-center gap-2 bg-[#1a3a6e]/10 text-[#1a3a6e] px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6">
+                <Shield size={14} />
                 Nuestros Servicios
               </span>
-              <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4">
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal mb-4">
                 Soluciones <span className="text-[#c41e3a] italic">Migratorias</span>
+                <br className="hidden md:block" />
+                <span className="text-[#1a3a6e]"> Completas</span>
               </h2>
-              <p className="font-body text-warm-grey max-w-2xl mx-auto text-lg">
-                Cada caso es único. Ofrecemos estrategias personalizadas para ayudarte a alcanzar tus metas migratorias.
+              <p className="font-body text-warm-grey max-w-2xl mx-auto text-lg leading-relaxed">
+                Desde asilo hasta tu Green Card. 9 servicios especializados para cada etapa de tu proceso migratorio.
               </p>
             </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {servicios.map((servicio, idx) => (
-                <Reveal key={idx} delay={idx * 0.1}>
-                  <div className="relative bg-gradient-to-br from-cream to-white p-8 md:p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col group border border-gray-100 overflow-hidden">
-                    {/* Decorative corner */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#ffd700]/10 to-transparent rounded-bl-full" />
+            {/* ── Servicios Migratorios ── */}
+            <Reveal>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#1a3a6e]/20 to-[#1a3a6e]/20" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#1a3a6e] whitespace-nowrap">
+                  Servicios Migratorios
+                </span>
+                <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#1a3a6e]/20 to-[#1a3a6e]/20" />
+              </div>
+            </Reveal>
 
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${servicio.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                      <servicio.icon className="text-white" size={28} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-14">
+              {serviciosDetallados.filter(s => s.category === 'migratorio').map((servicio, idx) => (
+                <Reveal key={servicio.num} delay={idx * 0.08}>
+                  <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-500 group hover:-translate-y-1 h-full flex flex-col">
+                    {/* Tab header — case file style */}
+                    <div className={`flex items-center gap-3 px-5 py-3.5 bg-gradient-to-r ${servicio.tabGradient}`}>
+                      <span className="text-white/40 font-mono text-xs font-bold">{servicio.num}</span>
+                      <div className="w-px h-4 bg-white/20" />
+                      <span className="text-white font-semibold text-sm tracking-wide">{servicio.title}</span>
+                      <servicio.icon className="text-[#ffd700] ml-auto opacity-80" size={18} />
                     </div>
-                    <h3 className="font-display text-2xl text-charcoal mb-2">{servicio.title}</h3>
-                    <p className="font-sans text-[#c41e3a] text-sm uppercase tracking-wider mb-4 font-medium">{servicio.subtitle}</p>
-                    <p className="font-body text-warm-grey leading-relaxed flex-grow">{servicio.description}</p>
+
+                    {/* Body */}
+                    <div className="p-5 md:p-6 flex-1 flex flex-col">
+                      <p className="text-warm-grey text-sm leading-relaxed mb-4 flex-1">
+                        {servicio.description}
+                      </p>
+
+                      {/* Metadata */}
+                      <div className="space-y-2.5 pt-4 border-t border-gray-100">
+                        <div className="flex items-start gap-2 flex-wrap">
+                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1">Formularios:</span>
+                          {servicio.forms.map((form) => (
+                            <span key={form} className="px-2 py-0.5 text-[11px] font-mono rounded-md font-medium" style={{
+                              backgroundColor: `${servicio.accent}12`,
+                              color: servicio.accent,
+                            }}>
+                              {form}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Clock size={13} className="opacity-50" style={{ color: servicio.accent }} />
+                          <span className="text-xs font-medium" style={{ color: servicio.accent }}>
+                            {servicio.timeline}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Henry's help */}
+                      <div className="mt-4 p-3 rounded-lg bg-[#ffd700]/5 border border-[#ffd700]/15">
+                        <p className="text-[13px] text-charcoal/80 leading-relaxed flex items-start gap-2">
+                          <CheckCircle2 size={14} className="text-[#ffd700] flex-shrink-0 mt-0.5" />
+                          {servicio.henryHelp}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            {/* ── Servicios Complementarios ── */}
+            <Reveal>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#b8860b]/20 to-[#b8860b]/20" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#b8860b] whitespace-nowrap">
+                  Servicios Complementarios
+                </span>
+                <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#b8860b]/20 to-[#b8860b]/20" />
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {serviciosDetallados.filter(s => s.category === 'complementario').map((servicio, idx) => (
+                <Reveal key={servicio.num} delay={idx * 0.1}>
+                  <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-500 group hover:-translate-y-1 h-full flex flex-col">
+                    {/* Tab header */}
+                    <div className={`flex items-center gap-3 px-5 py-3.5 bg-gradient-to-r ${servicio.tabGradient}`}>
+                      <span className="text-white/40 font-mono text-xs font-bold">{servicio.num}</span>
+                      <div className="w-px h-4 bg-white/20" />
+                      <span className="text-white font-semibold text-sm tracking-wide">{servicio.title}</span>
+                      <servicio.icon className="text-[#ffd700] ml-auto opacity-80" size={18} />
+                    </div>
+
+                    {/* Body */}
+                    <div className="p-5 flex-1 flex flex-col">
+                      <p className="text-warm-grey text-sm leading-relaxed mb-4 flex-1">
+                        {servicio.description}
+                      </p>
+
+                      {/* Metadata */}
+                      <div className="space-y-2.5 pt-4 border-t border-gray-100">
+                        <div className="flex items-start gap-2 flex-wrap">
+                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1">Formularios:</span>
+                          {servicio.forms.map((form) => (
+                            <span key={form} className="px-2 py-0.5 text-[11px] font-mono rounded-md font-medium" style={{
+                              backgroundColor: `${servicio.accent}12`,
+                              color: servicio.accent,
+                            }}>
+                              {form}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Clock size={13} className="opacity-50" style={{ color: servicio.accent }} />
+                          <span className="text-xs font-medium" style={{ color: servicio.accent }}>
+                            {servicio.timeline}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Henry's help */}
+                      <div className="mt-4 p-3 rounded-lg bg-[#ffd700]/5 border border-[#ffd700]/15">
+                        <p className="text-[13px] text-charcoal/80 leading-relaxed flex items-start gap-2">
+                          <CheckCircle2 size={14} className="text-[#ffd700] flex-shrink-0 mt-0.5" />
+                          {servicio.henryHelp}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </Reveal>
               ))}
@@ -456,68 +628,42 @@ export const UsalatinoPrime: React.FC = () => {
         </section>
 
         {/* ============================================
-            ¿POR QUÉ USALATINO PRIME? - Con imagen prominente
+            ¿POR QUÉ ELEGIR A HENRY?
         ============================================ */}
-        <section className="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              {/* Image - Visible en mobile también */}
-              <Reveal className="order-1">
-                <div className="relative">
-                  {/* Decorative elements */}
-                  <div className="absolute -inset-4 bg-gradient-to-br from-[#ffd700]/20 via-transparent to-[#1a3a6e]/20 rounded-3xl blur-xl" />
-                  <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-[#ffd700]/30 rounded-2xl" />
+        <section className="py-20 md:py-28 bg-gradient-to-br from-[#1a3a6e] via-[#0d2240] to-[#0d1b2a] relative overflow-hidden">
+          {/* Ambient effects */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#ffd700]/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#c41e3a]/10 rounded-full blur-[100px]" />
+          </div>
 
-                  <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-                    <img
-                      src="/images/usalatino/usalatino-vision.png"
-                      alt="Visión USALATINO PRIME"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a3a6e]/40 to-transparent" />
+          <div className="max-w-5xl mx-auto px-6 relative z-10">
+            <Reveal className="text-center mb-14">
+              <span className="inline-flex items-center gap-2 px-5 py-2 bg-[#ffd700]/15 border border-[#ffd700]/25 rounded-full text-[#ffd700] text-xs font-bold uppercase tracking-[0.2em] mb-6">
+                <Star size={14} fill="currentColor" />
+                Tu Mejor Aliado
+              </span>
+              <h2 className="font-display text-4xl md:text-5xl text-white mb-4">
+                ¿Por Qué Elegir a{' '}
+                <span className="shimmer-text italic">Henry</span>?
+              </h2>
+              <p className="text-white/50 max-w-xl mx-auto text-lg">
+                Más que un consultor, un aliado que entiende tu historia
+              </p>
+            </Reveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {porQueHenry.map((item, idx) => (
+                <Reveal key={idx} delay={idx * 0.08}>
+                  <div className="p-6 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-sm hover:bg-white/[0.08] transition-all duration-300 group hover:-translate-y-1">
+                    <div className="w-11 h-11 rounded-xl bg-[#ffd700]/15 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <item.icon className="text-[#ffd700]" size={22} />
+                    </div>
+                    <h4 className="text-white font-bold text-base mb-1.5">{item.title}</h4>
+                    <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
                   </div>
-
-                  {/* Floating badge */}
-                  <div className="absolute -bottom-4 -left-4 md:left-auto md:-right-4 bg-[#ffd700] text-[#1a3a6e] px-6 py-3 rounded-xl shadow-xl">
-                    <p className="font-bold text-sm uppercase tracking-wider">+500 Casos</p>
-                    <p className="text-xs opacity-80">Exitosos</p>
-                  </div>
-                </div>
-              </Reveal>
-
-              {/* Content */}
-              <div className="space-y-8 order-2">
-                <Reveal>
-                  <span className="inline-block bg-[#1a3a6e] text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em]">
-                    Nuestra Diferencia
-                  </span>
-                  <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal mt-6 leading-tight">
-                    ¿Por qué elegir <span className="text-[#ffd700]">USALATINO</span> <span className="italic text-[#c41e3a]">PRIME</span>?
-                  </h2>
                 </Reveal>
-
-                <Reveal delay={0.1}>
-                  <p className="font-body text-warm-grey text-lg leading-relaxed">
-                    No somos una agencia más. Somos tu aliado estratégico en el camino hacia
-                    una nueva vida en Estados Unidos. Cada caso recibe la atención y dedicación
-                    que merece.
-                  </p>
-                </Reveal>
-
-                <div className="space-y-4">
-                  {beneficios.map((beneficio, idx) => (
-                    <Reveal key={idx} delay={0.15 + idx * 0.05}>
-                      <div className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-0.5">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#1a3a6e] to-[#0d2240] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                          <beneficio.icon className="text-[#ffd700]" size={22} />
-                        </div>
-                        <p className="font-sans text-charcoal font-medium">{beneficio.text}</p>
-                      </div>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -738,6 +884,90 @@ export const UsalatinoPrime: React.FC = () => {
                 </Reveal>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ============================================
+            OFICINA - UBICACIÓN Y MAPA
+        ============================================ */}
+        <section className="py-20 md:py-28 bg-[#f8f6f3] relative">
+          <div className="max-w-5xl mx-auto px-6">
+            <Reveal>
+              <div className="text-center mb-12">
+                <span className="inline-flex items-center gap-2 px-5 py-2 bg-[#1a3a6e]/10 rounded-full text-[#1a3a6e] text-sm font-semibold tracking-wide uppercase mb-4">
+                  <MapPin size={16} />
+                  Nuestra Oficina
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight">
+                  Visítanos en <span className="text-[#c41e3a] italic">Utah</span>
+                </h2>
+                <p className="text-warm-grey text-base md:text-lg max-w-lg mx-auto mt-3 leading-relaxed">
+                  Agenda tu cita presencial o virtual desde nuestra oficina en Highland, Utah
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                {/* Mapa */}
+                <div className="w-full h-[300px] md:h-[360px]">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.5!2d-111.7953!3d40.4536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87528e8b0b0b0b0b%3A0x0!2s10951+N+Town+Center+Dr%2C+Highland%2C+UT+84003!5e0!3m2!1sen!2sus!4v1"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación UsaLatino Prime - Highland, Utah"
+                  />
+                </div>
+
+                {/* Info de contacto */}
+                <div className="p-6 md:p-8 flex flex-col sm:flex-row gap-6 md:gap-10">
+                  {/* Dirección */}
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className="w-11 h-11 bg-[#1a3a6e]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <MapPin className="text-[#1a3a6e]" size={22} />
+                    </div>
+                    <div>
+                      <p className="font-bold text-sm text-charcoal mb-1">Dirección</p>
+                      <p className="text-warm-grey text-sm leading-relaxed">
+                        10951 N. Town Center Drive<br />
+                        Highland, Utah 84003
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Horario */}
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className="w-11 h-11 bg-green-600/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Clock className="text-green-600" size={22} />
+                    </div>
+                    <div>
+                      <p className="font-bold text-sm text-charcoal mb-1">Horario de Atención</p>
+                      <p className="text-warm-grey text-sm leading-relaxed">
+                        Martes y Jueves<br />
+                        8:00 AM – 12:00 PM · 4:00 PM – 7:00 PM
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Botón */}
+                  <div className="flex items-center sm:items-end">
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=10951+N+Town+Center+Drive+Highland+Utah+84003"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#1a3a6e] to-[#2a5298] text-white font-semibold text-sm rounded-xl hover:scale-105 transition-transform shadow-lg shadow-[#1a3a6e]/20"
+                    >
+                      <Navigation size={16} />
+                      Cómo llegar
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 

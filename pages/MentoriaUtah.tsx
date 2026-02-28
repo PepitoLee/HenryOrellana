@@ -1267,6 +1267,202 @@ const MentoriaUtah: React.FC = () => {
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
+            OFICINA - UBICACIÓN Y MAPA
+        ══════════════════════════════════════════════════════════════ */}
+        <section style={{
+          padding: '80px 24px',
+          backgroundColor: colors.offWhite,
+        }}>
+          <div style={styles.maxWidth}>
+            <Reveal>
+              <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '8px 20px',
+                  backgroundColor: `${colors.primary}10`,
+                  borderRadius: '100px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: colors.primary,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase' as const,
+                  marginBottom: '16px',
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill={colors.primary}>
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                  Nuestra Oficina
+                </span>
+                <h2 style={{
+                  ...styles.fontEditorial,
+                  fontSize: 'clamp(28px, 5vw, 40px)',
+                  color: colors.primary,
+                  marginBottom: '12px',
+                  lineHeight: 1.2,
+                }}>
+                  Visítanos en Utah
+                </h2>
+                <p style={{
+                  fontSize: '16px',
+                  color: colors.gray,
+                  maxWidth: '500px',
+                  margin: '0 auto',
+                  lineHeight: 1.6,
+                }}>
+                  Agenda tu cita presencial o virtual desde nuestra oficina en Highland, Utah
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'minmax(0, 1fr)',
+                gap: '0',
+                maxWidth: '900px',
+                margin: '0 auto',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 8px 40px rgba(0, 0, 0, 0.08)',
+                border: `1px solid rgba(0, 0, 0, 0.06)`,
+              }}>
+                {/* Mapa */}
+                <div style={{
+                  width: '100%',
+                  height: '320px',
+                  position: 'relative' as const,
+                }}>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.5!2d-111.7953!3d40.4536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87528e8b0b0b0b0b%3A0x0!2s10951+N+Town+Center+Dr%2C+Highland%2C+UT+84003!5e0!3m2!1sen!2sus!4v1"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación UsaLatino Prime - Highland, Utah"
+                  />
+                </div>
+
+                {/* Info de contacto */}
+                <div style={{
+                  padding: '32px',
+                  backgroundColor: colors.white,
+                  display: 'flex',
+                  flexDirection: 'column' as const,
+                  gap: '24px',
+                }}>
+                  {/* Dirección */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '16px',
+                  }}>
+                    <div style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
+                      background: `linear-gradient(135deg, ${colors.primary}15, ${colors.primary}08)`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill={colors.primary}>
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p style={{
+                        fontWeight: 700,
+                        fontSize: '15px',
+                        color: colors.text,
+                        marginBottom: '4px',
+                      }}>Dirección</p>
+                      <p style={{
+                        fontSize: '15px',
+                        color: colors.gray,
+                        lineHeight: 1.5,
+                      }}>
+                        10951 N. Town Center Drive<br />
+                        Highland, Utah 84003
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Horario */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '16px',
+                  }}>
+                    <div style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '12px',
+                      background: `linear-gradient(135deg, ${colors.success}15, ${colors.success}08)`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill={colors.success}>
+                        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p style={{
+                        fontWeight: 700,
+                        fontSize: '15px',
+                        color: colors.text,
+                        marginBottom: '4px',
+                      }}>Horario de Atención</p>
+                      <p style={{
+                        fontSize: '15px',
+                        color: colors.gray,
+                        lineHeight: 1.5,
+                      }}>
+                        Martes y Jueves<br />
+                        8:00 AM – 12:00 PM · 4:00 PM – 7:00 PM
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Botón de dirección */}
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=10951+N+Town+Center+Drive+Highland+Utah+84003"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '10px',
+                      padding: '14px 28px',
+                      background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryLight} 100%)`,
+                      color: colors.white,
+                      fontWeight: 600,
+                      fontSize: '15px',
+                      borderRadius: '12px',
+                      textDecoration: 'none',
+                      marginTop: '4px',
+                      transition: 'transform 0.2s, box-shadow 0.2s',
+                    }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/>
+                    </svg>
+                    Cómo llegar
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════
             FOOTER
         ══════════════════════════════════════════════════════════════ */}
         <footer style={{

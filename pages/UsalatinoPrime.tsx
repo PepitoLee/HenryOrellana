@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Reveal } from '../components/Reveal';
+import { BackToHub } from '../components/BackToHub';
 import {
   Shield,
   FileCheck,
@@ -177,6 +178,8 @@ export const UsalatinoPrime: React.FC = () => {
           z-index: -1;
         }
       `}</style>
+
+      <BackToHub variant="dark" />
 
       <div className="w-full overflow-x-hidden">
 
@@ -1025,18 +1028,28 @@ export const UsalatinoPrime: React.FC = () => {
               </p>
             </Reveal>
 
-            {/* Back to Home */}
-            <Reveal delay={0.5}>
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors mt-10 font-sans text-sm group"
-              >
-                <ArrowRight size={16} className="rotate-180 group-hover:-translate-x-1 transition-transform" />
-                Volver al Inicio
-              </Link>
-            </Reveal>
           </div>
         </section>
+
+        {/* ============================================
+            BRAND FOOTER
+        ============================================ */}
+        <footer className="py-10 bg-[#0d1b2a] border-t border-white/5">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <p className="font-display text-xl text-[#ffd700] mb-2">UsaLatino Prime</p>
+            <p className="text-white/30 text-xs mb-4">10951 N. Town Center Drive · Highland, Utah 84003</p>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-white/25 hover:text-white/50 transition-colors text-xs uppercase tracking-widest group"
+            >
+              <ArrowRight size={12} className="rotate-180 group-hover:-translate-x-1 transition-transform" />
+              Orellana Group
+            </Link>
+            <p className="text-white/10 text-[10px] mt-6">
+              © {new Date().getFullYear()} UsaLatino Prime · Todos los derechos reservados
+            </p>
+          </div>
+        </footer>
 
       </div>
     </>

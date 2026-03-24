@@ -1,26 +1,11 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { BlogProvider } from './context/BlogContext';
 import { SEOProvider } from './components/SEO/SEOProvider';
-import { Navigation } from './components/Navigation';
-import { Footer } from './components/Footer';
-import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Books } from './pages/Books';
-import { Speaking } from './pages/Speaking';
-import { Blog } from './pages/Blog';
-import { BlogPost } from './pages/BlogPost';
-import { Contact } from './pages/Contact';
-import { CEOJunior } from './pages/CEOJunior';
-import { Metodologia } from './pages/Metodologia';
+import { HubPage } from './pages/HubPage';
 import { UsalatinoPrime } from './pages/UsalatinoPrime';
-import LandingPage from './src/landing/LandingPage';
-import MentoriaUtah from './pages/MentoriaUtah';
-import MentoriaUtahPeru from './pages/MentoriaUtahPeru';
-import MentoriaUtahPromo from './pages/MentoriaUtahPromo';
-import MentoriaUtahPeruPromo from './pages/MentoriaUtahPeruPromo';
-import Links from './pages/Links';
+import { StarbizAcademy } from './pages/StarbizAcademy';
 
 // Admin imports
 import { AdminAuthProvider } from './admin/context/AdminAuthContext';
@@ -39,17 +24,6 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Public layout wrapper
-const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="min-h-screen bg-cream font-sans text-charcoal selection:bg-forest selection:text-white flex flex-col">
-    <Navigation />
-    <main className="flex-grow">
-      {children}
-    </main>
-    <Footer />
-  </div>
-);
-
 const App: React.FC = () => {
   return (
     <SEOProvider>
@@ -59,25 +33,16 @@ const App: React.FC = () => {
             <Router>
               <ScrollToTop />
               <Routes>
-                {/* Public Routes */}
-                <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
-                <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
-                <Route path="/books" element={<PublicLayout><Books /></PublicLayout>} />
-                <Route path="/speaking" element={<PublicLayout><Speaking /></PublicLayout>} />
-                <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
-                <Route path="/blog/:slug" element={<PublicLayout><BlogPost /></PublicLayout>} />
-                <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
-                <Route path="/ceo-junior" element={<PublicLayout><CEOJunior /></PublicLayout>} />
-                <Route path="/metodologia" element={<PublicLayout><Metodologia /></PublicLayout>} />
-                <Route path="/usalatino-prime" element={<PublicLayout><UsalatinoPrime /></PublicLayout>} />
+                {/* Hub */}
+                <Route path="/" element={<HubPage />} />
 
-                {/* Landing Pages - Independent (no PublicLayout) */}
-                <Route path="/landingpage" element={<LandingPage />} />
-                <Route path="/mentoria-utah" element={<MentoriaUtah />} />
-                <Route path="/mentoria-utah-peru" element={<MentoriaUtahPeru />} />
-                <Route path="/mentoria-utah-promo" element={<MentoriaUtahPromo />} />
-                <Route path="/mentoria-utah-peru-promo" element={<MentoriaUtahPeruPromo />} />
-                <Route path="/links" element={<Links />} />
+                {/* Brand Pages */}
+                <Route path="/usalatino-prime" element={<UsalatinoPrime />} />
+                <Route path="/starbiz-academy" element={<StarbizAcademy />} />
+
+                {/* Redirects for old routes */}
+                <Route path="/ceo-junior" element={<Navigate to="/starbiz-academy" replace />} />
+                <Route path="/metodologia" element={<Navigate to="/starbiz-academy" replace />} />
 
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
@@ -87,6 +52,9 @@ const App: React.FC = () => {
                   <Route path="posts/new" element={<AdminPostNew />} />
                   <Route path="posts/:id/edit" element={<AdminPostEdit />} />
                 </Route>
+
+                {/* Everything else → Hub */}
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Router>
           </AdminAuthProvider>

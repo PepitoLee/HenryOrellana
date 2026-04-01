@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Reveal } from '../components/Reveal';
 import { BackToHub } from '../components/BackToHub';
+import { BookingCalendar, ColorTheme } from '../components/Booking';
 import {
   Shield,
   FileCheck,
@@ -26,83 +27,117 @@ import {
   Car,
   Globe,
   Headphones,
-  DollarSign
+  DollarSign,
+  MessageCircle,
+  Plane,
+  RefreshCw
 } from 'lucide-react';
 import { SEOHead } from '../components/SEO/SEOHead';
 
+// ===== WHATSAPP CONFIGURATION =====
+const WHATSAPP_NUMBER = '13854564470';
+const WHATSAPP_DEFAULT = encodeURIComponent('Hola Henry, vi tu página de USALATINO PRIME y me interesa una consulta.');
+const CTA_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_DEFAULT}`;
+
+const whatsappMessages: Record<string, string> = {
+  'Asilo Afirmativo': encodeURIComponent('Hola Henry, necesito ayuda con Asilo Afirmativo.'),
+  'Asilo Defensivo': encodeURIComponent('Hola Henry, estoy en proceso de deportación y necesito Asilo Defensivo.'),
+  'Ajuste de Estatus (I-485)': encodeURIComponent('Hola Henry, quiero información sobre Ajuste de Estatus / Green Card.'),
+  'Visa Juvenil (SIJS)': encodeURIComponent('Hola Henry, me interesa la Visa Juvenil SIJS para mi hijo/a.'),
+  'Cambio de Estatus': encodeURIComponent('Hola Henry, necesito un Cambio de Estatus migratorio.'),
+  'Cambio de Corte': encodeURIComponent('Hola Henry, necesito un Cambio de Corte para mi caso.'),
+  'Mociones': encodeURIComponent('Hola Henry, me negaron mi caso y necesito presentar una moción.'),
+  'ITIN Number': encodeURIComponent('Hola Henry, necesito obtener mi número ITIN.'),
+  'Adelantos (Advance Parole)': encodeURIComponent('Hola Henry, necesito un Advance Parole / permiso de viaje.'),
+  'Licencia de Conducir': encodeURIComponent('Hola Henry, necesito ayuda con mi licencia de conducir en Utah.'),
+  'Declaración de Impuestos': encodeURIComponent('Hola Henry, necesito ayuda con mi declaración de impuestos.'),
+};
+const getWhatsAppLink = (title: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessages[title] || WHATSAPP_DEFAULT}`;
+
+// WhatsApp SVG icon reusable
+const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
+// ========================================
+
 export const UsalatinoPrime: React.FC = () => {
+  const [isStickyCTAVisible, setIsStickyCTAVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsStickyCTAVisible(window.scrollY > 400);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const serviciosDetallados = [
     {
       num: '01', icon: Shield, title: 'Asilo Afirmativo',
-      description: '¿Sufriste persecución en tu país por tu raza, religión, nacionalidad, opinión política o pertenencia a un grupo social? Si estás dentro de Estados Unidos y NO estás en proceso de deportación, Henry te ayuda a presentar tu solicitud de asilo ante USCIS.',
-      forms: ['I-589', 'I-765 (permiso de trabajo)'],
-      timeline: '1 a 3+ años',
-      henryHelp: 'Henry prepara tu caso completo, te acompaña en la entrevista y pelea por tu protección.',
+      description: 'Presentamos tu solicitud de asilo ante USCIS si estás en EE.UU. y no estás en proceso de deportación.',
+      forms: ['I-589', 'I-765'], timeline: '1 a 3+ años',
       tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'migratorio',
     },
     {
       num: '02', icon: Scale, title: 'Asilo Defensivo',
-      description: '¿Ya estás en proceso de deportación? No te rindas. Henry presenta tu caso de asilo directamente ante la Corte de Inmigración para defenderte y evitar tu deportación.',
-      forms: ['I-589', 'EOIR-28'],
-      timeline: '1 a 3+ años',
-      henryHelp: 'Representación completa ante el juez de inmigración.',
+      description: '¿En proceso de deportación? Henry presenta tu caso de asilo ante la Corte de Inmigración.',
+      forms: ['I-589', 'EOIR-28'], timeline: '1 a 3+ años',
       tabGradient: 'from-[#c41e3a] to-[#8b1428]', accent: '#c41e3a', category: 'migratorio',
     },
     {
-      num: '03', icon: Users, title: 'Visa Juvenil (SIJS)',
-      description: '¿Tu hijo menor de 21 años fue víctima de abuso, abandono o negligencia? El Estatus de Inmigrante Juvenil Especial puede darle residencia permanente y protección en Estados Unidos.',
-      forms: ['I-360', 'I-485', 'I-912', 'I-765'],
-      timeline: '6 a 18 meses',
-      henryHelp: 'Henry maneja todo el proceso: desde la petición hasta la Green Card del menor.',
+      num: '03', icon: FileCheck, title: 'Ajuste de Estatus (I-485)',
+      description: 'Tu camino a la Green Card por matrimonio, familia, empleo o asilo aprobado. Paso a paso hasta la residencia.',
+      forms: ['I-485', 'I-130', 'I-864', 'I-765'], timeline: '8 a 36 meses',
       tabGradient: 'from-[#b8860b] to-[#8b6508]', accent: '#b8860b', category: 'migratorio',
     },
     {
-      num: '04', icon: FileCheck, title: 'Ajuste de Estatus (Green Card)',
-      description: '¿Eres elegible para la residencia permanente? Ya sea por matrimonio con ciudadano/residente, por ser padre/hijo de ciudadano, por empleo, o por asilo/SIJS aprobado, Henry te lleva paso a paso hasta tu Green Card.',
-      forms: ['I-485', 'I-130', 'I-864', 'I-765', 'I-131', 'I-693'],
-      timeline: '8 a 36 meses',
-      henryHelp: 'Incluye permiso de trabajo y permiso de viaje mientras esperas.',
+      num: '04', icon: Users, title: 'Visa Juvenil (SIJS)',
+      description: 'Protección y residencia para menores de 21 años víctimas de abuso, abandono o negligencia.',
+      forms: ['I-360', 'I-485', 'I-765'], timeline: '6 a 18 meses',
       tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'migratorio',
     },
     {
-      num: '05', icon: Landmark, title: 'Cambio de Corte',
-      description: '¿Tu caso está en una corte lejos de donde vives? Henry presenta la moción para transferir tu caso a una corte más cercana a ti, para que puedas asistir sin complicaciones.',
-      forms: ['Motion to Change Venue'],
-      timeline: '2 a 4 meses',
-      henryHelp: 'No pierdas tu caso por no poder viajar a otra ciudad.',
+      num: '05', icon: RefreshCw, title: 'Cambio de Estatus',
+      description: 'Cambia tu categoría migratoria sin salir de EE.UU. De turista a estudiante, de visitante a trabajador.',
+      forms: ['I-539', 'I-129'], timeline: '3 a 8 meses',
       tabGradient: 'from-[#c41e3a] to-[#8b1428]', accent: '#c41e3a', category: 'migratorio',
     },
     {
-      num: '06', icon: FileText, title: 'Mociones ante Corte',
-      description: '¿Te negaron tu caso? ¿Necesitas reabrir o reconsiderar una decisión? Henry presenta mociones legales ante la Corte de Inmigración para darte una segunda oportunidad.',
-      forms: ['Motion to Reopen', 'Motion to Reconsider', 'EOIR-26'],
-      timeline: '3 a 12 meses',
-      henryHelp: 'Cada caso merece una pelea justa.',
+      num: '06', icon: Landmark, title: 'Cambio de Corte',
+      description: '¿Tu caso está en una corte lejos de donde vives? Transferimos tu caso a una corte cercana.',
+      forms: ['Motion to Change Venue'], timeline: '2 a 4 meses',
       tabGradient: 'from-[#b8860b] to-[#8b6508]', accent: '#b8860b', category: 'migratorio',
     },
     {
-      num: '07', icon: Calculator, title: 'Declaración de Impuestos',
-      description: '¿Necesitas presentar tus taxes? Henry prepara y presenta tu declaración de impuestos ante el IRS. Tener tus taxes al día es clave para cualquier proceso migratorio futuro.',
-      forms: ['1040', '1040-NR'],
-      timeline: '2 a 4 semanas',
-      henryHelp: 'Proceso rápido y sin complicaciones.',
-      tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'complementario',
+      num: '07', icon: FileText, title: 'Mociones',
+      description: '¿Te negaron el caso? Presentamos mociones para reabrir o reconsiderar tu decisión ante la Corte.',
+      forms: ['Motion to Reopen', 'EOIR-26'], timeline: '3 a 12 meses',
+      tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'migratorio',
     },
     {
-      num: '08', icon: Hash, title: 'Número ITIN',
-      description: '¿No tienes Social Security? El ITIN te permite declarar impuestos, abrir cuentas bancarias y construir historial financiero en EE.UU. Henry gestiona tu solicitud completa ante el IRS.',
-      forms: ['W-7', '1040'],
-      timeline: '7 a 11 semanas',
-      henryHelp: 'Tu primer paso para establecerte legalmente.',
+      num: '08', icon: Hash, title: 'ITIN Number',
+      description: '¿No tienes Social Security? El ITIN te permite declarar impuestos y construir historial financiero.',
+      forms: ['W-7', '1040'], timeline: '7 a 11 semanas',
       tabGradient: 'from-[#c41e3a] to-[#8b1428]', accent: '#c41e3a', category: 'complementario',
     },
     {
-      num: '09', icon: Car, title: 'Licencia de Conducir',
-      description: 'Henry te asiste con todo el proceso de solicitud de licencia de conducir en el estado de Utah. Te guía con los documentos, formularios y requisitos necesarios.',
-      forms: ['State DMV Form'],
-      timeline: '2 a 6 semanas',
-      henryHelp: 'Maneja legal, maneja tranquilo.',
+      num: '09', icon: Plane, title: 'Adelantos (Advance Parole)',
+      description: 'Permiso de viaje para salir y regresar a EE.UU. mientras tu caso migratorio está en proceso.',
+      forms: ['I-131', 'I-512'], timeline: '3 a 6 meses',
       tabGradient: 'from-[#b8860b] to-[#8b6508]', accent: '#b8860b', category: 'complementario',
+    },
+    {
+      num: '10', icon: Car, title: 'Licencia de Conducir',
+      description: 'Te asistimos con todo el proceso de licencia de conducir en Utah: documentos, formularios y requisitos.',
+      forms: ['State DMV Form'], timeline: '2 a 6 semanas',
+      tabGradient: 'from-[#1a3a6e] to-[#0d2240]', accent: '#1a3a6e', category: 'complementario',
+    },
+    {
+      num: '11', icon: Calculator, title: 'Declaración de Impuestos',
+      description: 'Preparamos y presentamos tus taxes ante el IRS. Tener tus impuestos al día es clave para tu proceso.',
+      forms: ['1040', '1040-NR'], timeline: '2 a 4 semanas',
+      tabGradient: 'from-[#c41e3a] to-[#8b1428]', accent: '#c41e3a', category: 'complementario',
     },
   ];
 
@@ -242,13 +277,13 @@ export const UsalatinoPrime: React.FC = () => {
               <Reveal delay={0.4}>
                 <div className="flex flex-col gap-4 mt-8">
                   <a
-                    href="https://green-caterpillar-757909.hostingersite.com/"
+                    href={CTA_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] font-bold px-8 py-4 rounded-full text-base hover:scale-105 transition-transform shadow-xl shadow-[#ffd700]/30 font-sans uppercase tracking-wider pulse-gold"
+                    className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold px-8 py-4 rounded-full text-base hover:scale-105 transition-transform shadow-xl shadow-[#25D366]/30 font-sans uppercase tracking-wider pulse-gold"
                   >
-                    <Sparkles size={20} />
-                    ¡Agenda tu Consulta!
+                    <WhatsAppIcon size={20} />
+                    Escribe a Henry
                   </a>
                   <a
                     href="#servicios"
@@ -292,13 +327,13 @@ export const UsalatinoPrime: React.FC = () => {
                 <Reveal delay={0.3}>
                   <div className="flex gap-5 pt-4">
                     <a
-                      href="https://green-caterpillar-757909.hostingersite.com/"
+                      href={CTA_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] font-bold px-10 py-5 rounded-full text-lg hover:scale-105 transition-transform shadow-xl shadow-[#ffd700]/30 font-sans uppercase tracking-wider pulse-gold"
+                      className="inline-flex items-center gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold px-10 py-5 rounded-full text-lg hover:scale-105 transition-transform shadow-xl shadow-[#25D366]/30 font-sans uppercase tracking-wider pulse-gold"
                     >
-                      <Sparkles size={22} />
-                      ¡Agenda tu Consulta!
+                      <WhatsAppIcon size={22} />
+                      Escribe a Henry
                     </a>
                     <a
                       href="#servicios"
@@ -552,13 +587,16 @@ export const UsalatinoPrime: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Henry's help */}
-                      <div className="mt-4 p-3 rounded-lg bg-[#ffd700]/5 border border-[#ffd700]/15">
-                        <p className="text-[13px] text-charcoal/80 leading-relaxed flex items-start gap-2">
-                          <CheckCircle2 size={14} className="text-[#ffd700] flex-shrink-0 mt-0.5" />
-                          {servicio.henryHelp}
-                        </p>
-                      </div>
+                      {/* WhatsApp CTA */}
+                      <a
+                        href={getWhatsAppLink(servicio.title)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold text-xs py-2.5 rounded-lg transition-colors"
+                      >
+                        <WhatsAppIcon size={14} />
+                        ¿Tienes este caso? Habla con Henry
+                      </a>
                     </div>
                   </div>
                 </Reveal>
@@ -576,7 +614,7 @@ export const UsalatinoPrime: React.FC = () => {
               </div>
             </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
               {serviciosDetallados.filter(s => s.category === 'complementario').map((servicio, idx) => (
                 <Reveal key={servicio.num} delay={idx * 0.1}>
                   <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-500 group hover:-translate-y-1 h-full flex flex-col">
@@ -615,13 +653,16 @@ export const UsalatinoPrime: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Henry's help */}
-                      <div className="mt-4 p-3 rounded-lg bg-[#ffd700]/5 border border-[#ffd700]/15">
-                        <p className="text-[13px] text-charcoal/80 leading-relaxed flex items-start gap-2">
-                          <CheckCircle2 size={14} className="text-[#ffd700] flex-shrink-0 mt-0.5" />
-                          {servicio.henryHelp}
-                        </p>
-                      </div>
+                      {/* WhatsApp CTA */}
+                      <a
+                        href={getWhatsAppLink(servicio.title)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold text-xs py-2.5 rounded-lg transition-colors"
+                      >
+                        <WhatsAppIcon size={14} />
+                        Consultar este servicio
+                      </a>
                     </div>
                   </div>
                 </Reveal>
@@ -1012,18 +1053,32 @@ export const UsalatinoPrime: React.FC = () => {
 
             <Reveal delay={0.3}>
               <a
-                href="https://green-caterpillar-757909.hostingersite.com/"
+                href={CTA_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 bg-gradient-to-r from-[#ffd700] to-[#ffaa00] text-[#1a3a6e] font-bold px-10 md:px-14 py-5 md:py-6 rounded-full text-lg md:text-xl hover:scale-105 transition-transform shadow-2xl shadow-[#ffd700]/40 font-sans uppercase tracking-wider pulse-gold"
+                className="inline-flex items-center gap-4 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold px-10 md:px-14 py-5 md:py-6 rounded-full text-lg md:text-xl hover:scale-105 transition-transform shadow-2xl shadow-[#25D366]/30 font-sans uppercase tracking-wider"
               >
-                <Sparkles size={26} />
-                ¡Agenda tu Consulta AHORA!
+                <WhatsAppIcon size={26} />
+                Escribe a Henry AHORA
               </a>
             </Reveal>
 
             <Reveal delay={0.4}>
-              <p className="text-white/30 text-sm mt-10 font-sans tracking-[0.25em]">
+              <div className="flex justify-center gap-4 mt-8">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3 text-center">
+                  <p className="text-white font-bold text-xl">+500</p>
+                  <p className="text-white/50 text-[10px] uppercase">Familias</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3 text-center">
+                  <p className="text-white font-bold text-xl">100%</p>
+                  <p className="text-white/50 text-[10px] uppercase">Español</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-3 text-center">
+                  <p className="text-white font-bold text-xl">24h</p>
+                  <p className="text-white/50 text-[10px] uppercase">Respuesta</p>
+                </div>
+              </div>
+              <p className="text-white/30 text-sm mt-8 font-sans tracking-[0.25em]">
                 YOUR PATH TO SUCCESS IN THE USA
               </p>
             </Reveal>
@@ -1034,7 +1089,7 @@ export const UsalatinoPrime: React.FC = () => {
         {/* ============================================
             BRAND FOOTER
         ============================================ */}
-        <footer className="py-10 bg-[#0d1b2a] border-t border-white/5">
+        <footer className="py-10 pb-28 bg-[#0d1b2a] border-t border-white/5">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <p className="font-display text-xl text-[#ffd700] mb-2">UsaLatino Prime</p>
             <p className="text-white/30 text-xs mb-4">10951 N. Town Center Drive · Highland, Utah 84003</p>
@@ -1050,6 +1105,34 @@ export const UsalatinoPrime: React.FC = () => {
             </p>
           </div>
         </footer>
+
+        {/* ============================================
+            STICKY WHATSAPP CTA
+        ============================================ */}
+        <div
+          className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-6 py-4"
+          style={{
+            boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.1)',
+            transform: isStickyCTAVisible ? 'translateY(0)' : 'translateY(100%)',
+            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
+          <div className="flex items-center justify-between gap-4 max-w-lg mx-auto">
+            <div>
+              <p className="text-gray-500 text-xs">Consulta Migratoria</p>
+              <p className="text-[#1a3a6e] font-bold text-lg">Habla con Henry</p>
+            </div>
+            <a
+              href={CTA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-colors whitespace-nowrap shadow-lg shadow-[#25D366]/20"
+            >
+              <WhatsAppIcon size={18} />
+              WhatsApp
+            </a>
+          </div>
+        </div>
 
       </div>
     </>

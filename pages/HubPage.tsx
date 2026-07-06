@@ -46,19 +46,6 @@ const STARBIZ_SERVICES = [
 
 const BRANDS = [
   {
-    name: 'StarbizAcademy',
-    subtitle: 'El Ecosistema Familiar · GÉNESIS i7™',
-    description: 'Emprendimiento, liderazgo y transformación familiar',
-    badge: 'Emprendimiento',
-    path: '/starbiz-academy',
-    icon: Rocket,
-    logo: '/images/starbiz-logo-mark.png',
-    c1: '34, 211, 238',   // cian
-    c2: '139, 92, 246',   // violeta
-    accent: '#22d3ee',
-    services: STARBIZ_SERVICES,
-  },
-  {
     name: 'UsaLatino Prime',
     subtitle: 'Migración VIP · Highland, Utah',
     description: 'Tu camino seguro hacia el sueño americano',
@@ -70,6 +57,19 @@ const BRANDS = [
     c2: '59, 130, 246',   // azul premium
     accent: '#fbbf24',
     services: USALATINO_SERVICES,
+  },
+  {
+    name: 'StarbizAcademy',
+    subtitle: 'El Ecosistema Familiar · GÉNESIS i7™',
+    description: 'Emprendimiento, liderazgo y transformación familiar',
+    badge: 'Emprendimiento',
+    path: '/starbiz-academy',
+    icon: Rocket,
+    logo: '/images/starbiz-logo-mark.png',
+    c1: '34, 211, 238',   // cian
+    c2: '139, 92, 246',   // violeta
+    accent: '#22d3ee',
+    services: STARBIZ_SERVICES,
   },
 ];
 
